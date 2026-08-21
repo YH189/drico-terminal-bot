@@ -1,4 +1,4 @@
-# Rule-Based ChatBot
+# ChatBot Router
 
 A command-line chatbot built in Python that responds to user input using keyword matching — no machine learning or LLMs involved, purely conditional logic.
 
