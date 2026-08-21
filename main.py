@@ -16,7 +16,7 @@ while True:
         print('Bot > By analyzing your query, it appears to be research-focused:\n'
               '- Perplexity: https://www.perplexity.ai/\n'
               '- NotebookLM: https://notebooklm.google.com/\n'
-              '- Grok: https://x.com/')
+              '- Grok: https://grok.com/')
     elif 'create' in user_input or 'image' in user_input or 'video' in user_input:
         print('Bot > By analyzing your query, it appears to be a creation task:\n'
               '- Midjourney: https://www.midjourney.com/\n'
