@@ -27,7 +27,10 @@ while True:
         print('Bot > By analyzing your query, it appears to be software development:\n'
               '- Claude: https://claude.ai/\n'
               '- Cursor: https://www.cursor.com/\n'
-              '- GitHub Copilot: https://github.com/features/copilot')
+              '- GitHub Copilot: https://github.com/features/copilot'
+              '- Base44 : https://app.base44.com/'
+              '- Loveable : https://lovable.dev/'
+              )
     elif '+' in user_input or '-' in user_input or '*' in user_input or '/' in user_input or '**' in user_input or '%' in user_input:
         try:
             result = eval(user_input)
