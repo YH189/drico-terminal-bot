@@ -1,4 +1,4 @@
-print('---------Rule Based ChatBot---------')
+print('--------------- ChatBot Router ---------------')
 
 while True:
     user_input = input('User > ').lower()
