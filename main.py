@@ -38,7 +38,7 @@ while True:
         except:
             print('Bot > I could not calculate that. Please provide a valid math expression.')
     elif 'how are you' in user_input or 'who are you' in user_input:
-        print('Bot > I am a rule-based chatbot built using Python.')
+        print('Bot > I am a chatbot Router built using Python.')
     elif 'hi' in user_input or 'hello' in user_input:
         print('Bot > How can I assist you today?')
     elif 'list' in user_input or 'tools' in user_input or 'links' in user_input:
