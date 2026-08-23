@@ -1,4 +1,4 @@
-# Rule-Based ChatBot
+# ChatBot Router
 
 A command-line chatbot built in Python that responds to user input using keyword matching — no machine learning or LLMs involved, purely conditional logic.
 
@@ -14,7 +14,7 @@ A command-line chatbot built in Python that responds to user input using keyword
 The bot checks the user's input against a series of keyword conditions (`if`/`elif`) and prints a matching response. If no keyword matches, it returns a fallback message.
 
 ## Example
-
+```text
 ---------Rule Based ChatBot---------
 User > hello
 Bot > How can I assist you today?
