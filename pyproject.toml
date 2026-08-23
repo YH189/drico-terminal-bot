@@ -1,0 +1,12 @@
+[project]
+name = "drico-bot"
+version = "0.1.0"
+description = "A terminal keyword-router chatbot"
+requires-python = ">=3.8"
+
+[project.scripts]
+drico-bot = "drico_bot.main:run_bot"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
