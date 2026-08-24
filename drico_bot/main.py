@@ -76,12 +76,12 @@ def print_show():
     print('  <number> <operator> <number>    -> calculates result, e.g. 5 + 3')
     print('  list / tools / links            -> full tool directory')
 
-def print_tools(category):
+def tools(category):
     print(f'This looks like {category}-realated, so try:')
     for name,url in TOOL_LINKS[category]:
         print(f' {name:<16}:{url}')
 
-def print_full_directory():
+def full_directory():
     print('You have requested full directory:')
     for category,tools in TOOL_LINKS.items():
         print(f'[{category}]')
