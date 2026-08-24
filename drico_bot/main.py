@@ -63,7 +63,7 @@ def print_banner():
     print("Type 'show' for commands, or 'exit' to quit.\n ")
 
 def print_show():
-    print('Bot  > Available commands:')
+    print('Drico > Available commands:')
     print('  automation / agent / workflow   -> automation tool links')
     print('  research / found                -> research tool links')
     print('  create / image / video          -> creative tool links')
@@ -149,7 +149,7 @@ def run_bot():
  
        
         if user_input in ('bye', 'exit', 'quit'):
-            print('Bot > Thanks for Using. Goodbye!')
+            print('Drico > Thanks for Using')
             break  
  
         elif user_input == 'show':
@@ -158,26 +158,26 @@ def run_bot():
         
         elif user_input.startswith('git'):
             result = analyse_reference(user_input, 'git', GIT_COMMANDS)
-            print(f'Bot  > {result}')
+            print(f'Drico > {result}')
  
         elif user_input.startswith('python'):
             result = analyse_reference(user_input, 'python', PYTHON_SYNTAX)
-            print(f'Bot  > {result}')
+            print(f'Drico > {result}')
  
         
         elif contain_math(user_input):
             result = calculate(user_input)
             if result is None:
-                print('Bot  > I could not read that as math. Try a format like: 5 + 3')
+                print('Drico > I could not read that as math. Try a format like: 5 + 3')
             else:
-                print(f'Bot  > The result is: {result}')
+                print(f'Drico > The result is: {result}')
  
        
         elif 'how are you' in user_input or 'who are you' in user_input:
-            print('Bot  > I am a keyword-based chatbot router, built in Python.')
+            print('Drico > I am a keyword-based chatbot router, built in Python.')
  
         elif 'hi' in user_input or 'hello' in user_input:
-            print('Bot  > Hello! How can I assist you today?')
+            print('Drico > Hello! How can I assist you today?')
  
      
         elif 'list' in user_input or 'tools' in user_input or 'links' in user_input:
@@ -189,7 +189,7 @@ def run_bot():
             if category:
                 tools(category)
             else:
-                print("Bot  > I didn't understand that. Type 'show' to see what I can do.")
+                print("Drico > I didn't understand that. Type 'show' to see what I can do.")
 
 if __name__ == '__main__':
     run_bot()
