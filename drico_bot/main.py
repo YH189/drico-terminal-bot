@@ -1,88 +1,75 @@
-def safe_calculate(user_input):
-    parts = user_input.split()
+TOOL_LINKS = {
+    'automation': [
+        ('CrewAI', 'https://www.crewai.com/'),
+        ('LangChain', 'https://www.langchain.com/'),
+        ('AutoGen', 'https://microsoft.github.io/autogen/'),
+        ('Make.com', 'https://www.make.com/'),
+        ('Zapier', 'https://zapier.com/'),
+        ('n8n', 'https://n8n.io/'),
+    ],
+    'research': [
+        ('Perplexity', 'https://www.perplexity.ai/'),
+        ('NotebookLM', 'https://notebooklm.google.com/'),
+        ('Grok', 'https://grok.com/'),
+        ('Elicit', 'https://elicit.com/'),
+        ('Consensus', 'https://consensus.app/'),
+    ],
+    'creative': [
+        ('Midjourney', 'https://www.midjourney.com/'),
+        ('Runway', 'https://runwayml.com/'),
+        ('Gemini', 'https://gemini.google.com/'),
+        ('ChatGPT', 'https://chatgpt.com/'),
+        ('Ideogram', 'https://ideogram.ai/'),
+    ],
+    'development': [
+        ('Claude', 'https://claude.ai/'),
+        ('Cursor', 'https://www.cursor.com/'),
+        ('GitHub Copilot', 'https://github.com/features/copilot'),
+        ('Base44', 'https://app.base44.com/'),
+        ('Lovable', 'https://lovable.dev/'),
+        ('Replit', 'https://replit.com/'),
+    ],
+}
+CATEGORY_KEYWORDS = {
+      'automation': ['automation', 'agent', 'workflow'],
+    'research': ['research', 'found'],
+    'creative': ['create', 'image', 'video'],
+    'development': ['build', 'website', 'app', 'code'],
+}
+GIT_COMMANDS = {
+    'git status': 'Shows changed/staged/untracked files in the working directory.',
+    'git add': 'Stages changes for the next commit. Use "git add ." for all files.',
+    'git commit': 'Saves staged changes. Use "git commit -m \'message\'".',
+    'git push': 'Uploads local commits to the remote repository.',
+    'git pull': 'Downloads and merges changes from the remote repository.',
+    'git branch': 'Lists branches, or creates one if given a name.',
+    'git checkout': 'Switches branches, or restores files.',
+    'git clone': 'Copies a remote repository to your local machine.',
+}
+PYTHON_SYNTAX = {
+    'range': 'range(start, stop, step) generates a sequence of numbers.',
+    'len': 'len(x) returns the number of items in a list, string, or dict.',
+    'enumerate': 'enumerate(x) pairs each item with its index while looping.',
+    'zip': 'zip(a, b) pairs up items from two iterables position by position.',
+    'lambda': 'lambda x: x + 1 defines a small unnamed function inline.',
+}
 
-    if len(parts) != 3:
-        return None
+VALID_OPERATORS = ['+', '-', '*', '/', '%']
 
-    num1_str, operator, num2_str = parts
+def print_banne():
+    print('-'* 60)
+    print('  AI TOOLS ROUTER + DEV REFERENCE - DRICO v2')
+    print('-'*60)
+    print("Type 'show' for commands, or 'exit' to quit.\n ")
 
-    try:
-        num1 = float(num1_str)
-        num2 = float(num2_str)
-    except ValueError:
-        return None
+def print_show():
+    print('Bot  > Available commands:')
+    print('  automation / agent / workflow   -> automation tool links')
+    print('  research / found                -> research tool links')
+    print('  create / image / video          -> creative tool links')
+    print('  build / website / app / code    -> dev tool links')
+    print('  git <command>                   -> git command reference')
+    print('  python <keyword>                -> python syntax reference')
+    print('  <number> <operator> <number>    -> calculates result, e.g. 5 + 3')
+    print('  list / tools / links            -> full tool directory')
 
-    if operator == '+':
-        return num1 + num2
-    elif operator == '-':
-        return num1 - num2
-    elif operator == '*':
-        return num1 * num2
-    elif operator == '/':
-        if num2 == 0:
-            return 'error: division by zero'
-        return num1 / num2
-    elif operator == '%':
-        if num2 == 0:
-            return 'error: division by zero'
-        return num1 % num2
-    else:
-        return None
-
-
-def run_bot():
-    print('--------------- Drico Bot ---------------')
-
-    while True:
-        user_input = input('User > ').lower()
-
-        if 'bye' in user_input or 'exit' in user_input:
-            print('Bot > Thank you for utilizing the system. Goodbye. ')
-            break
-        elif 'automation' in user_input or 'agent' in user_input or 'workflow' in user_input:
-            print('Bot > By analyzing your query, it appears to be automation or AI agent-focused:\n'
-                  '- CrewAI: https://www.crewai.com/\n'
-                  '- LangChain: https://www.langchain.com/\n'
-                  '- Make.com: https://www.make.com/\n'
-                  '- Zapier: https://zapier.com/')
-        elif 'research' in user_input or 'found' in user_input:
-            print('Bot > By analyzing your query, it appears to be research-focused:\n'
-                  '- Perplexity: https://www.perplexity.ai/\n'
-                  '- NotebookLM: https://notebooklm.google.com/\n'
-                  '- Grok: https://grok.com/')
-        elif 'create' in user_input or 'image' in user_input or 'video' in user_input:
-            print('Bot > By analyzing your query, it appears to be a creation task:\n'
-                  '- Midjourney: https://www.midjourney.com/\n'
-                  '- Runway: https://runwayml.com/\n'
-                  '- Gemini: https://gemini.google.com/\n'
-                  '- ChatGPT: https://chatgpt.com/')
-        elif 'build' in user_input or 'website' in user_input or 'app' in user_input or 'code' in user_input:
-            print('Bot > By analyzing your query, it appears to be software development:\n'
-                  '- Claude: https://claude.ai/\n'
-                  '- Cursor: https://www.cursor.com/\n'
-                  '- GitHub Copilot: https://github.com/features/copilot\n'
-                  '- Base44 : https://app.base44.com/\n'
-                  '- Loveable : https://lovable.dev/\n'
-                  )
-        elif '+' in user_input or '-' in user_input or '*' in user_input or '/' in user_input or '**' in user_input or '%' in user_input:
-            result = safe_calculate(user_input)
-            if result is None:
-                print('Bot > I could not calculate that. Please provide a valid math expression.')
-            else:
-                print(f'Bot > The result is: {result}')
-        elif 'how are you' in user_input or 'who are you' in user_input:
-            print('Bot > I am a chatbot Router built using Python.')
-        elif 'hi' in user_input or 'hello' in user_input:
-            print('Bot > How can I assist you today?')
-        elif 'list' in user_input or 'tools' in user_input or 'links' in user_input:
-            print('Bot > Here are the recommended AI tools:\n'
-                  '- Perplexity: https://www.perplexity.ai/\n'
-                  '- Gemini: https://gemini.google.com/\n'
-                  '- ChatGPT: https://chatgpt.com/\n'
-                  '- Claude: https://claude.ai/')
-        else:
-            print('Bot > I did not understand that. Please try asking something else.')
-
-
-if __name__ == '__main__':
-    run_bot()
