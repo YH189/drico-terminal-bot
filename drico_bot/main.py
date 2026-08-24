@@ -176,7 +176,7 @@ def run_bot():
         elif 'how are you' in user_input or 'who are you' in user_input:
             print('Drico > I am a keyword-based chatbot router, built in Python.')
  
-        elif 'hi' in user_input or 'hello' in user_input:
+        elif 'hi' in user_input.split() or 'hello' in user_input.split():
             print('Drico > Hello! How can I assist you today?')
  
      
