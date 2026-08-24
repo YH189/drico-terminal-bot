@@ -1,3 +1,4 @@
+import operator
 from unicodedata import category
 
 
@@ -94,3 +95,22 @@ def detect_category(user_input):
             if query in user_input:
                 return category
     return None
+
+def contain_math(user_input):
+    for op in VALID_OPERATORS:
+        if op in user_input:
+            return True
+    return False
+
+def calculate(user_input):
+    parts = user_input.split()
+
+    if len(parts) != 3:
+        return 'For Mathematical operations you shoudl declare min 2 integers & min 1 operator'
+    
+    num_str,operator,num1_str = parts
+    try:
+        num = float(num_str)
+        num1 = float(num1_str)
+    except ValueError:
+        return 'For Mathematical operation their should be integer no string or character'
