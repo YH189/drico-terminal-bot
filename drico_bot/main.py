@@ -113,19 +113,19 @@ def calculate(user_input):
 
     
     if operator == '+':
-        return num + num1
+        return num+num1
     elif operator == '-':
-        return num - num1
+        return num-num1
     elif operator == '*':
-        return num * num1
+        return num*num1
     elif operator == '/':
-        if num1 == 0:
+        if num1==0:
             return 'error: division by zero'
-        return num / num1
+        return num/num1
     elif operator == '%':
         if num1 == 0:
             return 'error: division by zero'
-        return num % num1
+        return num%num1
     else:
         return None
 
