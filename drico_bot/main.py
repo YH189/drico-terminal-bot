@@ -1,4 +1,5 @@
 import operator
+import queue
 from unicodedata import category
 
 
@@ -132,3 +133,13 @@ def calculate(user_input):
         return num % num1
     else:
         return None
+
+def analyse_reference(user_input,prefix,refrence_dic):
+    if not user_input.startwith(prefix):
+        return 'Not Found'
+    query = user_input[len(prefix):].split()
+
+    for key,explaination in refrence_dic:
+        if key in user_input or key.split()[-1] == query:
+            return f'{key}: {explaination}'
+    return f"No reference found for '{query}' "
