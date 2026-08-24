@@ -1,3 +1,20 @@
+import os
+os.system('')
+
+BANNER = r""" 
+  ____       _             ____        _   
+ |  _ \ _ __(_) ___ ___   | __ )  ___ | |_ 
+ | | | | '__| |/ __/ _ \  |  _ \ / _ \| __|
+ | |_| | |  | | (_| (_) | | |_) | (_) | |_ 
+ |____/|_|  |_|\___\___/  |____/ \___/ \__|
+                                            """
+
+def print_banner():
+    cyan = '\033[96m'
+    reset = '\033[0m'
+    print(cyan + BANNER + reset)
+    print("Type 'help' for commands, or 'exit' to quit.\n")
+
 def safe_calculate(user_input):
     parts = user_input.split()
 
@@ -31,7 +48,7 @@ def safe_calculate(user_input):
 
 
 def run_bot():
-    print('--------------- ChatBot Router ---------------')
+    print('--------------- Drico Bot ---------------')
 
     while True:
         user_input = input('User > ').lower()
