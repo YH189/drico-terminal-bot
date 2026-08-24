@@ -1,8 +1,3 @@
-import operator
-import queue
-from unicodedata import category
-
-
 TOOL_LINKS = {
     'automation': [
         ('CrewAI', 'https://www.crewai.com/'),
@@ -61,7 +56,7 @@ PYTHON_SYNTAX = {
 
 VALID_OPERATORS = ['+', '-', '*', '/', '%']
 
-def print_banne():
+def print_banner():
     print('-'* 60)
     print('  AI TOOLS ROUTER + DEV REFERENCE - DRICO v2')
     print('-'*60)
@@ -134,12 +129,67 @@ def calculate(user_input):
     else:
         return None
 
-def analyse_reference(user_input,prefix,refrence_dic):
-    if not user_input.startwith(prefix):
+def analyse_reference(user_input, prefix, refrence_dic):
+    if not user_input.startswith(prefix):
         return 'Not Found'
-    query = user_input[len(prefix):].split()
+    query = user_input[len(prefix):].strip()
 
-    for key,explaination in refrence_dic:
+    for key, explaination in refrence_dic.items():
         if key in user_input or key.split()[-1] == query:
             return f'{key}: {explaination}'
     return f"No reference found for '{query}' "
+
+
+def run_bot():
+    print_banner()
+    
+    while True:
+        
+        user_input = input('User  > ').strip().lower()
+ 
+       
+        if user_input in ('bye', 'exit', 'quit'):
+            print('Bot > Thanks for Using. Goodbye!')
+            break  
+ 
+        elif user_input == 'show':
+            print_show()
+ 
+        
+        elif user_input.startswith('git'):
+            result = analyse_reference(user_input, 'git', GIT_COMMANDS)
+            print(f'Bot  > {result}')
+ 
+        elif user_input.startswith('python'):
+            result = analyse_reference(user_input, 'python', PYTHON_SYNTAX)
+            print(f'Bot  > {result}')
+ 
+        
+        elif contain_math(user_input):
+            result = calculate(user_input)
+            if result is None:
+                print('Bot  > I could not read that as math. Try a format like: 5 + 3')
+            else:
+                print(f'Bot  > The result is: {result}')
+ 
+       
+        elif 'how are you' in user_input or 'who are you' in user_input:
+            print('Bot  > I am a keyword-based chatbot router, built in Python.')
+ 
+        elif 'hi' in user_input or 'hello' in user_input:
+            print('Bot  > Hello! How can I assist you today?')
+ 
+     
+        elif 'list' in user_input or 'tools' in user_input or 'links' in user_input:
+            full_directory()
+ 
+ 
+        else:
+            category = detect_category(user_input)
+            if category:
+                tools(category)
+            else:
+                print("Bot  > I didn't understand that. Type 'show' to see what I can do.")
+
+if __name__ == '__main__':
+    run_bot()
