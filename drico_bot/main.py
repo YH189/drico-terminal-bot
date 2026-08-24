@@ -88,4 +88,9 @@ def full_directory():
         for name,url in tools:
             print(f'{name}:{url}')
 
-
+def detect_category(user_input):
+    for category,specific in CATEGORY_KEYWORDS.items():
+        for query  in specific:
+            if query in user_input:
+                return category
+    return None
