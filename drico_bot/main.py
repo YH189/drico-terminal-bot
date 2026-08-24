@@ -1,3 +1,6 @@
+from unicodedata import category
+
+
 TOOL_LINKS = {
     'automation': [
         ('CrewAI', 'https://www.crewai.com/'),
@@ -31,7 +34,7 @@ TOOL_LINKS = {
     ],
 }
 CATEGORY_KEYWORDS = {
-      'automation': ['automation', 'agent', 'workflow'],
+    'automation': ['automation', 'agent', 'workflow'],
     'research': ['research', 'found'],
     'creative': ['create', 'image', 'video'],
     'development': ['build', 'website', 'app', 'code'],
@@ -72,4 +75,17 @@ def print_show():
     print('  python <keyword>                -> python syntax reference')
     print('  <number> <operator> <number>    -> calculates result, e.g. 5 + 3')
     print('  list / tools / links            -> full tool directory')
+
+def print_tools(category):
+    print(f'This looks like {category}-realated, so try:')
+    for name,url in TOOL_LINKS[category]:
+        print(f' {name:<16}:{url}')
+
+def print_full_directory():
+    print('You have requested full directory:')
+    for category,tools in TOOL_LINKS.items():
+        print(f'[{category}]')
+        for name,url in tools:
+            print(f'{name}:{url}')
+
 
