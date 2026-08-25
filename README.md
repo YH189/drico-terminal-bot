@@ -5,8 +5,8 @@ A command-line chatbot that routes your queries to the right AI tools, does quic
 ## Install
 
 ```bash
-git clone https://github.com/YH189/Drico-Bot.git
-cd Drico-Bot
+git clone https://github.com/YH189/drico-terminal-bot.git
+cd drico-terminal-bot
 pip install -e .
 ```
 
