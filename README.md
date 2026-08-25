@@ -16,4 +16,3 @@ pip install -e .
 drico-bot
 ```
 
-That's it. Once installed, `drico-bot` works from any folder, any terminal.
