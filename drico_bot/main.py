@@ -1,5 +1,6 @@
-
 import re
+import time
+import sys
 
 
 tools = {
@@ -11,7 +12,6 @@ tools = {
         ("Zapier", "https://zapier.com/"),
         ("n8n", "https://n8n.io/")
     ],
-
     "research": [
         ("Perplexity", "https://www.perplexity.ai/"),
         ("NotebookLM", "https://notebooklm.google.com/"),
@@ -19,7 +19,6 @@ tools = {
         ("Elicit", "https://elicit.com/"),
         ("Consensus", "https://consensus.app/")
     ],
-
     "creative": [
         ("Midjourney", "https://www.midjourney.com/"),
         ("Runway", "https://runwayml.com/"),
@@ -27,7 +26,6 @@ tools = {
         ("ChatGPT", "https://chatgpt.com/"),
         ("Ideogram", "https://ideogram.ai/")
     ],
-
     "development": [
         ("Claude", "https://claude.ai/"),
         ("Cursor", "https://www.cursor.com/"),
@@ -38,14 +36,12 @@ tools = {
     ]
 }
 
-
 keywords = {
     "automation": ["automation", "agent", "workflow"],
     "research": ["research", "found"],
     "creative": ["create", "image", "video"],
     "development": ["build", "website", "app", "code"]
 }
-
 
 git_commands = {
     "git status": "Shows the current changes in the project.",
@@ -58,7 +54,6 @@ git_commands = {
     "git clone": "Copies a repository to your computer."
 }
 
-
 python_commands = {
     "range": "range(start, stop, step) creates a sequence of numbers.",
     "len": "len() gives the number of items in something.",
@@ -66,7 +61,6 @@ python_commands = {
     "zip": "zip() joins values from two or more lists together.",
     "lambda": "lambda is used to create a small function in one line."
 }
-
 
 java_commands = {
     "main": "public static void main(String[] args) is where a Java program starts.",
@@ -76,7 +70,6 @@ java_commands = {
     "class": "A class is used as a blueprint for objects."
 }
 
-
 c_commands = {
     "main": "int main() is the starting point of a C program.",
     "printf": "printf() is used to print output.",
@@ -84,7 +77,6 @@ c_commands = {
     "pointer": "A pointer stores the memory address of another variable.",
     "malloc": "malloc() is used to allocate memory dynamically."
 }
-
 
 cpp_commands = {
     "main": "int main() is the starting point of a C++ program.",
@@ -94,7 +86,6 @@ cpp_commands = {
     "vector": "std::vector is a resizable container in C++."
 }
 
-
 references = {
     "git": git_commands,
     "python": python_commands,
@@ -103,10 +94,37 @@ references = {
     "c++": cpp_commands
 }
 
+concepts = {
+    "git": "Git is a version control system that tracks changes to your code over time and lets you collaborate without overwriting each other's work.",
+    "github": "GitHub is a website that hosts Git repositories online, so you can back up, share, and collaborate on code.",
+    "python": "Python is a general-purpose programming language known for readable syntax, widely used in web development, automation, and AI/ML.",
+    "ai": "AI (Artificial Intelligence) is the broad field of building systems that perform tasks normally requiring human intelligence, like understanding language or recognizing images.",
+    "ml": "ML (Machine Learning) is a subset of AI where systems learn patterns from data instead of being explicitly programmed with rules.",
+    "machine learning": "Machine Learning is a subset of AI where systems learn patterns from data instead of being explicitly programmed with rules.",
+    "llm": "An LLM (Large Language Model) is a machine learning model trained on huge amounts of text to understand and generate human-like language.",
+    "deep learning": "Deep learning is a type of machine learning using multi-layered neural networks to learn complex patterns from large amounts of data.",
+    "neural network": "A neural network is a machine learning model loosely inspired by the brain, made of layers of connected nodes that learn to map inputs to outputs.",
+    "api": "An API (Application Programming Interface) is a defined way for two programs to talk to each other, usually by sending requests and getting responses.",
+    "rag": "RAG (Retrieval-Augmented Generation) is a technique where an AI model looks up relevant information from a data source before generating its answer.",
+}
 
 math_pattern = re.compile(
     r"^(-?\d+\.?\d*)\s*([+\-*/%])\s*(-?\d+\.?\d*)$"
 )
+
+THINKING_STAGES = ["Researching", "Analysing", "Finalising"]
+
+
+def show_thinking():
+    for stage in THINKING_STAGES:
+        sys.stdout.write("Drico > " + stage)
+        sys.stdout.flush()
+        for _ in range(3):
+            time.sleep(0.25)
+            sys.stdout.write(".")
+            sys.stdout.flush()
+        print()
+        time.sleep(0.15)
 
 
 def banner():
@@ -124,6 +142,7 @@ def show_commands():
     print("create / image / video         - Creative tools")
     print("build / website / app / code   - Development tools")
     print("git / python / java / c / c++  - Programming references")
+    print("what is <topic>                - Concept explanations (git, ai, ml, llm, api, rag...)")
     print("5+5, 10*2, 20/4                - Calculator")
     print("list / tools / links            - Show all tools")
     print()
@@ -131,22 +150,17 @@ def show_commands():
 
 def show_tools(category):
     print("\nDrico > These tools may be useful:\n")
-
     for name, url in tools[category]:
         print(name, "-", url)
-
     print()
 
 
 def show_all_tools():
     print("\nDrico > Full Tool Directory\n")
-
     for category in tools:
         print("[" + category + "]")
-
         for name, url in tools[category]:
             print(" ", name, "-", url)
-
         print()
 
 
@@ -155,17 +169,21 @@ def find_category(text):
         for word in keywords[category]:
             if word in text:
                 return category
-
     return None
 
 
 def find_reference(text):
     words = text.split()
-
     for topic in references:
         if topic in words:
             return topic
+    return None
 
+
+def find_concept(text):
+    for topic in concepts:
+        if topic in text.split() or topic + " " in text or text.endswith(topic):
+            return topic
     return None
 
 
@@ -175,41 +193,27 @@ def is_math(text):
 
 def calculate(text):
     match = math_pattern.match(text)
-
     if match is None:
         return None
-
     first = float(match.group(1))
     operator = match.group(2)
     second = float(match.group(3))
-
     if operator == "+":
         return first + second
-
     if operator == "-":
         return first - second
-
     if operator == "*":
         return first * second
-
     if operator == "/":
-        if second == 0:
-            return "Error: cannot divide by zero"
-
-        return first / second
-
+        return "Error: cannot divide by zero" if second == 0 else first / second
     if operator == "%":
-        if second == 0:
-            return "Error: cannot divide by zero"
-
-        return first % second
+        return "Error: cannot divide by zero" if second == 0 else first % second
 
 
 def find_command(text, reference):
     for command in reference:
         if command in text:
             return command
-
     return None
 
 
@@ -222,7 +226,7 @@ def run():
         if user == "":
             continue
 
-        if user == "exit" or user == "quit" or user == "bye":
+        if user in ("exit", "quit", "bye"):
             print("Drico > Thanks for using Drico.")
             break
 
@@ -231,6 +235,7 @@ def run():
             continue
 
         if is_math(user):
+            show_thinking()
             answer = calculate(user)
             print("Drico > The result is:", answer)
             continue
@@ -251,20 +256,29 @@ def run():
             show_all_tools()
             continue
 
+     
+        if user.startswith("what is") or user.startswith("what are") or user.startswith("explain"):
+            show_thinking()
+            concept = find_concept(user)
+            if concept:
+                print("Drico >", concepts[concept])
+            else:
+                print("Drico > I don't have an explanation for that yet. Type 'show' to see what I can answer.")
+            continue
+
         topic = find_reference(user)
         if topic:
+            show_thinking()
             command = find_command(user, references[topic])
-            
             if command:
                 print("Drico >", command + ":", references[topic][command])
             else:
                 print("Drico > Try a specific command, like:", topic + " status" if topic == "git" else topic + " <keyword>")
-                
             continue
-        
+
         category = find_category(user)
-        
         if category:
+            show_thinking()
             show_tools(category)
         else:
             print("Drico > I don't understand that yet.")
