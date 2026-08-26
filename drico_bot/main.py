@@ -389,8 +389,6 @@ https://docs.aws.amazon.com/prescriptive-guidance/latest/retrieval-augmented-gen
 """
 }
 
-
-# Simple calculator pattern
 math_pattern = re.compile(
     r"^(-?\d+(?:\.\d+)?)\s*([+\-*/%])\s*(-?\d+(?:\.\d+)?)$"
 )
