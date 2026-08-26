@@ -44,7 +44,7 @@ Type `show` inside the bot at any time to see this list again.
 Before answering most queries, Drico shows a short "Researching... Analysing... Finalising..." sequence to make the terminal feel more alive.
 
 ## Example session
-
+```text
 User  > what is the use of git
 Drico > Researching...
 Drico > Analysing...
@@ -76,6 +76,7 @@ Replit - https://replit.com/
 
 User  > exit
 Drico > Thanks for using Drico.
+```
 
 ## Scope
 
