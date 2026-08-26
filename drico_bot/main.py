@@ -1,8 +1,9 @@
 import re
-import time
 import sys
+import time
 
 
+# Tools grouped by what they are mainly used for
 tools = {
     "automation": [
         ("CrewAI", "https://www.crewai.com/"),
@@ -36,12 +37,15 @@ tools = {
     ]
 }
 
+
+# Words used to decide which group of tools the user is asking about
 keywords = {
     "automation": ["automation", "agent", "workflow"],
     "research": ["research", "found"],
     "creative": ["create", "image", "video"],
     "development": ["build", "website", "app", "code"]
 }
+
 
 git_commands = {
     "git status": "Shows the current changes in the project.",
@@ -86,6 +90,7 @@ cpp_commands = {
     "vector": "std::vector is a resizable container in C++."
 }
 
+
 references = {
     "git": git_commands,
     "python": python_commands,
@@ -94,281 +99,318 @@ references = {
     "c++": cpp_commands
 }
 
+
+# Basic explanations for common programming and AI topics
 concepts = {
     "git": """
-Git is a distributed version control system (DVCS) used to track changes to source code and other files throughout the development of a project. 
-Instead of storing only the latest version of a project, Git records a history of commits, allowing developers to inspect previous states, compare changes, revert mistakes, and work on multiple versions of a project independently.
+Git is a distributed version control system used to track changes in
+source code and other project files.
 
-Git works locally, so most operations such as creating commits, viewing history, creating branches, and comparing changes do not require an internet connection. 
-A Git repository contains the project's files together with its version history and metadata.
+Git keeps a history of changes using commits. This makes it possible
+to look at older versions, compare changes, and recover from mistakes.
 
-One of Git's most important features is branching. A branch provides an independent line of development, allowing developers to work on features, bug fixes, experiments, or releases without directly modifying the main development line. 
-Branches can later be merged, and Git provides mechanisms for handling conflicts when different branches modify the same parts of a file.
+Git also supports branches. A branch gives you a separate line of
+development where you can work on a feature, bug fix, or experiment
+without changing the main branch directly.
 
-The normal Git workflow involves modifying files, inspecting changes with commands such as `git diff`, staging changes with `git add`, creating a snapshot with `git commit`, and synchronizing with remote repositories using commands such as `git fetch`, `git pull`, and `git push`.
+A normal Git workflow is to change files, check the changes, stage them
+with git add, save them with git commit, and use git pull or git push
+when working with a remote repository.
 
-Important Git concepts include repositories, commits, branches, remotes, staging, merging, rebasing, tags, cherry-picking, stashing, and conflict resolution.
-
-Git itself does not require GitHub. A Git repository can exist entirely on a local machine or be hosted on many different Git-compatible services.
-
-In modern software development, Git is a foundational tool for source-code management, collaborative development, release management, open-source projects, and CI/CD workflows.
+Git can be used without GitHub. A repository can stay completely
+local or be hosted on another Git-compatible service.
 
 Reference:
 https://git-scm.com/docs
 """,
 
     "github": """
-GitHub is a web-based software development and collaboration platform that hosts Git repositories and provides tools for working with software projects.
+GitHub is an online platform for hosting Git repositories and
+collaborating on software projects.
 
-Git and GitHub are not the same thing. Git is the version control system that manages project history, while GitHub provides an online platform where Git repositories can be stored, shared, reviewed, and collaboratively developed.
+Git and GitHub are different. Git handles version control, while
+GitHub provides an online place to store repositories and tools for
+collaboration.
 
-A GitHub repository can contain source code, documentation, configuration files, datasets, releases, and the complete Git history of the project. Repositories can be public or private.
+GitHub repositories can contain source code, documentation,
+configuration files, releases, and the project's Git history.
 
-GitHub adds collaboration features around Git, including pull requests, issues, code review, discussions, project management, releases, permissions, repository security features, and automation through GitHub Actions.
+Some common GitHub features are pull requests, issues, code reviews,
+discussions, releases, permissions, and GitHub Actions.
 
-A typical GitHub workflow is:
+A common workflow is:
+
 1. Create or clone a repository.
-2. Create a branch for a change.
-3. Modify the project locally.
-4. Commit the changes using Git.
+2. Create a branch.
+3. Make changes.
+4. Commit the changes.
 5. Push the branch to GitHub.
 6. Open a pull request.
-7. Review and discuss the changes.
-8. Merge the approved changes into the target branch.
-
-GitHub also supports CI/CD and developer automation through GitHub Actions, dependency and security tooling, code ownership, release management, and other repository-level features.
-
-GitHub repositories are therefore more than simple online storage. They function as collaborative development environments where code, history, reviews, issues, automation, and project documentation can be managed together.
+7. Review the changes.
+8. Merge the branch.
 
 Reference:
 https://docs.github.com/en/repositories
-https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account
 """,
 
     "python": """
-Python is a high-level, general-purpose programming language designed around readable syntax, dynamic typing, and a large standard library.
+Python is a high-level, general-purpose programming language known
+for its readable syntax and large collection of libraries.
 
-Python is interpreted through implementations such as CPython and supports multiple programming paradigms, including procedural, object-oriented, and functional programming.
+Python is used for web development, automation, scripting, data
+analysis, scientific computing, testing, backend development,
+cybersecurity, artificial intelligence, and machine learning.
 
-Python is widely used in web development, automation, scripting, data analysis, scientific computing, cybersecurity, DevOps, artificial intelligence, machine learning, testing, and backend development.
+One of Python's biggest advantages is its ecosystem. It has a large
+standard library and many third-party packages available through PyPI.
 
-One of Python's major strengths is its ecosystem. Developers can use built-in modules from the standard library as well as third-party packages distributed through the Python Package Index (PyPI).
+Python is also widely used in AI and machine learning. Libraries such
+as PyTorch, TensorFlow, scikit-learn, NumPy, and pandas all have strong
+Python support.
 
-Python is particularly important in AI and ML because major frameworks and libraries such as PyTorch, TensorFlow, scikit-learn, NumPy, pandas, and many modern AI tooling ecosystems provide Python interfaces.
-
-Python code is generally designed to prioritize readability and developer productivity. Its indentation-based block structure makes the organization of code visually explicit.
-
-Modern Python also includes features such as type annotations, asynchronous programming with `asyncio`, structural pattern matching, dataclasses, improved typing support, and increasingly capable concurrency features.
-
-As of August 2026, the current stable major series is Python 3.14. Python 3.14.7 was released on August 5, 2026. The Python 3.14 series introduced major changes including officially supported free-threaded Python, deferred evaluation of annotations, template string literals, multiple interpreters in the standard library, and the `compression.zstd` module.
-
-Python is therefore not simply an introductory programming language. It is a major production language used across software engineering, scientific computing, data engineering, and modern AI systems.
+Python uses indentation to organize blocks of code, which makes the
+structure of a program easy to see.
 
 Reference:
 https://docs.python.org/3/
-https://www.python.org/downloads/release/python-3147/
 """,
 
     "ai": """
-Artificial Intelligence (AI) is the broad field of computing concerned with building systems capable of producing outputs such as predictions, recommendations, decisions, or generated content that would traditionally require forms of human intelligence.
+Artificial Intelligence, or AI, is the field of computing focused on
+building systems that can perform tasks that normally require forms
+of human intelligence.
 
-AI is an umbrella term rather than a single algorithm or technology. It includes multiple approaches such as rule-based systems, search and planning, machine learning, deep learning, reinforcement learning, computer vision, natural language processing, speech systems, generative AI, and increasingly multimodal and agentic systems.
+AI includes areas such as rule-based systems, machine learning,
+deep learning, reinforcement learning, computer vision, natural
+language processing, speech systems, and generative AI.
 
-Traditional AI systems can use explicitly designed rules and symbolic reasoning. Modern AI is heavily dominated by machine learning, where models learn patterns from data.
+Modern AI is heavily based on machine learning, where systems learn
+patterns from data.
 
-Generative AI is a major modern branch of AI capable of generating new content such as text, images, audio, video, and code. Large language models are one important class of generative AI systems.
+Generative AI can create content such as text, images, audio, video,
+and code. Large language models are one type of generative AI system.
 
-Modern AI systems can also combine multiple capabilities. For example, a multimodal model may process text and images, while an AI agent may use a model together with tools, external data, memory, and software actions to accomplish a task.
+AI systems can also use tools, external information, memory, and
+software actions to complete more complicated tasks.
 
-AI systems are not automatically intelligent in the human sense. Their capabilities depend on their architecture, training data, objectives, evaluation methods, available tools, and deployment environment.
-
-AI also introduces engineering and governance challenges including reliability, hallucination, bias, privacy, security, explainability, robustness, data quality, evaluation, and misuse.
-
-The modern AI engineering lifecycle therefore involves more than training a model. It can include data preparation, model selection, training or inference, evaluation, deployment, monitoring, security, and continuous improvement.
+AI development also has challenges such as reliability, privacy,
+security, bias, evaluation, and data quality.
 
 Reference:
 https://www.nist.gov/artificial-intelligence
-https://airc.nist.gov/airmf-resources/airmf/
 """,
 
     "ml": """
-Machine Learning (ML) is a subfield of Artificial Intelligence in which computational models learn patterns or relationships from data and use those learned patterns to make predictions, classifications, decisions, or other outputs.
+Machine Learning, or ML, is a part of Artificial Intelligence where
+models learn patterns from data and use those patterns to make
+predictions or decisions.
 
-Traditional programming generally follows the pattern:
+A simple way to compare traditional programming and machine learning
+is:
 
-input + manually written rules -> output
+Traditional programming:
+input + rules -> output
 
-Machine learning instead often follows:
-
+Machine learning:
 data + learning algorithm -> trained model
 
-The trained model can then process new inputs and produce predictions.
+The trained model can then be used on new data.
 
-Machine learning includes several major learning paradigms. Supervised learning uses labeled examples to learn tasks such as classification and regression. Unsupervised learning searches for structure in data, such as clusters or lower-dimensional representations. Reinforcement learning involves an agent learning through interactions with an environment and feedback in the form of rewards or penalties.
+Common types of machine learning include supervised learning,
+unsupervised learning, and reinforcement learning.
 
-A typical ML workflow includes collecting data, cleaning and preprocessing it, selecting useful features or representations, splitting data into training/validation/test sets, choosing a model, training it, evaluating it, tuning hyperparameters, and deploying it.
+A typical ML project involves collecting data, cleaning it,
+preparing it, choosing a model, training the model, testing it,
+tuning it, and finally deploying it.
 
-Important ML concepts include features, labels, parameters, hyperparameters, loss functions, optimization, gradient descent, overfitting, underfitting, regularization, generalization, inference, and evaluation metrics.
-
-Modern machine learning increasingly includes deep learning, foundation models, generative models, multimodal models, and large-scale pretrained models.
-
-An important distinction is that a machine learning model does not simply "memorize intelligence." It learns statistical patterns from its training process, and its ability to generalize to unseen data is a central part of evaluating the model.
+Important ideas include features, labels, parameters, loss functions,
+gradient descent, overfitting, underfitting, regularization, and
+evaluation metrics.
 
 Reference:
 https://developers.google.com/machine-learning
-https://developers.google.com/machine-learning/glossary
 """,
 
     "machine learning": """
-Machine Learning (ML) is a subfield of Artificial Intelligence in which computational models learn patterns from data rather than relying entirely on manually written rules.
+Machine Learning is a subfield of Artificial Intelligence where
+computer models learn patterns from data instead of depending only
+on manually written rules.
 
-A machine learning system typically receives examples during training and adjusts its internal parameters to reduce an objective such as a loss function. After training, the resulting model can process previously unseen inputs during inference.
+During training, a model changes its parameters to improve its
+performance on a chosen objective.
 
-The major learning paradigms include supervised learning, unsupervised learning, semi-supervised learning, self-supervised learning, and reinforcement learning.
+Common learning types include supervised learning, unsupervised
+learning, self-supervised learning, semi-supervised learning, and
+reinforcement learning.
 
-Supervised learning commonly solves classification and regression problems. Unsupervised learning can discover structure in data through techniques such as clustering. Self-supervised learning has become particularly important for modern foundation models because models can learn representations from large quantities of unlabeled data by creating learning signals from the data itself.
+Supervised learning is often used for classification and regression.
+Unsupervised learning can be used to find patterns such as clusters.
 
-The quality of an ML system depends not only on the algorithm but also on data quality, representation, model architecture, training procedure, evaluation methodology, and deployment conditions.
-
-Modern ML systems range from relatively simple linear regression and decision trees to very large neural networks containing billions or more parameters.
-
-Machine learning is the foundation behind many modern systems including recommendation engines, fraud detection, search ranking, computer vision, speech recognition, language models, autonomous systems, and generative AI.
+Modern machine learning is used in recommendation systems, fraud
+detection, search engines, computer vision, speech recognition,
+language models, and generative AI.
 
 Reference:
 https://developers.google.com/machine-learning/glossary
 """,
 
     "llm": """
-An LLM (Large Language Model) is a machine learning model trained on large-scale text or multimodal data to model language and generate or transform sequences of tokens.
+An LLM, or Large Language Model, is a machine learning model trained
+on a large amount of data to understand and generate sequences of
+tokens.
 
-Modern LLMs are commonly based on Transformer architectures. Instead of treating language purely as a sequence of isolated words, Transformer-based systems use mechanisms such as self-attention to model relationships between tokens across a context window.
+Many modern LLMs use Transformer architectures. Transformers use
+self-attention to understand relationships between tokens.
 
-During pretraining, a language model learns statistical relationships in large datasets. A common objective is next-token prediction, where the model learns to predict likely subsequent tokens from preceding context.
+During pretraining, a model learns statistical patterns in its
+training data. One common training task is predicting the next token.
 
-After pretraining, many LLMs undergo additional stages such as supervised fine-tuning, instruction tuning, preference optimization, safety training, or other post-training techniques to make them more useful for interactive tasks.
+After pretraining, an LLM may go through additional training such as
+instruction tuning, supervised fine-tuning, preference optimization,
+or safety training.
 
-LLMs can perform tasks such as text generation, summarization, translation, question answering, classification, reasoning-oriented workflows, code generation, information extraction, and tool interaction.
+LLMs can be used for writing, summarization, translation, question
+answering, classification, coding, information extraction, and tool
+use.
 
-Modern language models can also be multimodal, meaning they may process combinations of text, images, audio, or video rather than text alone.
-
-An LLM does not inherently contain a live database of facts. Its knowledge is determined by its training and subsequent system components. For current or private information, systems can use retrieval, tools, APIs, databases, or other external sources.
-
-Important LLM concepts include tokens, context windows, embeddings, attention, Transformers, pretraining, fine-tuning, instruction tuning, inference, temperature, sampling, quantization, model weights, and alignment.
-
-LLMs are a subset of machine learning and deep learning, not a separate category of intelligence.
+An LLM does not automatically have access to live information.
+Applications can connect models to APIs, databases, search systems,
+or other tools when current information is needed.
 
 Reference:
 https://developers.google.com/machine-learning/glossary
 """,
 
     "deep learning": """
-Deep Learning is a subfield of machine learning that uses neural networks with multiple layers to learn increasingly complex representations of data.
+Deep Learning is a part of machine learning that uses neural networks
+with multiple layers.
 
-The term "deep" generally refers to the presence of multiple computational layers between the input and output. These layers allow the model to transform raw inputs into progressively more abstract representations.
+The multiple layers allow the network to learn increasingly complex
+representations of data.
 
-For example, in computer vision, early layers of a neural network may learn low-level visual patterns, while deeper layers can represent increasingly complex structures. In language models, deep neural networks learn representations of tokens and their relationships across multiple layers.
+Deep learning is widely used in computer vision, speech recognition,
+natural language processing, recommendation systems, and generative AI.
 
-Deep learning has been highly successful in computer vision, speech recognition, natural language processing, recommendation systems, scientific computing, and generative AI.
+Important neural network architectures include CNNs, RNNs, autoencoders,
+GANs, and Transformers.
 
-Important deep learning architectures include convolutional neural networks (CNNs), recurrent neural networks (RNNs), autoencoders, generative adversarial networks (GANs), and Transformer architectures.
+Training a neural network normally involves a forward pass, calculating
+a loss, backpropagation, and updating the model parameters.
 
-Training deep neural networks generally involves forward propagation, calculating a loss, backpropagation, and parameter optimization using methods related to gradient descent.
-
-Deep learning typically benefits from large datasets and substantial computational resources, particularly for large-scale foundation models. GPUs, TPUs, and other accelerators are commonly used to perform the large number of matrix and tensor operations required during training and inference.
-
-Modern deep learning has evolved from task-specific neural networks toward large pretrained foundation models that can be adapted to many downstream applications.
+Large deep learning models often need substantial computing power,
+with GPUs and other accelerators commonly used for training and
+inference.
 
 Reference:
 https://developers.google.com/machine-learning/glossary
 """,
 
     "neural network": """
-A neural network is a machine learning model composed of interconnected computational units organized into layers. It learns parameters that transform input data into useful predictions or representations.
+A neural network is a machine learning model made from connected
+computational units arranged into layers.
 
-A basic neural network contains an input layer, one or more hidden layers, and an output layer. Each neuron generally computes a weighted combination of inputs, applies a bias, and passes the result through an activation function.
+A simple neural network normally has an input layer, hidden layers,
+and an output layer.
 
-During training, the network produces predictions through a forward pass. A loss function measures the difference between predictions and desired outcomes. Backpropagation then calculates how model parameters contributed to the error, and an optimization algorithm updates those parameters.
+During a forward pass, the network produces a prediction. A loss
+function measures how far the prediction is from the expected result.
+Backpropagation is then used to calculate gradients so the parameters
+can be updated.
 
-Neural networks can represent highly nonlinear relationships, which allows them to solve problems that are difficult to express using manually written rules.
+Neural networks can learn complex relationships that are difficult
+to describe using manually written rules.
 
-A neural network with multiple hidden layers is generally referred to as a deep neural network.
+A network with several hidden layers is generally called a deep
+neural network.
 
-Different architectures are suited to different problems. CNNs have historically been important in image processing, RNNs were widely used for sequential data, and Transformers are now central to many state-of-the-art language and multimodal systems.
-
-Modern neural networks can contain millions, billions, or even substantially more parameters. Larger parameter counts alone do not guarantee better performance; architecture, data quality, training methodology, compute, and evaluation all matter.
-
-Important concepts include neurons, weights, biases, activation functions, layers, loss functions, gradients, backpropagation, optimization, embeddings, attention, and parameters.
+Important concepts include neurons, weights, biases, activation
+functions, layers, loss functions, gradients, and backpropagation.
 
 Reference:
 https://developers.google.com/machine-learning/glossary
 """,
 
     "api": """
-An API (Application Programming Interface) is a defined interface through which one software component can interact with another software component.
+An API, or Application Programming Interface, is a defined way for
+one software system to communicate with another.
 
-An API specifies how a caller can request functionality or data and what form the response will take. APIs allow systems to communicate without requiring the caller to know how the underlying implementation works.
+An API describes how a program can request data or functionality and
+what kind of response it should receive.
 
-In web development, APIs commonly use HTTP and expose endpoints that clients can call using methods such as GET, POST, PUT, PATCH, and DELETE.
+Web APIs commonly use HTTP methods such as GET, POST, PUT, PATCH,
+and DELETE.
 
-For example, a frontend application might send a GET request to an API endpoint to retrieve user information. The backend processes the request and returns a response, often in JSON format.
+For example, a frontend application can send a GET request to a
+backend API and receive information, often in JSON format.
 
-Modern APIs can use different architectural and communication approaches, including REST, GraphQL, RPC, WebSockets, Webhooks, and event-driven interfaces.
+APIs can use different approaches such as REST, GraphQL, RPC,
+WebSockets, and webhooks.
 
-APIs commonly use authentication and authorization mechanisms such as API keys, OAuth 2.0, JSON Web Tokens, or other identity systems. Production APIs also need to consider rate limiting, validation, error handling, versioning, observability, caching, and security.
-
-APIs are fundamental to modern software architecture because they allow frontend applications, backend services, databases, third-party platforms, AI models, payment systems, cloud services, and other systems to interact.
-
-In AI development, APIs are frequently used to connect applications to model inference services, vector databases, retrieval systems, external tools, and other software components.
+Authentication, authorization, validation, rate limiting, error
+handling, security, and versioning are common concerns when building
+production APIs.
 
 Reference:
 https://developer.mozilla.org/en-US/docs/Glossary/API
 """,
 
     "rag": """
-RAG (Retrieval-Augmented Generation) is an AI architecture that combines information retrieval with generative models.
+RAG stands for Retrieval-Augmented Generation.
 
-Instead of requiring a language model to answer entirely from information encoded in its parameters, a RAG system retrieves relevant external information and supplies that information as context to the model before generation.
+It is an AI architecture that combines information retrieval with
+a generative language model.
 
-A typical RAG pipeline works approximately like this:
+Instead of asking a model to answer only from information stored in
+its parameters, a RAG system first retrieves relevant information and
+gives that information to the model as context.
 
-1. Documents are collected from sources such as PDFs, websites, databases, or internal knowledge bases.
-2. Documents are cleaned and divided into smaller chunks.
-3. The chunks are converted into embeddings or indexed using another retrieval mechanism.
-4. A user submits a query.
-5. The system retrieves the most relevant pieces of information.
-6. Retrieved content is provided to the language model as context.
-7. The model generates an answer based on the supplied context.
+A simple RAG process is:
 
-This architecture allows an application to use private, domain-specific, or frequently changing information without necessarily retraining the underlying language model.
+1. Collect documents.
+2. Split the documents into smaller pieces.
+3. Index the pieces.
+4. Receive a user question.
+5. Find relevant information.
+6. Give the retrieved information to the model.
+7. Generate the answer.
 
-RAG is particularly useful for enterprise knowledge bases, document question answering, customer support, research systems, internal documentation, and applications where answers should be grounded in an external source.
+RAG is useful for private documents, company knowledge bases,
+research systems, customer support, and question answering.
 
-Modern RAG systems can use vector search, keyword search, hybrid retrieval, reranking, metadata filtering, query rewriting, multi-step retrieval, citation generation, and agentic retrieval workflows.
+RAG does not automatically make answers correct. If retrieval finds
+bad or incomplete information, the final answer can still be wrong.
 
-RAG is not a guarantee of factual accuracy. Poor retrieval can provide the model with irrelevant or incomplete information, and the model can still generate incorrect conclusions. Therefore, retrieval quality, context construction, evaluation, and source attribution are important parts of a production RAG system.
-
-RAG is also different from fine-tuning. Fine-tuning changes model parameters to adapt behavior or capabilities, whereas RAG generally leaves the model parameters unchanged and supplies relevant external information at inference time.
+RAG is also different from fine-tuning. Fine-tuning changes model
+parameters, while RAG normally supplies external information during
+inference.
 
 Reference:
 https://docs.aws.amazon.com/prescriptive-guidance/latest/retrieval-augmented-generation-options/
 """
 }
 
+
+# Simple calculator pattern
 math_pattern = re.compile(
-    r"^(-?\d+\.?\d*)\s*([+\-*/%])\s*(-?\d+\.?\d*)$"
+    r"^(-?\d+(?:\.\d+)?)\s*([+\-*/%])\s*(-?\d+(?:\.\d+)?)$"
 )
 
 THINKING_STAGES = ["Researching", "Analysing", "Finalising"]
+CALC_STAGES = ["Thinking"]
 
 
-def show_thinking():
-    for stage in THINKING_STAGES:
-        sys.stdout.write("Drico > " + stage)
-        sys.stdout.flush()
+def show_thinking(stages=None):
+    """Show a small loading effect before an answer."""
+    if stages is None:
+        stages = THINKING_STAGES
+
+    for stage in stages:
+        print("Drico >", stage, end="", flush=True)
+
         for _ in range(3):
             time.sleep(0.25)
-            sys.stdout.write(".")
-            sys.stdout.flush()
+            print(".", end="", flush=True)
+
         print()
         time.sleep(0.15)
 
@@ -388,7 +430,7 @@ def show_commands():
     print("create / image / video         - Creative tools")
     print("build / website / app / code   - Development tools")
     print("git / python / java / c / c++  - Programming references")
-    print("what is <topic>                - Concept explanations (git, ai, ml, llm, api, rag...)")
+    print("what is <topic>                - Concept explanations")
     print("5+5, 10*2, 20/4                - Calculator")
     print("list / tools / links            - Show all tools")
     print()
@@ -396,70 +438,95 @@ def show_commands():
 
 def show_tools(category):
     print("\nDrico > These tools may be useful:\n")
+
     for name, url in tools[category]:
         print(name, "-", url)
+
     print()
 
 
 def show_all_tools():
     print("\nDrico > Full Tool Directory\n")
-    for category in tools:
+
+    for category, tool_list in tools.items():
         print("[" + category + "]")
-        for name, url in tools[category]:
+
+        for name, url in tool_list:
             print(" ", name, "-", url)
+
         print()
 
 
 def find_category(text):
-    for category in keywords:
-        for word in keywords[category]:
+    for category, words in keywords.items():
+        for word in words:
             if word in text:
                 return category
+
     return None
 
 
 def find_reference(text):
     words = text.split()
+
     for topic in references:
         if topic in words:
             return topic
+
     return None
 
 
 def find_concept(text):
+    words = text.split()
+
     for topic in concepts:
-        if topic in text.split() or topic + " " in text or text.endswith(topic):
+        if topic in words or text.endswith(topic):
             return topic
+
     return None
 
 
 def is_math(text):
-    return math_pattern.match(text) is not None
+    return math_pattern.fullmatch(text) is not None
 
 
 def calculate(text):
-    match = math_pattern.match(text)
+    match = math_pattern.fullmatch(text)
+
     if match is None:
         return None
+
     first = float(match.group(1))
     operator = match.group(2)
     second = float(match.group(3))
+
     if operator == "+":
         return first + second
+
     if operator == "-":
         return first - second
+
     if operator == "*":
         return first * second
+
     if operator == "/":
-        return "Error: cannot divide by zero" if second == 0 else first / second
+        if second == 0:
+            return "Error: cannot divide by zero"
+        return first / second
+
     if operator == "%":
-        return "Error: cannot divide by zero" if second == 0 else first % second
+        if second == 0:
+            return "Error: cannot divide by zero"
+        return first % second
+
+    return None
 
 
 def find_command(text, reference):
     for command in reference:
         if command in text:
             return command
+
     return None
 
 
@@ -469,7 +536,7 @@ def run():
     while True:
         user = input("User  > ").strip().lower()
 
-        if user == "":
+        if not user:
             continue
 
         if user in ("exit", "quit", "bye"):
@@ -481,7 +548,7 @@ def run():
             continue
 
         if is_math(user):
-            show_thinking()
+            show_thinking(CALC_STAGES)
             answer = calculate(user)
             print("Drico > The result is:", answer)
             continue
@@ -502,27 +569,40 @@ def run():
             show_all_tools()
             continue
 
-     
         if user.startswith("what is") or user.startswith("what are") or user.startswith("explain"):
             show_thinking()
+
             concept = find_concept(user)
+
             if concept:
                 print("Drico >", concepts[concept])
             else:
-                print("Drico > I don't have an explanation for that yet. Type 'show' to see what I can answer.")
+                print("Drico > I don't have an explanation for that yet.")
+                print("Drico > Type 'show' to see what I can answer.")
+
             continue
 
         topic = find_reference(user)
+
         if topic:
             show_thinking()
+
             command = find_command(user, references[topic])
+
             if command:
                 print("Drico >", command + ":", references[topic][command])
             else:
-                print("Drico > Try a specific command, like:", topic + " status" if topic == "git" else topic + " <keyword>")
+                if topic == "git":
+                    example = "git status"
+                else:
+                    example = topic + " <keyword>"
+
+                print("Drico > Try a specific command, like:", example)
+
             continue
 
         category = find_category(user)
+
         if category:
             show_thinking()
             show_tools(category)
@@ -531,4 +611,5 @@ def run():
             print("Drico > Type 'show' to see what I can do.")
 
 
-run()
+if __name__ == "__main__":
+    run()
