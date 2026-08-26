@@ -44,14 +44,302 @@ keywords = {
 }
 
 git_commands = {
-    "git status": "Shows the current changes in the project.",
-    "git add": "Adds files to the staging area.",
-    "git commit": "Saves the staged changes.",
-    "git push": "Uploads your commits to GitHub.",
-    "git pull": "Gets the latest changes from the remote repository.",
-    "git branch": "Shows or creates branches.",
-    "git checkout": "Switches between branches.",
-    "git clone": "Copies a repository to your computer."
+    "git status": {
+        "description": "Shows the current state of your working directory and staging area. It tells you which files are modified, staged, untracked, or ready to commit.",
+        "syntax": "git status",
+        "example": "git status",
+        "output": """On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  modified:   concepts.py
+
+Untracked files:
+  git_commands.py
+
+no changes added to commit"""
+    },
+
+    "git add": {
+        "description": "Moves changes from the working directory into the staging area so they can be included in the next commit.",
+        "syntax": "git add <file>",
+        "example": "git add concepts.py",
+        "output": """$ git add concepts.py
+
+$ git status
+Changes to be committed:
+  modified:   concepts.py"""
+    },
+
+    "git add .": {
+        "description": "Stages all new, modified, and deleted files in the current directory and its subdirectories.",
+        "syntax": "git add .",
+        "example": "git add .",
+        "output": """$ git add .
+
+$ git status
+Changes to be committed:
+  modified:   concepts.py
+  modified:   git_commands.py
+  new file:   README.md"""
+    },
+
+    "git commit": {
+        "description": "Creates a permanent snapshot of the staged changes in the Git repository. Each commit receives a unique commit hash.",
+        "syntax": 'git commit -m "<message>"',
+        "example": 'git commit -m "docs: expand Git concepts"',
+        "output": """[main 7f3a21c] docs: expand Git concepts
+ 2 files changed, 86 insertions(+), 14 deletions(-)"""
+    },
+
+    "git log": {
+        "description": "Displays the commit history of the repository, including commit hashes, authors, dates, and commit messages.",
+        "syntax": "git log",
+        "example": "git log --oneline",
+        "output": """7f3a21c (HEAD -> main) docs: expand Git concepts
+91c4e82 feat: add Python concepts
+4a12d76 fix: update README
+2b8f431 Initial commit"""
+    },
+
+    "git diff": {
+        "description": "Shows the differences between your current working files and the last committed version. It is useful for reviewing changes before staging them.",
+        "syntax": "git diff",
+        "example": "git diff concepts.py",
+        "output": """diff --git a/concepts.py b/concepts.py
+@@ -10,7 +10,10 @@
+
+-    "git": "Git tracks changes..."
++    "git": "Git is a distributed version control system..."
++
++    "rag": "RAG combines retrieval with generation..."
+"""
+    },
+
+    "git diff --staged": {
+        "description": "Shows the changes that have already been staged and will be included in the next commit.",
+        "syntax": "git diff --staged",
+        "example": "git diff --staged",
+        "output": """diff --git a/concepts.py b/concepts.py
+index 81a2f4c..9b42d17 100644
+--- a/concepts.py
++++ b/concepts.py
+@@ -1,5 +1,8 @@
+ concepts = {
++    "git": "...",
++    "github": "...",
++    "python": "..."
+ }"""
+    },
+
+    "git push": {
+        "description": "Uploads local commits to a remote repository such as GitHub. The remote branch must usually be configured before pushing.",
+        "syntax": "git push <remote> <branch>",
+        "example": "git push origin main",
+        "output": """Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Writing objects: 100% (3/3), 2.41 KiB | 2.41 MiB/s, done.
+To https://github.com/YH189/project.git
+   91c4e82..7f3a21c  main -> main"""
+    },
+
+    "git pull": {
+        "description": "Downloads changes from a remote repository and integrates them into your current local branch. Conceptually, it performs a fetch followed by an integration step.",
+        "syntax": "git pull <remote> <branch>",
+        "example": "git pull origin main",
+        "output": """From https://github.com/YH189/project
+ * branch            main       -> FETCH_HEAD
+Updating 91c4e82..7f3a21c
+Fast-forward
+ concepts.py | 24 +++++++++++++++++++++++-
+ README.md   |  5 +++++
+ 2 files changed, 28 insertions(+), 1 deletion(-)"""
+    },
+
+    "git fetch": {
+        "description": "Downloads the latest commits and references from a remote repository without automatically merging those changes into your current branch.",
+        "syntax": "git fetch <remote>",
+        "example": "git fetch origin",
+        "output": """From https://github.com/YH189/project
+   91c4e82..7f3a21c  main       -> origin/main
+   4a12d76..82b91de  dev        -> origin/dev"""
+    },
+
+    "git branch": {
+        "description": "Lists existing branches, creates new branches, or deletes branches.",
+        "syntax": "git branch <branch-name>",
+        "example": "git branch feature/rag",
+        "output": """$ git branch
+
+* main
+  dev
+  feature/rag"""
+    },
+
+    "git switch": {
+        "description": "Switches between branches. It is the modern Git command specifically designed for branch switching.",
+        "syntax": "git switch <branch-name>",
+        "example": "git switch feature/rag",
+        "output": """Switched to branch 'feature/rag'"""
+    },
+
+    "git checkout": {
+        "description": "An older, multi-purpose Git command historically used for switching branches, creating branches, and restoring files. For modern workflows, `git switch` and `git restore` are usually clearer alternatives.",
+        "syntax": "git checkout <branch-name>",
+        "example": "git checkout dev",
+        "output": """Switched to branch 'dev'
+Your branch is up to date with 'origin/dev'."""
+    },
+
+    "git switch -c": {
+        "description": "Creates a new branch and immediately switches to it.",
+        "syntax": "git switch -c <branch-name>",
+        "example": "git switch -c feature/ai-search",
+        "output": """Switched to a new branch 'feature/ai-search'"""
+    },
+
+    "git merge": {
+        "description": "Combines the changes from one branch into the currently checked-out branch.",
+        "syntax": "git merge <branch-name>",
+        "example": "git merge feature/rag",
+        "output": """Updating 7f3a21c..b91d442
+Fast-forward
+ rag.py | 42 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)"""
+    },
+
+    "git rebase": {
+        "description": "Reapplies commits from one branch on top of another commit or branch. Rebase can create a cleaner, more linear project history but rewrites commit history.",
+        "syntax": "git rebase <branch-name>",
+        "example": "git rebase main",
+        "output": """Successfully rebased and updated refs/heads/feature/rag."""
+    },
+
+    "git remote -v": {
+        "description": "Displays the remote repositories configured for the current Git repository, including their fetch and push URLs.",
+        "syntax": "git remote -v",
+        "example": "git remote -v",
+        "output": """origin  https://github.com/YH189/project.git (fetch)
+origin  https://github.com/YH189/project.git (push)"""
+    },
+
+    "git clone": {
+        "description": "Creates a local copy of a remote Git repository, including its files, branches, commits, and repository history.",
+        "syntax": "git clone <repository-url>",
+        "example": "git clone https://github.com/YH189/project.git",
+        "output": """Cloning into 'project'...
+remote: Enumerating objects: 42, done.
+remote: Counting objects: 100% (42/42), done.
+Receiving objects: 100% (42/42), done.
+Resolving deltas: 100% (18/18), done."""
+    },
+
+    "git stash": {
+        "description": "Temporarily stores uncommitted changes so you can switch branches or perform another Git operation without committing unfinished work.",
+        "syntax": "git stash",
+        "example": "git stash",
+        "output": """Saved working directory and index state
+WIP on feature/rag: b91d442 add retrieval pipeline"""
+    },
+
+    "git stash pop": {
+        "description": "Restores the most recently stashed changes and removes that stash from the stash list.",
+        "syntax": "git stash pop",
+        "example": "git stash pop",
+        "output": """On branch feature/rag
+Changes not staged for commit:
+  modified:   rag.py
+
+Dropped refs/stash@{0} (a42f19d...)"""
+    },
+
+    "git restore": {
+        "description": "Restores files to a previous state. It is commonly used to discard working-directory changes or remove files from the staging area.",
+        "syntax": "git restore <file>",
+        "example": "git restore concepts.py",
+        "output": """$ git status
+On branch main
+nothing to commit, working tree clean"""
+    },
+
+    "git reset": {
+        "description": "Moves the current branch reference to another commit and can modify the staging area or working directory depending on the selected mode. Use carefully because some reset modes can discard work.",
+        "syntax": "git reset <mode> <commit>",
+        "example": "git reset --soft HEAD~1",
+        "output": """$ git reset --soft HEAD~1
+
+$ git status
+Changes to be committed:
+  modified:   concepts.py"""
+    },
+
+    "git cherry-pick": {
+        "description": "Applies the changes introduced by a specific commit onto the current branch. It is useful when you need one particular change without merging an entire branch.",
+        "syntax": "git cherry-pick <commit-hash>",
+        "example": "git cherry-pick 7f3a21c",
+        "output": """[main 4d92bc1] docs: expand Git concepts
+ Date: Wed Aug 26 19:10:00 2026
+ 1 file changed, 38 insertions(+), 4 deletions(-)"""
+    },
+
+    "git tag": {
+        "description": "Creates or lists tags used to mark important points in repository history, commonly release versions.",
+        "syntax": "git tag <tag-name>",
+        "example": "git tag v1.0.0",
+        "output": """$ git tag
+
+v1.0.0"""
+    },
+
+    "git show": {
+        "description": "Displays information about a specific Git object, commonly a commit, including its metadata and changes.",
+        "syntax": "git show <commit>",
+        "example": "git show 7f3a21c",
+        "output": """commit 7f3a21c
+Author: YH
+Date:   Wed Aug 26 19:10:00 2026
+
+    docs: expand Git concepts
+
+diff --git a/concepts.py b/concepts.py
+...
+"""
+    },
+
+    "git log --oneline --graph": {
+        "description": "Displays a compact visual representation of the commit history, including branches and merges.",
+        "syntax": "git log --oneline --graph --all",
+        "example": "git log --oneline --graph --all",
+        "output": """*   b91d442 Merge branch 'feature/rag'
+|\\
+| * 82c31a4 add RAG pipeline
+| * 71a91bc add vector search
+|/
+* 7f3a21c docs: expand Git concepts
+* 91c4e82 feat: add Python concepts
+* 4a12d76 Initial commit"""
+    },
+
+    "git rm": {
+        "description": "Removes a tracked file from the working directory and stages the deletion for the next commit.",
+        "syntax": "git rm <file>",
+        "example": "git rm old_notes.txt",
+        "output": """rm 'old_notes.txt'
+
+$ git status
+Changes to be committed:
+  deleted:    old_notes.txt"""
+    },
+
+    "git config": {
+        "description": "Reads or changes Git configuration settings, such as your username, email, default branch, and editor.",
+        "syntax": "git config <option> <value>",
+        "example": 'git config --global user.name "YH"',
+        "output": """$ git config --global user.name "YH"
+
+$ git config --global user.name
+YH"""
+    }
 }
 
 python_commands = {
