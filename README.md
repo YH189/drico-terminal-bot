@@ -4,11 +4,17 @@ A command-line chatbot that routes your queries to the right AI tools, does quic
 
 ## Install
 
+Want `drico-bot` available anytime, just by typing it?
+
+```bash
+pip install --user pipx
+pipx install git+https://github.com/YH189/drico-terminal-bot.git
 ```
-git clone https://github.com/YH189/drico-terminal-bot.git
-cd drico-terminal-bot
-pip install -e .
-```
+
+> Restart your terminal after installing, then run:
+> ```bash
+> drico-bot
+> ```
 
 ## Run
 
