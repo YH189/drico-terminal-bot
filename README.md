@@ -8,17 +8,18 @@ Want `drico-bot` available anytime, just by typing it?
 
 ```bash
 pip install --user pipx
+python -m pipx ensurepath
+```
+
+**Close and reopen your terminal**, then run:
+
+```bash
 pipx install git+https://github.com/YH189/drico-terminal-bot.git
 ```
 
-> Restart your terminal after installing, then run:
-> ```bash
-> drico-bot
-> ```
+**Close and reopen your terminal again**, then run:
 
-## Run
-
-```
+```bash
 drico-bot
 ```
 
