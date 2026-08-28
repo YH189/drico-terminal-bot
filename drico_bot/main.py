@@ -415,7 +415,7 @@ def show_thinking(stages=None):
 
 def banner():
     print("-" * 60)
-    print("        DRICO v2 - AI TOOLS ROUTER")
+    print("        DRICO - AI TOOLS ROUTER")
     print("-" * 60)
     print("Type 'show' to see the available commands.")
     print("Type 'exit' to close the program.\n")
