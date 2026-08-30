@@ -509,12 +509,12 @@ def calculate(text):
 
     if operator == "/":
         if second == 0:
-            return "Error: cannot divide by zero"
+            return "Error: cannot divide by 0"
         return first / second
 
     if operator == "%":
         if second == 0:
-            return "Error: cannot divide by zero"
+            return "Error: cannot divide by 0"
         return first % second
 
     return None
