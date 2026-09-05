@@ -1,6 +1,6 @@
 # Drico-Bot
 
-A command-line chatbot that routes your queries to the right AI tools, does quick math, explains dev concepts, and answers basic dev-reference questions — right from your terminal.
+A command-line chatbot that routes your queries to the right AI tools, does quick math, explains dev concepts, and answers basic dev-reference questions - right from your terminal.
 
 ## Install
 
