@@ -552,7 +552,7 @@ def run():
             continue
 
         if "how are you" in user:
-            print("Drico > I am doing fine. What do you need?")
+            print("Drico > I am doing fine. How. can i help you.")
             continue
 
         if "who are you" in user:
