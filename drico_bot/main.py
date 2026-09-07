@@ -376,7 +376,6 @@ A simple RAG process is:
 
 RAG is useful for private documents, company knowledge bases,
 research systems, customer support, and question answering.
-
 RAG does not automatically make answers correct. If retrieval finds
 bad or incomplete information, the final answer can still be wrong.
 
@@ -393,8 +392,8 @@ math_pattern = re.compile(
     r"^(-?\d+(?:\.\d+)?)\s*([+\-*/%])\s*(-?\d+(?:\.\d+)?)$"
 )
 
-THINKING_STAGES = ["Researching", "Analysing", "Finalising"]
-CALC_STAGES = ["Thinking"]
+THINKING_STAGES = ["Searching..."]
+CALC_STAGES = ["Calculating"]
 
 
 def show_thinking(stages=None):
