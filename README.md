@@ -1,6 +1,6 @@
 # Drico-Bot
 
-A command-line chatbot that routes your queries to the right AI tools, does quick math, explains dev concepts, and answers basic dev-reference questions — right from your terminal.
+A command-line chatbot that routes your queries to the right AI tools, does quick math, explains dev concepts, and answers basic dev-reference questions - right from your terminal.
 
 ## Install
 
@@ -44,8 +44,7 @@ Type `show` inside the bot at any time to see this list again.
 Before answering most queries, Drico shows a short "Researching... Analysing... Finalising..." sequence to make the terminal feel more alive.
 
 ## Example session
-
-```
+```text
 User  > what is the use of git
 Drico > Researching...
 Drico > Analysing...
@@ -59,9 +58,7 @@ Drico > Finalising...
 Drico > git status: Shows the current changes in the project.
 
 User  > 12+13
-Drico > Researching...
-Drico > Analysing...
-Drico > Finalising...
+Drico > Thinking...
 Drico > The result is: 25.0
 
 User  > build a website
@@ -72,7 +69,10 @@ Drico > These tools may be useful:
 
 Claude - https://claude.ai/
 Cursor - https://www.cursor.com/
-...
+GitHub Copilot - https://github.com/features/copilot
+Base44 - https://app.base44.com/
+Lovable - https://lovable.dev/
+Replit - https://replit.com/
 
 User  > exit
 Drico > Thanks for using Drico.

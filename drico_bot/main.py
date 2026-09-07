@@ -102,7 +102,7 @@ references = {
 
 # Basic explanations for common programming and AI topics
 concepts = {
-    "git": """
+    "Git": """
 Git is a distributed version control system used to track changes in
 source code and other project files.
 
@@ -124,7 +124,7 @@ Reference:
 https://git-scm.com/docs
 """,
 
-    "github": """
+    "Github": """
 GitHub is an online platform for hosting Git repositories and
 collaborating on software projects.
 
@@ -153,7 +153,7 @@ Reference:
 https://docs.github.com/en/repositories
 """,
 
-    "python": """
+    "Python": """
 Python is a high-level, general-purpose programming language known
 for its readable syntax and large collection of libraries.
 
@@ -175,7 +175,7 @@ Reference:
 https://docs.python.org/3/
 """,
 
-    "ai": """
+    "AI": """
 Artificial Intelligence, or AI, is the field of computing focused on
 building systems that can perform tasks that normally require forms
 of human intelligence.
@@ -200,7 +200,7 @@ Reference:
 https://www.nist.gov/artificial-intelligence
 """,
 
-    "ml": """
+    "Ml": """
 Machine Learning, or ML, is a part of Artificial Intelligence where
 models learn patterns from data and use those patterns to make
 predictions or decisions.
@@ -231,7 +231,7 @@ Reference:
 https://developers.google.com/machine-learning
 """,
 
-    "machine learning": """
+    "Machine learning": """
 Machine Learning is a subfield of Artificial Intelligence where
 computer models learn patterns from data instead of depending only
 on manually written rules.
@@ -254,7 +254,7 @@ Reference:
 https://developers.google.com/machine-learning/glossary
 """,
 
-    "llm": """
+    "LLM": """
 An LLM, or Large Language Model, is a machine learning model trained
 on a large amount of data to understand and generate sequences of
 tokens.
@@ -281,7 +281,7 @@ Reference:
 https://developers.google.com/machine-learning/glossary
 """,
 
-    "deep learning": """
+    "Deep learning": """
 Deep Learning is a part of machine learning that uses neural networks
 with multiple layers.
 
@@ -414,7 +414,7 @@ def show_thinking(stages=None):
 
 def banner():
     print("-" * 60)
-    print("        DRICO v2 - AI TOOLS ROUTER")
+    print("        DRICO - AI TOOLS ROUTER")
     print("-" * 60)
     print("Type 'show' to see the available commands.")
     print("Type 'exit' to close the program.\n")
@@ -508,12 +508,12 @@ def calculate(text):
 
     if operator == "/":
         if second == 0:
-            return "Error: cannot divide by zero"
+            return "Error: cannot divide by 0"
         return first / second
 
     if operator == "%":
         if second == 0:
-            return "Error: cannot divide by zero"
+            return "Error: cannot divide by 0"
         return first % second
 
     return None
@@ -551,7 +551,7 @@ def run():
             continue
 
         if "how are you" in user:
-            print("Drico > I am doing fine. What do you need?")
+            print("Drico > I am doing fine. How. can i help you.")
             continue
 
         if "who are you" in user:
