@@ -1,31 +1,28 @@
 import re
-import sys
 import time
 
-
-# Tools grouped by what they are mainly used for
-tools = {
+TOOLS = {
     "automation": [
         ("CrewAI", "https://www.crewai.com/"),
         ("LangChain", "https://www.langchain.com/"),
         ("AutoGen", "https://microsoft.github.io/autogen/"),
         ("Make.com", "https://www.make.com/"),
         ("Zapier", "https://zapier.com/"),
-        ("n8n", "https://n8n.io/")
+        ("n8n", "https://n8n.io/"),
     ],
     "research": [
         ("Perplexity", "https://www.perplexity.ai/"),
         ("NotebookLM", "https://notebooklm.google.com/"),
         ("Grok", "https://grok.com/"),
         ("Elicit", "https://elicit.com/"),
-        ("Consensus", "https://consensus.app/")
+        ("Consensus", "https://consensus.app/"),
     ],
     "creative": [
         ("Midjourney", "https://www.midjourney.com/"),
         ("Runway", "https://runwayml.com/"),
         ("Gemini", "https://gemini.google.com/"),
         ("ChatGPT", "https://chatgpt.com/"),
-        ("Ideogram", "https://ideogram.ai/")
+        ("Ideogram", "https://ideogram.ai/"),
     ],
     "development": [
         ("Claude", "https://claude.ai/"),
@@ -33,110 +30,112 @@ tools = {
         ("GitHub Copilot", "https://github.com/features/copilot"),
         ("Base44", "https://app.base44.com/"),
         ("Lovable", "https://lovable.dev/"),
-        ("Replit", "https://replit.com/")
-    ]
+        ("Replit", "https://replit.com/"),
+    ],
 }
 
 
-# Words used to decide which group of tools the user is asking about
-keywords = {
+CATEGORY_KEYWORDS = {
     "automation": ["automation", "agent", "workflow"],
-    "research": ["research", "found"],
-    "creative": ["create", "image", "video"],
-    "development": ["build", "website", "app", "code"]
+    "research": ["research", "find", "found", "search"],
+    "creative": ["create", "image", "video", "design"],
+    "development": ["build", "website", "app", "code", "develop"],
 }
 
-
-git_commands = {
+GIT_COMMANDS = {
     "git status": "Shows the current changes in the project.",
     "git add": "Adds files to the staging area.",
-    "git commit": "Saves the staged changes.",
-    "git push": "Uploads your commits to GitHub.",
-    "git pull": "Gets the latest changes from the remote repository.",
-    "git branch": "Shows or creates branches.",
+    "git commit": "Saves the staged changes as a commit.",
+    "git push": "Uploads local commits to a remote repository such as GitHub.",
+    "git pull": "Downloads and integrates the latest remote changes.",
+    "git branch": "Shows branches or creates a new branch.",
     "git checkout": "Switches between branches.",
-    "git clone": "Copies a repository to your computer."
+    "git clone": "Copies a remote repository to your computer.",
 }
 
-python_commands = {
+PYTHON_COMMANDS = {
     "range": "range(start, stop, step) creates a sequence of numbers.",
-    "len": "len() gives the number of items in something.",
-    "enumerate": "enumerate() gives both the index and the value while looping.",
-    "zip": "zip() joins values from two or more lists together.",
-    "lambda": "lambda is used to create a small function in one line."
+    "len": "len() returns the number of items in an object.",
+    "enumerate": "enumerate() gives both the index and value while looping.",
+    "zip": "zip() combines values from two or more iterables.",
+    "lambda": "lambda creates a small anonymous function in one expression.",
 }
 
-java_commands = {
-    "main": "public static void main(String[] args) is where a Java program starts.",
-    "system.out.println": "Prints something to the console.",
-    "for loop": "A for loop repeats code a certain number of times.",
-    "arraylist": "ArrayList is a resizable list in Java.",
-    "class": "A class is used as a blueprint for objects."
-}
-
-c_commands = {
-    "main": "int main() is the starting point of a C program.",
-    "printf": "printf() is used to print output.",
-    "scanf": "scanf() is used to take input.",
-    "pointer": "A pointer stores the memory address of another variable.",
-    "malloc": "malloc() is used to allocate memory dynamically."
-}
-
-cpp_commands = {
-    "main": "int main() is the starting point of a C++ program.",
-    "cout": "std::cout is used to print output.",
-    "cin": "std::cin is used to take input.",
+JAVA_COMMANDS = {
+    "main": "public static void main(String[] args) is the usual entry point of a Java program.",
+    "system.out.println": "System.out.println() prints output to the console.",
+    "for loop": "A for loop repeats a block of code.",
+    "arraylist": "ArrayList is a resizable list implementation in Java.",
     "class": "A class is a blueprint for creating objects.",
-    "vector": "std::vector is a resizable container in C++."
 }
 
-
-references = {
-    "git": git_commands,
-    "python": python_commands,
-    "java": java_commands,
-    "c": c_commands,
-    "c++": cpp_commands
+C_COMMANDS = {
+    "main": "int main() is the usual starting point of a C program.",
+    "printf": "printf() prints formatted output.",
+    "scanf": "scanf() reads formatted input.",
+    "pointer": "A pointer stores the memory address of another value.",
+    "malloc": "malloc() dynamically allocates memory.",
 }
 
+CPP_COMMANDS = {
+    "main": "int main() is the usual starting point of a C++ program.",
+    "cout": "std::cout writes output to the console.",
+    "cin": "std::cin reads input from the console.",
+    "class": "A class is a blueprint for creating objects.",
+    "vector": "std::vector is a resizable sequence container.",
+}
 
-# Basic explanations for common programming and AI topics
-concepts = {
-    "Git": """
+REFERENCES = {
+    "git": GIT_COMMANDS,
+    "python": PYTHON_COMMANDS,
+    "java": JAVA_COMMANDS,
+    "c": C_COMMANDS,
+    "c++": CPP_COMMANDS,
+}
+
+CONCEPTS = {
+    "git": """
 Git is a distributed version control system used to track changes in
 source code and other project files.
 
-Git keeps a history of changes using commits. This makes it possible
-to look at older versions, compare changes, and recover from mistakes.
+Git stores project history through commits. This makes it possible to
+compare versions, recover older work, and collaborate safely.
 
-Git also supports branches. A branch gives you a separate line of
-development where you can work on a feature, bug fix, or experiment
-without changing the main branch directly.
+Git also supports branches. A branch lets you work on a feature, bug
+fix, or experiment without directly changing the main branch.
 
-A normal Git workflow is to change files, check the changes, stage them
-with git add, save them with git commit, and use git pull or git push
-when working with a remote repository.
+A common Git workflow is:
 
-Git can be used without GitHub. A repository can stay completely
-local or be hosted on another Git-compatible service.
+1. Change files.
+2. Check the changes with git status.
+3. Stage changes with git add.
+4. Save them with git commit.
+5. Share them with git push.
+
+Git can be used without GitHub. GitHub is only one platform that can
+host Git repositories.
 
 Reference:
 https://git-scm.com/docs
 """,
 
-    "Github": """
+    "github": """
 GitHub is an online platform for hosting Git repositories and
 collaborating on software projects.
 
-Git and GitHub are different. Git handles version control, while
-GitHub provides an online place to store repositories and tools for
-collaboration.
+Git and GitHub are different. Git is the version control system, while
+GitHub is a service that stores Git repositories online and adds
+collaboration features.
 
-GitHub repositories can contain source code, documentation,
-configuration files, releases, and the project's Git history.
+Common GitHub features include:
 
-Some common GitHub features are pull requests, issues, code reviews,
-discussions, releases, permissions, and GitHub Actions.
+- repositories
+- pull requests
+- issues
+- code reviews
+- discussions
+- releases
+- GitHub Actions
 
 A common workflow is:
 
@@ -144,69 +143,73 @@ A common workflow is:
 2. Create a branch.
 3. Make changes.
 4. Commit the changes.
-5. Push the branch to GitHub.
+5. Push the branch.
 6. Open a pull request.
-7. Review the changes.
-8. Merge the branch.
+7. Review and merge the changes.
 
 Reference:
 https://docs.github.com/en/repositories
 """,
 
-    "Python": """
-Python is a high-level, general-purpose programming language known
-for its readable syntax and large collection of libraries.
+    "python": """
+Python is a high-level, general-purpose programming language known for
+its readable syntax and large ecosystem.
 
-Python is used for web development, automation, scripting, data
-analysis, scientific computing, testing, backend development,
-cybersecurity, artificial intelligence, and machine learning.
+Python is used for:
 
-One of Python's biggest advantages is its ecosystem. It has a large
-standard library and many third-party packages available through PyPI.
+- automation
+- web development
+- scripting
+- data analysis
+- scientific computing
+- testing
+- backend development
+- artificial intelligence
+- machine learning
 
-Python is also widely used in AI and machine learning. Libraries such
-as PyTorch, TensorFlow, scikit-learn, NumPy, and pandas all have strong
-Python support.
-
-Python uses indentation to organize blocks of code, which makes the
-structure of a program easy to see.
+Popular Python libraries include NumPy, pandas, scikit-learn,
+TensorFlow, and PyTorch.
 
 Reference:
 https://docs.python.org/3/
 """,
 
-    "AI": """
+    "ai": """
 Artificial Intelligence, or AI, is the field of computing focused on
 building systems that can perform tasks that normally require forms
 of human intelligence.
 
-AI includes areas such as rule-based systems, machine learning,
-deep learning, reinforcement learning, computer vision, natural
-language processing, speech systems, and generative AI.
+AI includes areas such as:
+
+- rule-based systems
+- machine learning
+- deep learning
+- reinforcement learning
+- computer vision
+- natural language processing
+- speech systems
+- generative AI
 
 Modern AI is heavily based on machine learning, where systems learn
 patterns from data.
 
-Generative AI can create content such as text, images, audio, video,
-and code. Large language models are one type of generative AI system.
+Generative AI can create text, images, audio, video, and code. Large
+language models are one type of generative AI system.
 
 AI systems can also use tools, external information, memory, and
-software actions to complete more complicated tasks.
+software actions to complete more complex tasks.
 
-AI development also has challenges such as reliability, privacy,
-security, bias, evaluation, and data quality.
+Important AI challenges include reliability, privacy, security, bias,
+evaluation, and data quality.
 
 Reference:
 https://www.nist.gov/artificial-intelligence
 """,
 
-    "Ml": """
+    "ml": """
 Machine Learning, or ML, is a part of Artificial Intelligence where
 models learn patterns from data and use those patterns to make
 predictions or decisions.
-
-A simple way to compare traditional programming and machine learning
-is:
 
 Traditional programming:
 input + rules -> output
@@ -219,87 +222,79 @@ The trained model can then be used on new data.
 Common types of machine learning include supervised learning,
 unsupervised learning, and reinforcement learning.
 
-A typical ML project involves collecting data, cleaning it,
-preparing it, choosing a model, training the model, testing it,
-tuning it, and finally deploying it.
-
-Important ideas include features, labels, parameters, loss functions,
-gradient descent, overfitting, underfitting, regularization, and
-evaluation metrics.
+A typical ML project involves collecting data, cleaning it, preparing
+features, choosing a model, training it, evaluating it, tuning it, and
+deploying it.
 
 Reference:
 https://developers.google.com/machine-learning
 """,
 
-    "Machine learning": """
+    "machine learning": """
 Machine Learning is a subfield of Artificial Intelligence where
-computer models learn patterns from data instead of depending only
-on manually written rules.
+computer models learn patterns from data instead of depending only on
+manually written rules.
 
-During training, a model changes its parameters to improve its
-performance on a chosen objective.
+During training, a model changes its parameters to improve performance
+on a chosen objective.
 
-Common learning types include supervised learning, unsupervised
-learning, self-supervised learning, semi-supervised learning, and
-reinforcement learning.
+Common learning approaches include:
 
-Supervised learning is often used for classification and regression.
-Unsupervised learning can be used to find patterns such as clusters.
+- supervised learning
+- unsupervised learning
+- self-supervised learning
+- semi-supervised learning
+- reinforcement learning
 
-Modern machine learning is used in recommendation systems, fraud
-detection, search engines, computer vision, speech recognition,
-language models, and generative AI.
+Machine learning is widely used in recommendation systems, fraud
+detection, search engines, computer vision, speech recognition, and
+language models.
 
 Reference:
 https://developers.google.com/machine-learning/glossary
 """,
 
-    "LLM": """
+    "llm": """
 An LLM, or Large Language Model, is a machine learning model trained
-on a large amount of data to understand and generate sequences of
+on large amounts of data to understand and generate sequences of
 tokens.
 
 Many modern LLMs use Transformer architectures. Transformers use
-self-attention to understand relationships between tokens.
+self-attention to model relationships between tokens.
 
-During pretraining, a model learns statistical patterns in its
-training data. One common training task is predicting the next token.
+During pretraining, a model learns statistical patterns in its training
+data. A common objective is next-token prediction.
 
-After pretraining, an LLM may go through additional training such as
-instruction tuning, supervised fine-tuning, preference optimization,
-or safety training.
+After pretraining, an LLM may go through instruction tuning, supervised
+fine-tuning, preference optimization, or safety training.
 
 LLMs can be used for writing, summarization, translation, question
-answering, classification, coding, information extraction, and tool
-use.
-
-An LLM does not automatically have access to live information.
-Applications can connect models to APIs, databases, search systems,
-or other tools when current information is needed.
+answering, classification, coding, information extraction, and tool use.
 
 Reference:
 https://developers.google.com/machine-learning/glossary
 """,
 
-    "Deep learning": """
+    "deep learning": """
 Deep Learning is a part of machine learning that uses neural networks
 with multiple layers.
 
-The multiple layers allow the network to learn increasingly complex
-representations of data.
+Those layers allow a model to learn increasingly complex
+representations from data.
 
-Deep learning is widely used in computer vision, speech recognition,
-natural language processing, recommendation systems, and generative AI.
+Deep learning is widely used in:
 
-Important neural network architectures include CNNs, RNNs, autoencoders,
-GANs, and Transformers.
+- computer vision
+- speech recognition
+- natural language processing
+- recommendation systems
+- generative AI
 
-Training a neural network normally involves a forward pass, calculating
-a loss, backpropagation, and updating the model parameters.
+Important architectures include CNNs, RNNs, autoencoders, GANs, and
+Transformers.
 
-Large deep learning models often need substantial computing power,
-with GPUs and other accelerators commonly used for training and
-inference.
+Training usually involves a forward pass, loss calculation,
+backpropagation, and parameter updates.
 
 Reference:
 https://developers.google.com/machine-learning/glossary
@@ -309,19 +304,17 @@ https://developers.google.com/machine-learning/glossary
 A neural network is a machine learning model made from connected
 computational units arranged into layers.
 
-A simple neural network normally has an input layer, hidden layers,
-and an output layer.
+A simple neural network normally contains:
+
+- an input layer
+- one or more hidden layers
+- an output layer
 
 During a forward pass, the network produces a prediction. A loss
 function measures how far the prediction is from the expected result.
-Backpropagation is then used to calculate gradients so the parameters
-can be updated.
 
-Neural networks can learn complex relationships that are difficult
-to describe using manually written rules.
-
-A network with several hidden layers is generally called a deep
-neural network.
+Backpropagation calculates gradients so that the model parameters can
+be updated.
 
 Important concepts include neurons, weights, biases, activation
 functions, layers, loss functions, gradients, and backpropagation.
@@ -331,24 +324,25 @@ https://developers.google.com/machine-learning/glossary
 """,
 
     "api": """
-An API, or Application Programming Interface, is a defined way for
-one software system to communicate with another.
+An API, or Application Programming Interface, is a defined way for one
+software system to communicate with another.
 
-An API describes how a program can request data or functionality and
+An API describes how software can request data or functionality and
 what kind of response it should receive.
 
-Web APIs commonly use HTTP methods such as GET, POST, PUT, PATCH,
-and DELETE.
+Web APIs commonly use HTTP methods such as:
 
-For example, a frontend application can send a GET request to a
-backend API and receive information, often in JSON format.
+- GET
+- POST
+- PUT
+- PATCH
+- DELETE
 
-APIs can use different approaches such as REST, GraphQL, RPC,
-WebSockets, and webhooks.
+APIs can use approaches such as REST, GraphQL, RPC, WebSockets, and
+webhooks.
 
-Authentication, authorization, validation, rate limiting, error
-handling, security, and versioning are common concerns when building
-production APIs.
+Important API concerns include authentication, authorization,
+validation, rate limiting, error handling, security, and versioning.
 
 Reference:
 https://developer.mozilla.org/en-US/docs/Glossary/API
@@ -357,62 +351,136 @@ https://developer.mozilla.org/en-US/docs/Glossary/API
     "rag": """
 RAG stands for Retrieval-Augmented Generation.
 
-It is an AI architecture that combines information retrieval with
-a generative language model.
+It is an AI architecture that combines information retrieval with a
+generative language model.
 
-Instead of asking a model to answer only from information stored in
-its parameters, a RAG system first retrieves relevant information and
-gives that information to the model as context.
-
-A simple RAG process is:
+A simple RAG pipeline works like this:
 
 1. Collect documents.
-2. Split the documents into smaller pieces.
-3. Index the pieces.
+2. Split them into smaller chunks.
+3. Index those chunks.
 4. Receive a user question.
-5. Find relevant information.
-6. Give the retrieved information to the model.
-7. Generate the answer.
+5. Retrieve relevant information.
+6. Give that information to the model.
+7. Generate an answer.
 
-RAG is useful for private documents, company knowledge bases,
-research systems, customer support, and question answering.
-RAG does not automatically make answers correct. If retrieval finds
-bad or incomplete information, the final answer can still be wrong.
+RAG is useful for private documents, company knowledge bases, research
+systems, customer support, and question-answering applications.
 
-RAG is also different from fine-tuning. Fine-tuning changes model
-parameters, while RAG normally supplies external information during
-inference.
+RAG is different from fine-tuning. Fine-tuning changes model
+parameters, while RAG supplies external information during inference.
 
 Reference:
 https://docs.aws.amazon.com/prescriptive-guidance/latest/retrieval-augmented-generation-options/
-"""
+""",
 }
 
-math_pattern = re.compile(
+MATH_PATTERN = re.compile(
     r"^(-?\d+(?:\.\d+)?)\s*([+\-*/%])\s*(-?\d+(?:\.\d+)?)$"
 )
 
-THINKING_STAGES = ["Searching..."]
-CALC_STAGES = ["Calculating"]
+
+def calculate(expression):
+    """Calculate a basic two-number arithmetic expression."""
+    match = MATH_PATTERN.fullmatch(expression)
+
+    if not match:
+        return None
+
+    first = float(match.group(1))
+    operator = match.group(2)
+    second = float(match.group(3))
+
+    if operator == "+":
+        result = first + second
+    elif operator == "-":
+        result = first - second
+    elif operator == "*":
+        result = first * second
+    elif operator == "/":
+        if second == 0:
+            return "Error: cannot divide by 0"
+        result = first / second
+    elif operator == "%":
+        if second == 0:
+            return "Error: cannot divide by 0"
+        result = first % second
+    else:
+        return None
+
+    if result.is_integer():
+        return int(result)
+
+    return result
+
+def find_category(text):
+    """Return the first matching AI-tool category."""
+    words = set(text.split())
+
+    for category, keywords in CATEGORY_KEYWORDS.items():
+        for keyword in keywords:
+            if keyword in words or keyword in text:
+                return category
+
+    return None
 
 
-def show_thinking(stages=None):
-    """Show a small loading effect before an answer."""
-    if stages is None:
-        stages = THINKING_STAGES
+def find_reference(text):
+    """Find a programming reference topic in the user's message."""
+    words = set(text.split())
 
-    for stage in stages:
-        print("Drico >", stage, end="", flush=True)
+    if "c++" in text:
+        return "c++"
 
-        for _ in range(3):
-            time.sleep(0.25)
-            print(".", end="", flush=True)
+    for topic in REFERENCES:
+        if topic in words:
+            return topic
 
-        print()
-        time.sleep(0.15)
+    return None
 
 
-def banner():
+def find_reference_command(text, reference):
+    """Find a supported command or keyword for a programming topic."""
+    for command in reference:
+        if command in text:
+            return command
+
+    return None
+
+
+def find_concept(text):
+    """
+    Match a concept without depending on capitalization.
+
+    The user's input is normalized to lowercase, so concept keys are
+    also stored and compared in lowercase.
+    """
+    text = text.lower().strip()
+
+    for topic in sorted(CONCEPTS, key=len, reverse=True):
+        if text.endswith(topic):
+            return topic
+
+    return None
+
+
+def is_math(text):
+    """Return True if the input is a supported arithmetic expression."""
+    return MATH_PATTERN.fullmatch(text) is not None
+
+
+def show_loading(message="Searching"):
+    """Show a small console loading animation."""
+    print(f"Drico > {message}", end="", flush=True)
+
+    for _ in range(3):
+        time.sleep(0.2)
+        print(".", end="", flush=True)
+
+    print()
+
+
+def show_banner():
     print("-" * 60)
     print("        DRICO - AI TOOLS ROUTER")
     print("-" * 60)
@@ -422,22 +490,23 @@ def banner():
 
 def show_commands():
     print("\nDrico > Commands")
-    print("automation / agent / workflow  - Automation tools")
-    print("research / found               - Research tools")
-    print("create / image / video         - Creative tools")
-    print("build / website / app / code   - Development tools")
-    print("git / python / java / c / c++  - Programming references")
-    print("what is <topic>                - Concept explanations")
+    print("automation / agent / workflow   - Automation tools")
+    print("research / find / search        - Research tools")
+    print("create / image / video          - Creative tools")
+    print("build / website / app / code    - Development tools")
+    print("git / python / java / c / c++   - Programming references")
+    print("what is <topic>                 - Concept explanations")
     print("5+5, 10*2, 20/4                - Calculator")
     print("list / tools / links            - Show all tools")
+    print("exit                            - Close Drico")
     print()
 
 
 def show_tools(category):
-    print("\nDrico > These tools may be useful:\n")
+    print(f"\nDrico > {category.title()} tools\n")
 
-    for name, url in tools[category]:
-        print(name, "-", url)
+    for name, url in TOOLS[category]:
+        print(f"{name} - {url}")
 
     print()
 
@@ -445,90 +514,56 @@ def show_tools(category):
 def show_all_tools():
     print("\nDrico > Full Tool Directory\n")
 
-    for category, tool_list in tools.items():
-        print("[" + category + "]")
+    for category, tool_list in TOOLS.items():
+        print(f"[{category.title()}]")
 
         for name, url in tool_list:
-            print(" ", name, "-", url)
+            print(f"  {name} - {url}")
 
         print()
 
+def handle_concept_question(user):
+    """Handle questions such as 'what is AI' or 'explain RAG'."""
+    concept = find_concept(user)
 
-def find_category(text):
-    for category, words in keywords.items():
-        for word in words:
-            if word in text:
-                return category
-
-    return None
-
-
-def find_reference(text):
-    words = text.split()
-
-    for topic in references:
-        if topic in words:
-            return topic
-
-    return None
+    if concept:
+        show_loading()
+        print(f"Drico > {CONCEPTS[concept].strip()}\n")
+    else:
+        show_loading()
+        print("Drico > I don't have an explanation for that yet.")
+        print("Drico > Type 'show' to see what I can answer.\n")
 
 
-def find_concept(text):
-    words = text.split()
+def handle_reference_question(user):
+    """Handle programming reference requests."""
+    topic = find_reference(user)
 
-    for topic in concepts:
-        if topic in words or text.endswith(topic):
-            return topic
+    if not topic:
+        return False
 
-    return None
+    show_loading()
 
+    reference = REFERENCES[topic]
+    command = find_reference_command(user, reference)
 
-def is_math(text):
-    return math_pattern.fullmatch(text) is not None
+    if command:
+        print(f"Drico > {command}: {reference[command]}\n")
+    else:
+        if topic == "git":
+            example = "git status"
+        elif topic == "c++":
+            example = "c++ vector"
+        else:
+            example = f"{topic} <keyword>"
 
+        print(f"Drico > Try a specific command, like: {example}\n")
 
-def calculate(text):
-    match = math_pattern.fullmatch(text)
-
-    if match is None:
-        return None
-
-    first = float(match.group(1))
-    operator = match.group(2)
-    second = float(match.group(3))
-
-    if operator == "+":
-        return first + second
-
-    if operator == "-":
-        return first - second
-
-    if operator == "*":
-        return first * second
-
-    if operator == "/":
-        if second == 0:
-            return "Error: cannot divide by 0"
-        return first / second
-
-    if operator == "%":
-        if second == 0:
-            return "Error: cannot divide by 0"
-        return first % second
-
-    return None
-
-
-def find_command(text, reference):
-    for command in reference:
-        if command in text:
-            return command
-
-    return None
+    return True
 
 
 def run():
-    banner()
+    show_banner()
 
     while True:
         user = input("User  > ").strip().lower()
@@ -536,7 +571,7 @@ def run():
         if not user:
             continue
 
-        if user in ("exit", "quit", "bye"):
+        if user in {"exit", "quit", "bye"}:
             print("Drico > Thanks for using Drico.")
             break
 
@@ -544,68 +579,44 @@ def run():
             show_commands()
             continue
 
-        if is_math(user):
-            show_thinking(CALC_STAGES)
-            answer = calculate(user)
-            print("Drico > The result is:", answer)
-            continue
-
-        if "how are you" in user:
-            print("Drico > I am doing fine. How. can i help you.")
-            continue
-
-        if "who are you" in user:
-            print("Drico > I am Drico, a simple Python chatbot.")
-            continue
-
-        if "hi" in user.split() or "hello" in user.split():
-            print("Drico > Hello! How can I help you?")
-            continue
-
-        if "list" in user or "tools" in user or "links" in user:
+        if user in {"list", "tools", "links"}:
             show_all_tools()
             continue
 
-        if user.startswith("what is") or user.startswith("what are") or user.startswith("explain"):
-            show_thinking()
-
-            concept = find_concept(user)
-
-            if concept:
-                print("Drico >", concepts[concept])
-            else:
-                print("Drico > I don't have an explanation for that yet.")
-                print("Drico > Type 'show' to see what I can answer.")
-
+        if is_math(user):
+            show_loading("Calculating")
+            answer = calculate(user)
+            print(f"Drico > The result is: {answer}\n")
             continue
 
-        topic = find_reference(user)
+        if "how are you" in user:
+            print("Drico > I am doing fine. How can I help you?\n")
+            continue
 
-        if topic:
-            show_thinking()
+        if "who are you" in user:
+            print("Drico > I am Drico, a simple Python AI tools router.\n")
+            continue
 
-            command = find_command(user, references[topic])
+        if "hi" in user.split() or "hello" in user.split():
+            print("Drico > Hello! How can I help you?\n")
+            continue
 
-            if command:
-                print("Drico >", command + ":", references[topic][command])
-            else:
-                if topic == "git":
-                    example = "git status"
-                else:
-                    example = topic + " <keyword>"
+        if user.startswith(("what is ", "what are ", "explain ")):
+            handle_concept_question(user)
+            continue
 
-                print("Drico > Try a specific command, like:", example)
-
+        if handle_reference_question(user):
             continue
 
         category = find_category(user)
 
         if category:
-            show_thinking()
+            show_loading()
             show_tools(category)
-        else:
-            print("Drico > I don't understand that yet.")
-            print("Drico > Type 'show' to see what I can do.")
+            continue
+
+        print("Drico > I don't understand that yet.")
+        print("Drico > Type 'show' to see what I can do.\n")
 
 
 if __name__ == "__main__":
