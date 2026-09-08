@@ -158,11 +158,11 @@ Start it again:
 drico-bot
 ```
 
-This prevents an older installed copy from being used after the project has been updated.
+This helps prevent an older installed copy from being used after the project has been updated.
 
-## Important for Previous Versions
+## Previous Installations
 
-If you previously installed an older version of Drico using `pip`, editable installation, or `pipx`, remove the old installation before installing the current version.
+If you previously installed Drico using `pip`, editable installation, or `pipx`, remove the old installation before installing the current version.
 
 First try:
 
@@ -176,13 +176,13 @@ Then remove any old pip installation:
 python -m pip uninstall drico-bot
 ```
 
-On macOS or Linux, if your system uses `python3`:
+On macOS or Linux:
 
 ```bash
 python3 -m pip uninstall drico-bot
 ```
 
-Then install the latest release:
+Then install the current version:
 
 ```bash
 pipx install git+https://github.com/YH189/drico-terminal-bot.git
@@ -229,7 +229,7 @@ inside Drico at any time to display the command list.
 
 ### Automation
 
-Drico can suggest tools such as:
+Drico can suggest:
 
 - CrewAI
 - LangChain
@@ -589,7 +589,7 @@ Normal users do not need to manually locate or run `main.py`.
 
 ## Development
 
-This section is only for contributors or developers changing Drico's source code.
+This section is for contributors or developers changing Drico's source code.
 
 Clone the repository:
 
@@ -603,16 +603,7 @@ Enter the repository:
 cd drico-terminal-bot
 ```
 
-Confirm that the project contains:
-
-```text
-drico_bot/
-pyproject.toml
-README.md
-LICENSE
-```
-
-Then run the source:
+Run the current source directly:
 
 ```bash
 python -m drico_bot.main
@@ -624,9 +615,9 @@ On systems where Python is available as `python3`:
 python3 -m drico_bot.main
 ```
 
-The module command should be run from inside the repository when testing source code.
+Run the module command from inside the repository when testing source code.
 
-Normal users should not use the module command. They should install Drico with `pipx` and run:
+Normal users should install Drico with `pipx` and run:
 
 ```bash
 drico-bot
@@ -642,31 +633,39 @@ From inside the repository, run:
 python -c "import drico_bot.main as m; print(m.__file__)"
 ```
 
-The path should point to your current repository, for example:
+On macOS or Linux:
+
+```bash
+python3 -c "import drico_bot.main as m; print(m.__file__)"
+```
+
+The path should point to the current repository.
+
+Example on Windows:
 
 ```text
 C:\Users\your-name\drico-terminal-bot\drico_bot\main.py
 ```
 
-If it points to an older Python `site-packages` location, remove the old installation and reinstall Drico.
+If the path points to an older Python `site-packages` location, remove the old installation and reinstall Drico.
 
 ## Troubleshooting
 
 ### `drico-bot` command is not found
 
-Close and reopen your terminal after running:
+Run:
 
 ```bash
 python -m pipx ensurepath
 ```
 
-If necessary, run:
+On some macOS or Linux systems:
 
 ```bash
-python -m pipx ensurepath
+python3 -m pipx ensurepath
 ```
 
-again and restart the terminal.
+Then completely close and reopen the terminal.
 
 ### An old version of Drico starts
 
@@ -682,7 +681,13 @@ Also check for an old pip installation:
 python -m pip uninstall drico-bot
 ```
 
-Then install the newest version:
+On macOS or Linux:
+
+```bash
+python3 -m pip uninstall drico-bot
+```
+
+Then reinstall the current version:
 
 ```bash
 pipx install git+https://github.com/YH189/drico-terminal-bot.git
@@ -696,21 +701,26 @@ drico-bot
 
 ### Windows shows multiple `drico-bot` commands
 
-In PowerShell, run:
+In PowerShell:
 
 ```powershell
 Get-Command drico-bot -All
 ```
 
-Remove old Drico installations, then reinstall using pipx:
+Remove old installations:
 
 ```powershell
 pipx uninstall drico-bot
 python -m pip uninstall drico-bot
+```
+
+Then reinstall:
+
+```powershell
 pipx install git+https://github.com/YH189/drico-terminal-bot.git
 ```
 
-Then restart PowerShell and run:
+Restart PowerShell and run:
 
 ```powershell
 drico-bot
@@ -724,7 +734,7 @@ Check where the command is coming from:
 which drico-bot
 ```
 
-Remove the old installation:
+Remove old installations:
 
 ```bash
 pipx uninstall drico-bot
@@ -821,30 +831,20 @@ The core program has no external runtime dependencies.
 
 ## Contributing
 
-If you want to modify Drico locally:
+Contributions are welcome.
 
-```bash
-git clone https://github.com/YH189/drico-terminal-bot.git
-cd drico-terminal-bot
-```
+You can fork the repository, make changes in your own copy, and open a pull request.
 
-Make your changes, then test:
+Changes to the original repository are only made when they are reviewed and accepted.
 
-```bash
-python -m drico_bot.main
-```
+## Open Source
 
-Check the repository:
+Drico-Bot is an open-source project released under the MIT License.
 
-```bash
-git status
-```
+You are free to use, study, modify, and distribute the code under the terms of the license.
 
-Commit changes:
+## License
 
-```bash
-git add .
-git commit -m "your commit message"
-git push
-```
+This project is licensed under the MIT License.
 
+See the `LICENSE` file for details.
