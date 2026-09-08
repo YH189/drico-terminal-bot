@@ -5,7 +5,7 @@ description = "A terminal keyword-router chatbot"
 requires-python = ">=3.8"
 
 [project.scripts]
-drico-bot = "drico_bot.main:run_bot"
+drico-bot = "drico_bot.main:run"
 
 [build-system]
 requires = ["setuptools"]
