@@ -848,6 +848,3 @@ git commit -m "your commit message"
 git push
 ```
 
-## License
-
-See the `LICENSE` file in this repository for usage terms.
