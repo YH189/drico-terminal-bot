@@ -1,10 +1,10 @@
 # Drico-Bot
 
-Drico-Bot is a lightweight command-line chatbot written in Python.
+Drico-Bot is a lightweight Python command-line chatbot and AI tools router.
 
-It routes simple queries to useful AI tools, explains selected AI and development concepts, provides small programming references, and performs basic arithmetic directly from the terminal.
+It can recommend useful AI tools, explain selected AI and development concepts, provide small programming references, and perform basic arithmetic directly from the terminal.
 
-Drico is intentionally simple and predictable. It does not use an LLM, external AI API, database, or web search to generate its answers.
+Drico is intentionally simple and predictable. It does not use an LLM, external AI API, database, or live web search to generate its answers.
 
 ## Features
 
@@ -35,7 +35,7 @@ Check your Python version:
 python --version
 ```
 
-On some macOS or Linux systems, use:
+On some macOS and Linux systems:
 
 ```bash
 python3 --version
@@ -43,28 +43,28 @@ python3 --version
 
 ## Installation
 
-The recommended installation method is `pipx`.
+The recommended way to install Drico-Bot is with `pipx`.
 
-`pipx` installs Drico-Bot in its own isolated Python environment and makes the `drico-bot` command available from your terminal.
+`pipx` installs Drico in an isolated Python environment and makes the `drico-bot` command available from your terminal.
 
 ### Windows
 
-Install pipx:
+Install `pipx`:
 
 ```powershell
 python -m pip install --user pipx
 python -m pipx ensurepath
 ```
 
-Close PowerShell or Command Prompt completely and open it again.
+Close PowerShell completely and open a new PowerShell window.
 
-Then install Drico-Bot:
+Install Drico-Bot:
 
 ```powershell
-pipx install git+https://github.com/YH189/drico-terminal-bot.git
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 ```
 
-Run Drico:
+Run:
 
 ```powershell
 drico-bot
@@ -72,7 +72,7 @@ drico-bot
 
 ### macOS
 
-Install pipx:
+Install `pipx`:
 
 ```bash
 python3 -m pip install --user pipx
@@ -84,7 +84,7 @@ Close and reopen your terminal.
 Install Drico-Bot:
 
 ```bash
-pipx install git+https://github.com/YH189/drico-terminal-bot.git
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 ```
 
 Run:
@@ -95,7 +95,7 @@ drico-bot
 
 ### Linux
 
-Install pipx:
+Install `pipx`:
 
 ```bash
 python3 -m pip install --user pipx
@@ -107,7 +107,7 @@ Close and reopen your terminal.
 Install Drico-Bot:
 
 ```bash
-pipx install git+https://github.com/YH189/drico-terminal-bot.git
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 ```
 
 Run:
@@ -124,8 +124,6 @@ After installation, start Drico with:
 drico-bot
 ```
 
-Normal users should use this command to launch the program.
-
 You should see:
 
 ```text
@@ -138,39 +136,44 @@ Type 'exit' to close the program.
 User  >
 ```
 
+Normal users do not need to manually run `main.py`.
+
 ## Update Drico-Bot
 
-If you already have Drico installed and want the latest version from GitHub, remove the old installation first:
+If Drico is already installed and you want the latest version:
 
 ```bash
 pipx uninstall drico-bot
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 ```
 
-Then install the newest version:
-
-```bash
-pipx install git+https://github.com/YH189/drico-terminal-bot.git
-```
-
-Start it again:
+Then run:
 
 ```bash
 drico-bot
 ```
 
-This helps prevent an older installed copy from being used after the project has been updated.
+This replaces the previous isolated installation with the latest version from the repository.
 
-## Previous Installations
+## Upgrading From an Older Version
 
-If you previously installed Drico using `pip`, editable installation, or `pipx`, remove the old installation before installing the current version.
+Older development versions of Drico used a different command-line entry point.
 
-First try:
+If you see an error similar to:
+
+```text
+ImportError: cannot import name 'run_bot' from 'drico_bot.main'
+```
+
+an older Drico launcher is still installed.
+
+Remove the old pipx installation:
 
 ```bash
 pipx uninstall drico-bot
 ```
 
-Then remove any old pip installation:
+Also remove any older pip installation:
 
 ```bash
 python -m pip uninstall drico-bot
@@ -185,13 +188,20 @@ python3 -m pip uninstall drico-bot
 Then install the current version:
 
 ```bash
-pipx install git+https://github.com/YH189/drico-terminal-bot.git
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 ```
 
 Run:
 
 ```bash
 drico-bot
+```
+
+The current CLI entry point is:
+
+```toml
+[project.scripts]
+drico-bot = "drico_bot.main:run"
 ```
 
 ## Commands
@@ -202,7 +212,7 @@ Type:
 show
 ```
 
-inside Drico at any time to display the command list.
+inside Drico at any time to display the available commands.
 
 | Input | What Drico does |
 |---|---|
@@ -337,17 +347,13 @@ explain RAG
 tell me about neural networks
 ```
 
-Drico normalizes capitalization before matching concepts.
-
-For example:
+Drico handles capitalization differences such as:
 
 ```text
 what is ai
 what is AI
 what is Ai
 ```
-
-are treated as the same concept.
 
 Basic trailing punctuation is also supported:
 
@@ -394,12 +400,6 @@ python len
 python enumerate
 python zip
 python lambda
-```
-
-Example:
-
-```text
-User  > python lambda
 ```
 
 ### Java
@@ -534,7 +534,7 @@ Drico uses straightforward Python routing rather than a language model.
 
 When you enter a command, Drico:
 
-1. Reads the terminal input.
+1. Reads terminal input.
 2. Normalizes the text.
 3. Checks built-in commands.
 4. Detects supported arithmetic expressions.
@@ -566,7 +566,7 @@ drico-terminal-bot/
 
 ## CLI Entry Point
 
-Drico-Bot uses a command-line entry point defined in `pyproject.toml`:
+The terminal command is configured in `pyproject.toml`:
 
 ```toml
 [project.scripts]
@@ -589,7 +589,7 @@ Normal users do not need to manually locate or run `main.py`.
 
 ## Development
 
-This section is for contributors or developers changing Drico's source code.
+This section is for developers or contributors working directly with the source code.
 
 Clone the repository:
 
@@ -603,79 +603,83 @@ Enter the repository:
 cd drico-terminal-bot
 ```
 
-Run the current source directly:
+Run the source:
 
 ```bash
 python -m drico_bot.main
 ```
 
-On systems where Python is available as `python3`:
+On macOS or Linux:
 
 ```bash
 python3 -m drico_bot.main
 ```
 
-Run the module command from inside the repository when testing source code.
+Run this command from inside the repository when testing source code.
 
-Normal users should install Drico with `pipx` and run:
+Normal users should install Drico with `pipx` and start it with:
 
 ```bash
 drico-bot
 ```
 
-## Verify Which Source Is Running
-
-This section is mainly useful for development or troubleshooting.
-
-From inside the repository, run:
-
-```bash
-python -c "import drico_bot.main as m; print(m.__file__)"
-```
-
-On macOS or Linux:
-
-```bash
-python3 -c "import drico_bot.main as m; print(m.__file__)"
-```
-
-The path should point to the current repository.
-
-Example on Windows:
-
-```text
-C:\Users\your-name\drico-terminal-bot\drico_bot\main.py
-```
-
-If the path points to an older Python `site-packages` location, remove the old installation and reinstall Drico.
-
 ## Troubleshooting
 
-### `drico-bot` command is not found
+### `drico-bot` is not recognized on Windows
 
 Run:
 
-```bash
+```powershell
 python -m pipx ensurepath
 ```
 
-On some macOS or Linux systems:
+Then close PowerShell completely and open a new PowerShell window.
+
+Try:
+
+```powershell
+drico-bot
+```
+
+If Drico has not been installed yet:
+
+```powershell
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
+```
+
+### `drico-bot: command not found` on macOS or Linux
+
+Run:
 
 ```bash
 python3 -m pipx ensurepath
 ```
 
-Then completely close and reopen the terminal.
+Close and reopen your terminal.
 
-### An old version of Drico starts
+Then run:
 
-Remove previous installations:
+```bash
+drico-bot
+```
+
+### `run_bot` ImportError
+
+If you see:
+
+```text
+ImportError: cannot import name 'run_bot' from 'drico_bot.main'
+```
+
+an older Drico launcher is still installed.
+
+Remove old installations:
 
 ```bash
 pipx uninstall drico-bot
 ```
 
-Also check for an old pip installation:
+Then:
 
 ```bash
 python -m pip uninstall drico-bot
@@ -687,10 +691,50 @@ On macOS or Linux:
 python3 -m pip uninstall drico-bot
 ```
 
-Then reinstall the current version:
+Install the latest version:
 
 ```bash
-pipx install git+https://github.com/YH189/drico-terminal-bot.git
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
+```
+
+Then run:
+
+```bash
+drico-bot
+```
+
+The current launcher uses:
+
+```text
+drico_bot.main:run
+```
+
+not:
+
+```text
+drico_bot.main:run_bot
+```
+
+### An old version of Drico starts
+
+Remove both possible installations:
+
+```bash
+pipx uninstall drico-bot
+python -m pip uninstall drico-bot
+```
+
+On macOS or Linux:
+
+```bash
+pipx uninstall drico-bot
+python3 -m pip uninstall drico-bot
+```
+
+Then reinstall:
+
+```bash
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 ```
 
 Run:
@@ -699,9 +743,9 @@ Run:
 drico-bot
 ```
 
-### Windows shows multiple `drico-bot` commands
+### Windows has multiple Drico commands
 
-In PowerShell:
+In PowerShell, check:
 
 ```powershell
 Get-Command drico-bot -All
@@ -714,37 +758,16 @@ pipx uninstall drico-bot
 python -m pip uninstall drico-bot
 ```
 
-Then reinstall:
+Reinstall Drico:
 
 ```powershell
-pipx install git+https://github.com/YH189/drico-terminal-bot.git
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 ```
 
-Restart PowerShell and run:
+Close PowerShell, open it again, and run:
 
 ```powershell
 drico-bot
-```
-
-### macOS or Linux shows an old command
-
-Check where the command is coming from:
-
-```bash
-which drico-bot
-```
-
-Remove old installations:
-
-```bash
-pipx uninstall drico-bot
-python3 -m pip uninstall drico-bot
-```
-
-Then reinstall:
-
-```bash
-pipx install git+https://github.com/YH189/drico-terminal-bot.git
 ```
 
 ### Repository already exists
@@ -771,23 +794,23 @@ git pull
 
 ## Clean Reinstall
 
-If you are unsure which Drico version is installed, use a clean reinstall.
+If you are unsure which version of Drico is installed, perform a clean reinstall.
 
-Windows:
+### Windows
 
 ```powershell
 pipx uninstall drico-bot
 python -m pip uninstall drico-bot
-pipx install git+https://github.com/YH189/drico-terminal-bot.git
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 drico-bot
 ```
 
-macOS or Linux:
+### macOS or Linux
 
 ```bash
 pipx uninstall drico-bot
 python3 -m pip uninstall drico-bot
-pipx install git+https://github.com/YH189/drico-terminal-bot.git
+pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 drico-bot
 ```
 
@@ -827,7 +850,7 @@ Drico-Bot is built with:
 - setuptools
 - pyproject.toml
 
-The core program has no external runtime dependencies.
+The core application has no external runtime dependencies.
 
 ## Contributing
 
