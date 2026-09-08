@@ -1,5 +1,17 @@
+# Python cache
 __pycache__/
+*.py[cod]
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
 .venv/
+venv/
+
+# Editor / OS
 .vscode/
 .DS_Store
-*.egg-info/
+Thumbs.db
