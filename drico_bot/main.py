@@ -423,9 +423,9 @@ def show_loading(message="Searching"):
 
 
 def show_banner():
-    print("-" * 60)
+    print("-" * 50)
     print("        DRICO - AI TOOLS ROUTER")
-    print("-" * 60)
+    print("-" * 50)
     print("Type 'show' to see the available commands.")
     print("Type 'exit' to close the program.\n")
 
