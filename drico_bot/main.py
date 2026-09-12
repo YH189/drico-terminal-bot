@@ -247,7 +247,7 @@ updated.
 Reference:
 https://developers.google.com/machine-learning/glossary
 """,
-    "api": """
+    "Api": """
 An API, or Application Programming Interface, is a defined way for one
 software system to communicate with another.
 
@@ -260,7 +260,7 @@ DELETE.
 Reference:
 https://developer.mozilla.org/en-US/docs/Glossary/API
 """,
-    "rag": """
+    "RAG": """
 RAG stands for Retrieval-Augmented Generation.
 
 It is an AI architecture that combines information retrieval with a
