@@ -46,7 +46,7 @@ CATEGORY_KEYWORDS = {
 
 GIT_COMMANDS = {
     "git status": "Shows the current changes in the project.",
-    "git add": "Adds files to the staging area.",
+    "git add .": "Adds files to the staging area.",
     "git commit": "Saves the staged changes as a commit.",
     "git push": "Uploads local commits to a remote repository such as GitHub.",
     "git pull": "Downloads and integrates the latest remote changes.",
