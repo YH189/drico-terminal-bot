@@ -247,7 +247,7 @@ updated.
 Reference:
 https://developers.google.com/machine-learning/glossary
 """,
-    "api": """
+    "Api": """
 An API, or Application Programming Interface, is a defined way for one
 software system to communicate with another.
 
@@ -260,7 +260,7 @@ DELETE.
 Reference:
 https://developer.mozilla.org/en-US/docs/Glossary/API
 """,
-    "rag": """
+    "RAG": """
 RAG stands for Retrieval-Augmented Generation.
 
 It is an AI architecture that combines information retrieval with a
@@ -423,9 +423,9 @@ def show_loading(message="Searching"):
 
 
 def show_banner():
-    print("-" * 60)
+    print("-" * 50)
     print("        DRICO - AI TOOLS ROUTER")
-    print("-" * 60)
+    print("-" * 50)
     print("Type 'show' to see the available commands.")
     print("Type 'exit' to close the program.\n")
 
