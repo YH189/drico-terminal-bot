@@ -440,7 +440,7 @@ def show_commands():
     print("what is <topic>                 - Concept explanations")
     print("5+5, 10*2, 20/4                - Calculator")
     print("list / tools / links            - Show all tools")
-    print("exit                            - Close Drico")
+    print("exit                            - To close Drico")
     print()
 
 
