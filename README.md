@@ -1,6 +1,6 @@
 # Drico-Bot
 
-Drico-Bot is a lightweight Python command-line chatbot and AI tools router.
+Drico-Bot is a Python command-line chatbot and AI tools router.
 
 It can recommend useful AI tools, explain selected AI and development concepts, provide small programming references, and perform basic arithmetic directly from the terminal.
 
