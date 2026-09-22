@@ -347,7 +347,7 @@ def calculate(expression):
 
 
 def find_category(text):
-    words = set(normalize_text(text).split())
+    words = set(re.findall(r"[a-z0-9+]+", normalize_text(text)))
 
     for category, keywords in CATEGORY_KEYWORDS.items():
         if words.intersection(keywords):
