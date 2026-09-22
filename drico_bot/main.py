@@ -94,6 +94,14 @@ C_COMMANDS = {
     "malloc": "malloc() dynamically allocates memory.",
 }
 
+BASH_COMMANDS = {
+    "pwd": "Prints the current working directory.",
+    "ls": "Lists files and directories.",
+    "cd": "Changes the current directory.",
+    "mkdir": "Creates a new directory.",
+    "grep": "Searches lines for a pattern.",
+}
+
 
 CPP_COMMANDS = {
     "main": "int main() is the usual starting point of a C++ program.",
@@ -110,6 +118,7 @@ REFERENCES = {
     "java": JAVA_COMMANDS,
     "c": C_COMMANDS,
     "c++": CPP_COMMANDS,
+    "bash": BASH_COMMANDS,
 }
 
 
