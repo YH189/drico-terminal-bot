@@ -30,6 +30,11 @@ TOOLS = {
         ("PortSwigger Academy", "https://portswigger.net/web-security"),
         ("CyberChef", "https://gchq.github.io/CyberChef/"),
     ],
+        "productivity": [
+        ("Notion", "https://www.notion.so/"),
+        ("Obsidian", "https://obsidian.md/"),
+        ("Trello", "https://trello.com/"),
+    ],
     "development": [
         ("Claude", "https://claude.ai/"),
         ("Cursor", "https://www.cursor.com/"),
@@ -47,6 +52,7 @@ CATEGORY_KEYWORDS = {
     "creative": {"create", "image", "video", "design"},
     "development": {"build", "website", "app", "code", "develop"},
     "security": {"security", "cybersecurity", "pentest", "privacy"},
+    "productivity": {"productivity", "notes", "planning"},
 }
 
 
