@@ -518,6 +518,15 @@ def run():
             show_all_tools()
             continue
 
+        if user in {"concepts", "topics"}:
+            print("\nDrico > Available concepts:\n")
+
+            for topic in sorted(CONCEPTS):
+                print(f"  - {topic}")
+
+            print()
+            continue
+
         if is_math(user):
             show_loading("Calculating")
             answer = calculate(user)
