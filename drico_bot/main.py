@@ -616,6 +616,27 @@ def run():
 
             print()
             continue
+        
+        if user.startswith("tool ") and user != "tool count":
+            requested = user.removeprefix("tool ").strip()
+
+            matches = []
+
+            for category, entries in TOOLS.items():
+                for name, url in entries:
+                    if name.casefold() == requested:
+                        matches.append((category, name, url))
+
+            if matches:
+                for category, name, url in matches:
+                    print(f"Drico > {name} [{category}]")
+                    print(f"Drico > {url}\n")
+
+            else:
+                print("Drico > Tool not found.")
+                print("Drico > Type 'tools' to see the full directory.\n")
+
+            continue
 
         if is_math(user):
             show_loading("Calculating")
