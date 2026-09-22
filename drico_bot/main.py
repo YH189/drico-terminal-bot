@@ -260,6 +260,23 @@ DELETE.
 Reference:
 https://developer.mozilla.org/en-US/docs/Glossary/API
 """,
+    "prompt engineering": """
+Prompt engineering is the process of writing and improving
+instructions given to an AI model.
+
+A good prompt explains the task clearly, provides useful context,
+and defines the expected output.
+
+Common techniques:
+- Clear instructions
+- Few-shot examples
+- Role prompting
+- Output formatting
+- Prompt testing and refinement
+
+Prompt engineering is useful when building chatbots,
+AI assistants, and LLM-powered applications.
+""",
     "rag": """
 RAG stands for Retrieval-Augmented Generation.
 
