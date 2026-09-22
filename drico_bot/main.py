@@ -25,6 +25,11 @@ TOOLS = {
         ("ChatGPT", "https://chatgpt.com/"),
         ("Ideogram", "https://ideogram.ai/"),
     ],
+        "security": [
+        ("OWASP", "https://owasp.org/"),
+        ("PortSwigger Academy", "https://portswigger.net/web-security"),
+        ("CyberChef", "https://gchq.github.io/CyberChef/"),
+    ],
     "development": [
         ("Claude", "https://claude.ai/"),
         ("Cursor", "https://www.cursor.com/"),
@@ -41,6 +46,7 @@ CATEGORY_KEYWORDS = {
     "research": {"research", "find", "found", "search"},
     "creative": {"create", "image", "video", "design"},
     "development": {"build", "website", "app", "code", "develop"},
+    "security": {"security", "cybersecurity", "pentest", "privacy"},
 }
 
 
