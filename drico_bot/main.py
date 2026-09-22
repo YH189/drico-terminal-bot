@@ -437,8 +437,6 @@ def show_commands():
     print("create / image / video          - Creative tools")
     print("build / website / app / code    - Development tools")
     print("git / python / java / c / c++   - Programming references")
-    print("what is <topic>                 - Concept explanations")
-    print("5+5, 10*2, 20/4                - Calculator")
     print("list / tools / links            - Show all tools")
     print("exit                            - To close Drico")
     print()
