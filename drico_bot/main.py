@@ -600,6 +600,22 @@ def run():
 
             print()
             continue
+        
+        if user.startswith("commands "):
+            topic = user.removeprefix("commands ").strip()
+
+            if topic in REFERENCES:
+                print(f"\nDrico > {topic.upper()} commands:\n")
+
+                for command, description in REFERENCES[topic].items():
+                    print(f"  {command}: {description}")
+
+            else:
+                print("Drico > Unknown reference.")
+                print("Drico > Type 'references' to see available topics.")
+
+            print()
+            continue
 
         if is_math(user):
             show_loading("Calculating")
