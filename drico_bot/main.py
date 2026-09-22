@@ -507,7 +507,7 @@ def run():
             print("Drico > Thanks for using Drico.")
             break
 
-        if user == "show":
+        if user in {"show", "help"} or raw_user == "?":
             show_commands()
             continue
 
