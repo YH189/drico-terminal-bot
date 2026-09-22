@@ -102,6 +102,14 @@ BASH_COMMANDS = {
     "grep": "Searches lines for a pattern.",
 }
 
+SQL_COMMANDS = {
+    "select": "Retrieves rows or columns from a database.",
+    "where": "Filters rows that match a condition.",
+    "join": "Combines related rows from multiple tables.",
+    "group by": "Groups rows for aggregation.",
+    "order by": "Sorts the result set.",
+}
+
 
 CPP_COMMANDS = {
     "main": "int main() is the usual starting point of a C++ program.",
@@ -119,6 +127,7 @@ REFERENCES = {
     "c": C_COMMANDS,
     "c++": CPP_COMMANDS,
     "bash": BASH_COMMANDS,
+    "sql": SQL_COMMANDS,
 }
 
 
