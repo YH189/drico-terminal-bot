@@ -1,12 +1,15 @@
+
 # Drico-Bot
 
 Drico-Bot is a Python command-line chatbot and AI tools router.
 
-It can recommend useful AI tools, explain selected AI and development concepts, provide small programming references, and perform basic arithmetic directly from the terminal.
+It helps developers discover useful tools, understand programming concepts, explore command references, and perform simple calculations directly from the terminal.
 
-Drico is intentionally simple and predictable. It does not use an LLM, external AI API, database, or live web search to generate its answers.
+The project focuses on keeping things simple. Drico uses predefined knowledge, keyword matching, and basic input processing rather than relying on an external AI model.
 
 ## Features
+
+Drico includes several built-in features:
 
 - AI tool recommendations
 - AI and machine learning concept explanations
@@ -17,17 +20,20 @@ Drico is intentionally simple and predictable. It does not use an LLM, external 
 - C++ references
 - Basic arithmetic
 - Simple terminal conversations
-- Case-insensitive concept matching
+- Case-insensitive input handling
 - Common concept aliases
 - Basic punctuation handling
 - No external runtime dependencies
 
+Drico is designed to be lightweight and easy to run on Windows, macOS, and Linux.
+
 ## Requirements
 
-Drico-Bot requires:
+Before installing Drico, make sure you have:
 
-- Python 3.8 or newer
+- Python 3.9 or newer
 - pipx
+- A working terminal
 
 Check your Python version:
 
@@ -35,7 +41,7 @@ Check your Python version:
 python --version
 ```
 
-On some macOS and Linux systems:
+On some Linux and macOS systems:
 
 ```bash
 python3 --version
@@ -45,26 +51,26 @@ python3 --version
 
 The recommended way to install Drico-Bot is with `pipx`.
 
-`pipx` installs Drico in an isolated Python environment and makes the `drico-bot` command available from your terminal.
+It installs Drico in an isolated Python environment and makes the `drico-bot` command available in your terminal.
 
 ### Windows
 
-Install `pipx`:
+Install pipx using PowerShell:
 
 ```powershell
 python -m pip install --user pipx
 python -m pipx ensurepath
 ```
 
-Close PowerShell completely and open a new PowerShell window.
+Close PowerShell completely and open a new window.
 
-Install Drico-Bot:
+Install Drico:
 
 ```powershell
 pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 ```
 
-Run:
+Start the application:
 
 ```powershell
 drico-bot
@@ -72,7 +78,7 @@ drico-bot
 
 ### macOS
 
-Install `pipx`:
+Install pipx:
 
 ```bash
 python3 -m pip install --user pipx
@@ -81,13 +87,13 @@ python3 -m pipx ensurepath
 
 Close and reopen your terminal.
 
-Install Drico-Bot:
+Install Drico:
 
 ```bash
 pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 ```
 
-Run:
+Start Drico:
 
 ```bash
 drico-bot
@@ -95,30 +101,31 @@ drico-bot
 
 ### Linux
 
-Install `pipx`:
+Install pipx if it is not already available.
+
+On Ubuntu, you can use:
 
 ```bash
-python3 -m pip install --user pipx
-python3 -m pipx ensurepath
+sudo apt update
+sudo apt install pipx
+pipx ensurepath
 ```
 
-Close and reopen your terminal.
-
-Install Drico-Bot:
+Open a new terminal and install Drico:
 
 ```bash
 pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
 ```
 
-Run:
+Start Drico:
 
 ```bash
 drico-bot
 ```
 
-## Start Drico
+## Getting Started
 
-After installation, start Drico with:
+After installation, launch Drico:
 
 ```bash
 drico-bot
@@ -127,84 +134,16 @@ drico-bot
 You should see:
 
 ```text
-------------------------------------------------------------
+--------------------------------------------------
         DRICO - AI TOOLS ROUTER
-------------------------------------------------------------
+--------------------------------------------------
 Type 'show' to see the available commands.
 Type 'exit' to close the program.
 
 User  >
 ```
 
-Normal users do not need to manually run `main.py`.
-
-## Update Drico-Bot
-
-If Drico is already installed and you want the latest version:
-
-```bash
-pipx uninstall drico-bot
-pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
-```
-
-Then run:
-
-```bash
-drico-bot
-```
-
-This replaces the previous isolated installation with the latest version from the repository.
-
-## Upgrading From an Older Version
-
-Older development versions of Drico used a different command-line entry point.
-
-If you see an error similar to:
-
-```text
-ImportError: cannot import name 'run_bot' from 'drico_bot.main'
-```
-
-an older Drico launcher is still installed.
-
-Remove the old pipx installation:
-
-```bash
-pipx uninstall drico-bot
-```
-
-Also remove any older pip installation:
-
-```bash
-python -m pip uninstall drico-bot
-```
-
-On macOS or Linux:
-
-```bash
-python3 -m pip uninstall drico-bot
-```
-
-Then install the current version:
-
-```bash
-pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
-```
-
-Run:
-
-```bash
-drico-bot
-```
-
-The current CLI entry point is:
-
-```toml
-[project.scripts]
-drico-bot = "drico_bot.main:run"
-```
-
-## Commands
+You can now interact with Drico directly from the terminal.
 
 Type:
 
@@ -212,34 +151,48 @@ Type:
 show
 ```
 
-inside Drico at any time to display the available commands.
+to see the built-in help menu.
 
-| Input | What Drico does |
-|---|---|
-| `automation`, `agent`, `workflow` | Shows automation tools |
-| `research`, `find`, `found`, `search` | Shows research tools |
-| `create`, `image`, `video`, `design` | Shows creative AI tools |
-| `build`, `website`, `app`, `code`, `develop` | Shows development tools |
-| `git status`, `git push`, etc. | Explains supported Git commands |
-| `python lambda`, `python range`, etc. | Explains supported Python references |
-| `java class`, `java arraylist`, etc. | Explains supported Java references |
-| `c pointer`, `c malloc`, etc. | Explains supported C references |
-| `c++ vector`, `c++ cout`, etc. | Explains supported C++ references |
-| `what is ai` | Explains Artificial Intelligence |
-| `what is ml` | Explains Machine Learning |
-| `what is rag` | Explains Retrieval-Augmented Generation |
-| `12+13`, `20 * 4`, `9 % 2` | Performs basic arithmetic |
-| `list`, `tools`, `links` | Shows the complete tool directory |
-| `hi`, `hello` | Greets the user |
-| `how are you` | Returns a simple response |
-| `who are you` | Explains what Drico is |
-| `exit`, `quit`, `bye` | Closes Drico |
+To close Drico:
 
-## AI Tool Categories
+```text
+exit
+```
+
+## Core Commands
+
+| Command | Description |
+|---------|-------------|
+| `automation` | Discover automation tools |
+| `research` | Discover research tools |
+| `creative` | Discover creative AI tools |
+| `development` | Discover development tools |
+| `tools` | Display the complete tool directory |
+| `links` | Display the complete tool directory |
+| `show` | Display the help menu |
+| `exit` | Close Drico |
+| `quit` | Close Drico |
+| `bye` | Close Drico |
+
+Drico also recognizes several alternative words.
+
+For example, these inputs open the development category:
+
+```text
+build
+website
+app
+code
+develop
+```
+
+## AI Tool Directory
+
+Drico contains a built-in directory of tools grouped by their main use cases.
 
 ### Automation
 
-Drico can suggest:
+Tools available in this category:
 
 - CrewAI
 - LangChain
@@ -256,7 +209,7 @@ User  > automation
 
 ### Research
 
-Drico can suggest:
+Tools available in this category:
 
 - Perplexity
 - NotebookLM
@@ -264,17 +217,15 @@ Drico can suggest:
 - Elicit
 - Consensus
 
-Examples:
+Example:
 
 ```text
 User  > research
-User  > find
-User  > search
 ```
 
 ### Creative
 
-Drico can suggest:
+Tools available in this category:
 
 - Midjourney
 - Runway
@@ -282,18 +233,15 @@ Drico can suggest:
 - ChatGPT
 - Ideogram
 
-Examples:
+Example:
 
 ```text
-User  > create
-User  > image
-User  > video
-User  > design
+User  > creative
 ```
 
 ### Development
 
-Drico can suggest:
+Tools available in this category:
 
 - Claude
 - Cursor
@@ -302,52 +250,42 @@ Drico can suggest:
 - Lovable
 - Replit
 
-Examples:
+Example:
 
 ```text
-User  > build
-User  > website
-User  > code
-User  > develop
+User  > development
 ```
 
-## Supported Concepts
+## Concept Explanations
 
-Drico currently includes explanations for:
+Drico includes explanations of several technical concepts.
+
+Core topics include:
 
 - Git
 - GitHub
 - Python
 - Artificial Intelligence
 - Machine Learning
-- Large Language Models
 - Deep Learning
+- Large Language Models
 - Neural Networks
 - APIs
 - Retrieval-Augmented Generation
 
-Examples:
+Example inputs:
 
 ```text
-what is ai
-what is AI
 what is AI?
-what is artificial intelligence
-what is ml
-what is ML
-what is machine learning
-what is the use of AI
-what is llm
-what is large language model
-what is deep learning
-what is neural network
-what is api
-what is rag
+what is machine learning?
 explain RAG
-tell me about neural networks
+what is LLM?
+what is neural network?
+what is API?
+tell me about Python
 ```
 
-Drico handles capitalization differences such as:
+Drico recognizes different capitalization styles:
 
 ```text
 what is ai
@@ -355,7 +293,7 @@ what is AI
 what is Ai
 ```
 
-Basic trailing punctuation is also supported:
+Basic punctuation is also supported:
 
 ```text
 what is AI?
@@ -365,15 +303,15 @@ explain RAG?
 
 ## Programming References
 
-Drico includes small built-in references for several programming languages and development tools.
+Drico provides short explanations of commonly used commands and programming concepts.
 
 ### Git
 
-Supported Git commands include:
+Supported Git references include:
 
 ```text
 git status
-git add
+git add .
 git commit
 git push
 git pull
@@ -386,13 +324,14 @@ Example:
 
 ```text
 User  > git status
+
 Drico > Searching...
 Drico > git status: Shows the current changes in the project.
 ```
 
 ### Python
 
-Supported Python topics include:
+Supported Python references:
 
 ```text
 python range
@@ -404,7 +343,7 @@ python lambda
 
 ### Java
 
-Supported Java topics include:
+Supported Java references:
 
 ```text
 java main
@@ -416,7 +355,7 @@ java class
 
 ### C
 
-Supported C topics include:
+Supported C references:
 
 ```text
 c main
@@ -428,7 +367,7 @@ c malloc
 
 ### C++
 
-Supported C++ topics include:
+Supported C++ references:
 
 ```text
 c++ main
@@ -440,112 +379,92 @@ c++ vector
 
 ## Calculator
 
-Drico supports basic arithmetic using two numbers.
+Drico can perform basic arithmetic using two numbers.
 
 Supported operators:
 
-```text
-+
--
-*
-/
-%
-```
+| Operator | Operation |
+|----------|-----------|
+| `+` | Addition |
+| `-` | Subtraction |
+| `*` | Multiplication |
+| `/` | Division |
+| `%` | Modulo |
 
 Examples:
 
 ```text
 12+13
-20 * 4
-100 / 5
-9 % 2
--5 + 10
+20*4
+100/5
+9%2
+-5+10
 ```
 
-Example:
+Example output:
 
 ```text
 User  > 12+13
+
 Drico > Calculating...
 Drico > The result is: 25
 ```
 
-Division by zero is handled safely:
+Division by zero is handled without crashing the application.
 
 ```text
 User  > 10/0
+
 Drico > Calculating...
 Drico > The result is: Error: cannot divide by 0
 ```
 
-Modulo by zero is also handled without crashing the application.
-
 ## Example Session
 
 ```text
-------------------------------------------------------------
+--------------------------------------------------
         DRICO - AI TOOLS ROUTER
-------------------------------------------------------------
-Type 'show' to see the available commands.
-Type 'exit' to close the program.
+--------------------------------------------------
 
-User  > hi
+User  > hello
+
 Drico > Hello! How can I help you?
 
-User  > what is AI
-Drico > Searching...
-Drico > Artificial Intelligence, or AI, is the field of computing focused on
-building systems that can perform tasks that normally require forms
-of human intelligence.
-
-User  > what is ML
-Drico > Searching...
-Drico > Machine Learning, or ML, is a part of Artificial Intelligence where
-models learn patterns from data and use those patterns to make
-predictions or decisions.
-
 User  > git status
+
 Drico > Searching...
 Drico > git status: Shows the current changes in the project.
 
-User  > 12+13
+User  > 5+5
+
 Drico > Calculating...
-Drico > The result is: 25
+Drico > The result is: 10
 
-User  > build
-Drico > Searching...
+User  > who are you
 
-Drico > Development tools
-
-Claude - https://claude.ai/
-Cursor - https://www.cursor.com/
-GitHub Copilot - https://github.com/features/copilot
-Base44 - https://app.base44.com/
-Lovable - https://lovable.dev/
-Replit - https://replit.com/
+Drico > I am Drico, a simple Python AI tools router.
 
 User  > exit
+
 Drico > Thanks for using Drico.
 ```
 
 ## How Drico Works
 
-Drico uses straightforward Python routing rather than a language model.
+Drico uses a rule-based approach to process user requests.
 
-When you enter a command, Drico:
+The application follows a simple workflow:
 
-1. Reads terminal input.
-2. Normalizes the text.
-3. Checks built-in commands.
-4. Detects supported arithmetic expressions.
-5. Matches supported concepts and aliases.
-6. Checks programming references.
-7. Matches keywords to AI-tool categories.
-8. Returns a predefined response.
+1. Read the user's terminal input.
+2. Normalize the input text.
+3. Check whether the input matches a built-in command.
+4. Check for supported mathematical expressions.
+5. Identify concept questions and aliases.
+6. Search programming references.
+7. Match keywords to tool categories.
+8. Display the corresponding response.
 
-If Drico does not recognize an input, it does not invent an answer.
-
-Example:
+If Drico does not understand a request, it displays a fallback message instead of generating an unsupported answer.
 
 ```text
 Drico > I don't understand that yet.
@@ -553,6 +472,8 @@ Drico > Type 'show' to see what I can do.
 ```
 
 ## Project Structure
+
+The Python package is organized as follows:
 
 ```text
 drico-terminal-bot/
@@ -566,30 +487,22 @@ drico-terminal-bot/
 
 ## CLI Entry Point
 
-The terminal command is configured in `pyproject.toml`:
+The application is launched using the `drico-bot` command.
+
+The entry point in `pyproject.toml` is:
 
 ```toml
 [project.scripts]
 drico-bot = "drico_bot.main:run"
 ```
 
-This connects:
+This connects the terminal command to the `run()` function inside `drico_bot/main.py`.
 
-```bash
-drico-bot
-```
-
-to the `run()` function inside:
-
-```text
-drico_bot/main.py
-```
-
-Normal users do not need to manually locate or run `main.py`.
+Users who install Drico with pipx do not need to manually execute the Python source file.
 
 ## Development
 
-This section is for developers or contributors working directly with the source code.
+Developers can work directly with the source code.
 
 Clone the repository:
 
@@ -597,138 +510,30 @@ Clone the repository:
 git clone https://github.com/YH189/drico-terminal-bot.git
 ```
 
-Enter the repository:
+Enter the project directory:
 
 ```bash
 cd drico-terminal-bot
 ```
 
-Run the source:
+Run the application:
 
 ```bash
 python -m drico_bot.main
 ```
 
-On macOS or Linux:
+On Linux or macOS:
 
 ```bash
 python3 -m drico_bot.main
 ```
 
-Run this command from inside the repository when testing source code.
+## Updating Drico
 
-Normal users should install Drico with `pipx` and start it with:
-
-```bash
-drico-bot
-```
-
-## Troubleshooting
-
-### `drico-bot` is not recognized on Windows
-
-Run:
-
-```powershell
-python -m pipx ensurepath
-```
-
-Then close PowerShell completely and open a new PowerShell window.
-
-Try:
-
-```powershell
-drico-bot
-```
-
-If Drico has not been installed yet:
-
-```powershell
-pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
-```
-
-### `drico-bot: command not found` on macOS or Linux
-
-Run:
-
-```bash
-python3 -m pipx ensurepath
-```
-
-Close and reopen your terminal.
-
-Then run:
-
-```bash
-drico-bot
-```
-
-### `run_bot` ImportError
-
-If you see:
-
-```text
-ImportError: cannot import name 'run_bot' from 'drico_bot.main'
-```
-
-an older Drico launcher is still installed.
-
-Remove old installations:
+To install the latest version from the main branch:
 
 ```bash
 pipx uninstall drico-bot
-```
-
-Then:
-
-```bash
-python -m pip uninstall drico-bot
-```
-
-On macOS or Linux:
-
-```bash
-python3 -m pip uninstall drico-bot
-```
-
-Install the latest version:
-
-```bash
-pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
-```
-
-Then run:
-
-```bash
-drico-bot
-```
-
-The current launcher uses:
-
-```text
-drico_bot.main:run
-```
-
-not:
-
-```text
-drico_bot.main:run_bot
-```
-
-### An old version of Drico starts
-
-Remove both possible installations:
-
-```bash
-pipx uninstall drico-bot
-python -m pip uninstall drico-bot
-```
-
-On macOS or Linux:
-
-```bash
-pipx uninstall drico-bot
-python3 -m pip uninstall drico-bot
 ```
 
 Then reinstall:
@@ -743,131 +548,126 @@ Run:
 drico-bot
 ```
 
-### Windows has multiple Drico commands
+## Troubleshooting
 
-In PowerShell, check:
+### The drico-bot command is not recognized
+
+Make sure pipx is installed and its application directory is available in your PATH.
+
+On Windows:
 
 ```powershell
-Get-Command drico-bot -All
+python -m pipx ensurepath
 ```
 
-Remove old installations:
+On macOS or Linux:
+
+```bash
+pipx ensurepath
+```
+
+Restart your terminal and try again.
+
+### An older version of Drico starts
+
+Remove the existing pipx installation:
+
+```bash
+pipx uninstall drico-bot
+```
+
+If an older pip installation exists, remove that as well.
+
+Windows:
 
 ```powershell
-pipx uninstall drico-bot
 python -m pip uninstall drico-bot
 ```
 
-Reinstall Drico:
+macOS or Linux:
 
-```powershell
-pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
+```bash
+python3 -m pip uninstall drico-bot
 ```
 
-Close PowerShell, open it again, and run:
+Then reinstall the current version using pipx.
 
-```powershell
-drico-bot
+### ImportError: cannot import name run_bot
+
+Older development versions used a different CLI entry point.
+
+The current entry point should reference:
+
+```text
+drico_bot.main:run
 ```
+
+If an older launcher is still installed, remove it and reinstall Drico.
 
 ### Repository already exists
 
-If you see:
+If Git reports:
 
 ```text
-fatal: destination path 'drico-terminal-bot' already exists and is not an empty directory
+fatal: destination path 'drico-terminal-bot' already exists
 ```
 
-do not clone it again.
-
-Enter the existing repository:
+enter the existing repository instead of cloning it again:
 
 ```bash
 cd drico-terminal-bot
-```
-
-Then update it:
-
-```bash
 git pull
-```
-
-## Clean Reinstall
-
-If you are unsure which version of Drico is installed, perform a clean reinstall.
-
-### Windows
-
-```powershell
-pipx uninstall drico-bot
-python -m pip uninstall drico-bot
-pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
-drico-bot
-```
-
-### macOS or Linux
-
-```bash
-pipx uninstall drico-bot
-python3 -m pip uninstall drico-bot
-pipx install https://github.com/YH189/drico-terminal-bot/archive/refs/heads/main.zip
-drico-bot
 ```
 
 ## Scope
 
-Drico is intentionally small and predictable.
+Drico is a rule-based terminal assistant.
 
 It uses:
 
-- predefined AI tool directories
-- predefined concept explanations
-- predefined programming references
-- keyword matching
-- concept aliases
-- regular expressions
-- simple arithmetic
+- Python dictionaries
+- Regular expressions
+- Keyword matching
+- Predefined explanations
+- Programming references
+- Terminal input and output
 
-Drico does not:
+Drico currently does not use:
 
-- use an LLM
-- browse the internet
-- call external AI APIs
-- use a database
-- generate unrestricted answers
-- guess answers for unsupported queries
+- Large language models
+- External AI APIs
+- Live web search
+- A database
+- Autonomous agent workflows
 
-## Tech
+Its responses are based on the information and functionality included in the source code.
 
-Drico-Bot is built with:
+## Tech Stack
 
 - Python
-- Python standard library
-- Regular expressions
+- Python Standard Library
+- Regular Expressions
 - Dictionaries
 - Sets
-- Command-line input/output
 - setuptools
 - pyproject.toml
 
-The core application has no external runtime dependencies.
+The core application does not require external Python libraries at runtime.
 
 ## Contributing
 
-Contributions are welcome.
+Contributions and suggestions are welcome.
 
-You can fork the repository, make changes in your own copy, and open a pull request.
+You can fork the repository, make changes, and submit a pull request.
 
-Changes to the original repository are only made when they are reviewed and accepted.
+Bug reports and feature requests can also be submitted through GitHub Issues.
 
 ## Open Source
 
-Drico-Bot is an open-source project released under the MIT License.
+Drico-Bot is released under the MIT License.
 
-You are free to use, study, modify, and distribute the code under the terms of the license.
+You can use, modify, and distribute the code according to the license terms.
 
 ## License
 
-This project is licensed under the MIT License.
-
-See the `LICENSE` file for details.
+See the [LICENSE](LICENSE) file for the complete MIT License.
