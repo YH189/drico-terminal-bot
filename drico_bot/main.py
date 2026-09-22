@@ -616,7 +616,7 @@ def run():
 
             print()
             continue
-        
+
         if user.startswith("tool ") and user != "tool count":
             requested = user.removeprefix("tool ").strip()
 
@@ -636,6 +636,28 @@ def run():
                 print("Drico > Tool not found.")
                 print("Drico > Type 'tools' to see the full directory.\n")
 
+            continue
+        
+        if user.startswith("search tools "):
+            query = user.removeprefix("search tools ").strip()
+
+            matches = []
+
+            for category, entries in TOOLS.items():
+                for name, url in entries:
+                    if query in name.casefold():
+                        matches.append((category, name, url))
+
+            if matches:
+                print(f"\nDrico > Found {len(matches)} matching tools:\n")
+
+                for category, name, url in matches:
+                    print(f"{name} [{category}] - {url}")
+
+            else:
+                print("Drico > No matching tools found.")
+
+            print()
             continue
 
         if is_math(user):
