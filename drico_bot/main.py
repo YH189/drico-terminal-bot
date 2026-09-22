@@ -277,6 +277,23 @@ Common techniques:
 Prompt engineering is useful when building chatbots,
 AI assistants, and LLM-powered applications.
 """,
+       "embeddings": """
+Embeddings are numerical representations of text,
+images, or other data.
+
+They help computers compare information based on
+meaning rather than exact words.
+
+For example, two sentences with similar meanings
+can have similar embedding vectors.
+
+Common uses:
+- Semantic search
+- Recommendation systems
+- Document retrieval
+- RAG applications
+- Similarity matching
+""",
     "rag": """
 RAG stands for Retrieval-Augmented Generation.
 
@@ -313,6 +330,8 @@ CONCEPT_ALIASES = {
     "ai": "ai",
     "ml": "ml",
     "llm": "llm",
+    "embedding": "embeddings",
+    "embeddings": "embeddings",
     "api": "api",
     "rag": "rag",
 }
