@@ -389,7 +389,7 @@ Supported operators:
 | `-` | Subtraction |
 | `*` | Multiplication |
 | `/` | Division |
-| `%` | Modulo |
+| `%` | Modulus |
 
 Examples:
 
