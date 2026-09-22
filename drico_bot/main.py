@@ -593,6 +593,14 @@ def run():
             print()
             continue
 
+        if user in {"references", "languages"}:
+            print("\nDrico > Programming references:\n")
+            for topic in REFERENCES:
+                print(f"  - {topic}")
+
+            print()
+            continue
+
         if is_math(user):
             show_loading("Calculating")
             answer = calculate(user)
