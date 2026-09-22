@@ -654,6 +654,373 @@ Its responses are based on the information and functionality included in the sou
 
 The core application does not require external Python libraries at runtime.
 
+
+## Additional Features
+
+Drico has been expanded with more tool categories, programming references, and command-line utilities.
+
+These additions make it easier to explore the tool directory and find information without scrolling through every available entry.
+
+### Cybersecurity Tools
+
+Drico now includes a dedicated security category.
+
+Available resources:
+
+| Tool | Purpose |
+|------|---------|
+| OWASP | Web application security resources |
+| PortSwigger Academy | Web security training |
+| CyberChef | Data encoding, decoding, and analysis |
+
+Open the security category with:
+
+```text
+security
+cybersecurity
+pentest
+privacy
+```
+
+Example:
+
+```text
+User  > security
+```
+
+Drico displays the available security resources and their website links.
+
+### Productivity Tools
+
+A new productivity category has been added for tools related to note-taking and project organization.
+
+Available tools:
+
+- Notion
+- Obsidian
+- Trello
+
+Supported inputs:
+
+```text
+productivity
+notes
+planning
+```
+
+These commands display the productivity tools stored in Drico's directory.
+
+## New Programming References
+
+Drico now includes Bash and SQL alongside its existing programming references.
+
+### Bash
+
+The Bash reference contains common terminal commands.
+
+| Command | Description |
+|---------|-------------|
+| `pwd` | Print the current working directory |
+| `ls` | List files and directories |
+| `cd` | Change the current directory |
+| `mkdir` | Create a directory |
+| `grep` | Search lines for a pattern |
+
+Example inputs:
+
+```text
+bash pwd
+bash ls
+bash cd
+bash mkdir
+bash grep
+```
+
+### SQL
+
+The SQL reference includes commonly used database query keywords.
+
+| Command | Description |
+|---------|-------------|
+| `SELECT` | Retrieve data |
+| `WHERE` | Filter rows |
+| `JOIN` | Combine related table data |
+| `GROUP BY` | Group rows |
+| `ORDER BY` | Sort query results |
+
+Example inputs:
+
+```text
+sql select
+sql where
+sql join
+sql group by
+sql order by
+```
+
+## Tool Search
+
+Drico now supports looking up individual tools without displaying the entire directory.
+
+### Search by exact tool name
+
+Use:
+
+```text
+tool <name>
+```
+
+Examples:
+
+```text
+tool Cursor
+tool ChatGPT
+tool Claude
+tool n8n
+tool Notion
+```
+
+Example output:
+
+```text
+User  > tool Cursor
+
+Drico > Cursor [development]
+Drico > https://www.cursor.com/
+```
+
+The lookup is case-insensitive.
+
+If no matching tool exists, Drico displays a tool-not-found message.
+
+### Search tools by keyword
+
+Use:
+
+```text
+search tools <keyword>
+```
+
+Examples:
+
+```text
+search tools github
+search tools claude
+search tools notion
+search tools ai
+```
+
+Drico checks tool names and displays matching entries.
+
+Example:
+
+```text
+User  > search tools github
+
+Drico > Found 1 matching tools:
+
+GitHub Copilot [development] - https://github.com/features/copilot
+```
+
+Tool search works with Drico's built-in directory. It does not perform a live internet search.
+
+## Concept and Reference Discovery
+
+Drico now provides dedicated commands for discovering its built-in knowledge.
+
+### List available concepts
+
+Use:
+
+```text
+concepts
+```
+
+or:
+
+```text
+topics
+```
+
+Drico displays the topics stored in its concept dictionary.
+
+### List programming references
+
+Use:
+
+```text
+references
+```
+
+or:
+
+```text
+languages
+```
+
+The current programming references include:
+
+- Git
+- Python
+- Java
+- C
+- C++
+- Bash
+- SQL
+
+### View all commands for a reference
+
+Use:
+
+```text
+commands <topic>
+```
+
+Examples:
+
+```text
+commands git
+commands python
+commands bash
+commands sql
+commands c++
+```
+
+Instead of looking up commands individually, Drico displays every entry stored under the selected reference.
+
+## Expanded Concept Library
+
+Drico's concept dictionary also includes explanations of:
+
+### Prompt Engineering
+
+The explanation covers:
+
+- Clear instructions
+- Few-shot examples
+- Role prompting
+- Output formatting
+- Prompt testing and refinement
+
+The topic is stored in Drico's concept dictionary and appears in the available concepts list.
+
+### Vector Embeddings
+
+Drico explains how embeddings represent text, images, and other information as numerical vectors.
+
+The explanation includes common applications such as:
+
+- Semantic search
+- Recommendation systems
+- Document retrieval
+- Retrieval-Augmented Generation
+- Similarity matching
+
+Example inputs:
+
+```text
+what is embedding?
+explain embeddings
+```
+
+## More Natural Question Formats
+
+Drico now recognizes additional ways of asking concept questions.
+
+Supported formats include:
+
+```text
+what is Python?
+explain Python
+define Python
+describe Python
+meaning of Python
+tell me about Python
+```
+
+These formats use the same predefined concept explanations.
+
+Only topics recognized by the concept alias dictionary can be answered directly.
+
+## Help Command Aliases
+
+The help menu can now be opened using:
+
+```text
+show
+help
+?
+```
+
+All three inputs call the same help function.
+
+## Complete Tool Directory
+
+Use any of the following commands to display the full tool directory:
+
+```text
+list
+tools
+links
+```
+
+The directory now contains six categories:
+
+1. Automation
+2. Research
+3. Creative
+4. Development
+5. Security
+6. Productivity
+
+These categories currently contain 28 tool entries.
+
+## Updated CLI Examples
+
+The following example shows some of Drico's newer commands.
+
+```text
+User  > references
+
+Drico > Programming references:
+
+  - git
+  - python
+  - java
+  - c
+  - c++
+  - bash
+  - sql
+
+User  > bash pwd
+
+Drico > Searching...
+Drico > pwd: Prints the current working directory.
+
+User  > tool Cursor
+
+Drico > Cursor [development]
+Drico > https://www.cursor.com/
+
+User  > search tools github
+
+Drico > Found 1 matching tools:
+
+GitHub Copilot [development] - https://github.com/features/copilot
+
+User  > exit
+
+Drico > Thanks for using Drico.
+```
+
+## Notes
+
+Drico remains a rule-based CLI assistant.
+
+The newer features expand its built-in directory and command routing, but they do not introduce an LLM or live web search.
+
+New commands may also be available before they are added to the interactive `show` menu. This README documents the additional supported commands.
+
 ## Contributing
 
 Contributions and suggestions are welcome.
