@@ -1,5 +1,5 @@
 
-# Drico-Bot
+# Drico
 
 Drico-Bot is a chatbot and AI tools router.
 
