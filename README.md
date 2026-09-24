@@ -1,7 +1,7 @@
 
 # Drico
 
-Drico-Bot is a chatbot and AI tools router.
+Drico-Bot is a AI tools router.
 
 It helps developers discover useful tools, understand programming concepts, explore command references, and perform simple calculations directly from the terminal.
 
