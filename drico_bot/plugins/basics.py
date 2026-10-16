@@ -1,25 +1,22 @@
 from drico_bot.core.registry import Command
 
 
-def show_commands():
-    print("\nDrico > Commands")
-    print("automation / agent / workflow   - Automation tools")
-    print("research / find / search        - Research tools")
-    print("create / image / video          - Creative tools")
-    print("build / website / app / code    - Development tools")
-    print("git / python / java / c / c++   - Programming references")
-    print("list / tools / links            - Show all tools")
-    print("exit                            - To close Drico")
-    print()
-
-
 def _handle_exit(context):
     print("Drico > Thanks for using Drico.")
     context.session.running = False
 
 
 def _handle_show(context):
-    show_commands()
+    print("\nDrico > Commands")
+    grouped = context.session.registry.help_by_category()
+    for category in sorted(grouped.keys()):
+        print("[{0}]".format(category))
+        for label, help_text in sorted(grouped[category], key=lambda item: item[0]):
+            if help_text:
+                print("  {0} - {1}".format(label, help_text))
+            else:
+                print("  {0}".format(label))
+    print()
 
 
 def _handle_how_are_you(context):
@@ -64,7 +61,7 @@ def register(registry):
             name="show",
             aliases=("help",),
             handler=_handle_show,
-            help_text="Show the help menu.",
+            help_text="Show this command list.",
             category="basics",
         )
     )
@@ -76,6 +73,7 @@ def register(registry):
             category="basics",
             match_fn=lambda ctx: ctx.raw == "?",
             priority=5,
+            show_in_help=False,
         )
     )
     registry.register(
@@ -94,6 +92,7 @@ def register(registry):
             category="basics",
             match_fn=lambda ctx: "how are you" in ctx.normalized,
             priority=20,
+            show_in_help=False,
         )
     )
     registry.register(
@@ -104,6 +103,7 @@ def register(registry):
             category="basics",
             match_fn=lambda ctx: "who are you" in ctx.normalized,
             priority=30,
+            show_in_help=False,
         )
     )
     registry.register(
@@ -114,5 +114,6 @@ def register(registry):
             category="basics",
             match_fn=_match_greeting,
             priority=40,
+            show_in_help=False,
         )
     )

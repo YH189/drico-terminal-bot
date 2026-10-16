@@ -347,7 +347,7 @@ CONCEPT_ALIASES = {
     "artificial intelligence": "ai",
     "machine learning": "machine learning",
     "large language model": "llm",
-    "large language models": "llms",
+    "large language models": "llm",
     "deep learning": "deep learning",
     "neural network": "neural network",
     "neural networks": "neural network",
