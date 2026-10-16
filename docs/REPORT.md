@@ -20,7 +20,7 @@
 | 10 | #18 | MERGED | 94+ |
 | 11 | #19 | MERGED | 97+ |
 | 12 | #20 | MERGED | 98+ |
-| 13 | (this PR) | OPEN | 101+ target |
+| 13 | #21 | MERGED | 101 passed |
 
 Earlier closed without merge: #2, #15, #16 (superseded or STOP checkpoint).
 
@@ -52,6 +52,6 @@ Earlier closed without merge: #2, #15, #16 (superseded or STOP checkpoint).
 - `sources.json` ships with an empty `sources` list until you add curated packs.
 - User plugins are powerful — document trust for end users.
 
-## Next step
+## Status
 
-Merge Phase 13 PR when CI is green; tag a release if desired.
+Phases K and 2–13 are merged to `main`. CI `test` job is green on Python 3.10 and 3.12. Enable branch protection on `main` when ready.
