@@ -1,0 +1,25 @@
+--------------------------------------------------
+        DRICO - AI TOOLS ROUTER
+--------------------------------------------------
+Type 'show' to see the available commands.
+Type 'exit' to close the program.
+
+Drico > Searching...
+Drico > Artificial Intelligence, or AI, is the field of computing focused on
+building systems that can perform tasks that normally require forms
+of human intelligence.
+
+AI includes areas such as rule-based systems, machine learning, deep
+learning, reinforcement learning, computer vision, natural language
+processing, speech systems, and generative AI.
+
+Modern AI is heavily based on machine learning, where systems learn
+patterns from data.
+
+Generative AI can create text, images, audio, video, and code. Large
+language models are one type of generative AI system.
+
+Reference:
+https://www.nist.gov/artificial-intelligence
+
+Drico > Thanks for using Drico.

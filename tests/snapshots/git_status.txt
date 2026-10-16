@@ -1,0 +1,10 @@
+--------------------------------------------------
+        DRICO - AI TOOLS ROUTER
+--------------------------------------------------
+Type 'show' to see the available commands.
+Type 'exit' to close the program.
+
+Drico > Searching...
+Drico > git status: Shows the current changes in the project.
+
+Drico > Thanks for using Drico.

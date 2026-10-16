@@ -1,0 +1,26 @@
+--------------------------------------------------
+        DRICO - AI TOOLS ROUTER
+--------------------------------------------------
+Type 'show' to see the available commands.
+Type 'exit' to close the program.
+
+
+Drico > Commands
+[basics]
+  exit / quit / bye - Close Drico.
+  plugins - List loaded plugins and status.
+  show / help - Show this command list.
+[calculator]
+  <a><op><b> - Two-number arithmetic (+, -, *, /, %), e.g. 12+13.
+[concepts]
+  concepts / topics - List concept topics.
+[references]
+  commands - List commands for a reference topic.
+  references / languages - List programming reference topics.
+[tools]
+  list / tools / links - Show the full tool directory.
+  search tools <keyword> - Search tools by keyword.
+  tool <name> - Look up a tool by name.
+  tool count - Print the total number of tools.
+
+Drico > Thanks for using Drico.

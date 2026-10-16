@@ -15,3 +15,10 @@ venv/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Drico local data (never commit)
+.drico/
+*.db
+packs/
+logs/
+drico-backups/
