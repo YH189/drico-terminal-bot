@@ -72,6 +72,12 @@ Drico > Commands
 [run]
   logs - Show recent masked run log lines.
   run - Run a whitelisted command (argv only).
+[system]
+  doctor - Check Python, paths, and data permissions.
+  examples - Show example commands.
+  reset - reset --all erases DRICO_HOME (confirm DELETE).
+  setup - Create ~/.drico layout and defaults.
+  where - Show important Drico paths.
 [tools]
   list / tools / links - Show the full tool directory.
   search tools <keyword> - Search tools by keyword.

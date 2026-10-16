@@ -1,5 +1,10 @@
 # Changelog
 
+## Phase 13: Ship-ready tooling and docs
+
+- Commands: `setup`, `doctor`, `where`, `examples`, `help <command>`, `reset --all` (type DELETE).
+- `SECURITY.md`, `docs/THREAT_MODEL.md`, README quickstart, CI `permissions: read`, pinned Action SHAs.
+
 ## Phase 12: Local dashboard
 
 - `dashboard` serves tasks on `http://127.0.0.1:8765/` with CSRF on POST, security headers, and 64 KB POST limit.
