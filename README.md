@@ -528,6 +528,36 @@ On Linux or macOS:
 python3 -m drico_bot.main
 ```
 
+## User plugins
+
+Drop Python files in `~/.drico/plugins/` (or `$DRICO_HOME/plugins/`). Each file may define a `register(registry)` function that adds commands, the same way built-in plugins do. Broken plugins are skipped with a warning; other plugins still load.
+
+Disable a plugin by stem name in `~/.drico/config.toml`:
+
+```toml
+[disabled]
+plugins = ["my_plugin"]
+```
+
+Sample `~/.drico/plugins/my_plugin.py`:
+
+```python
+from drico_bot.core.registry import Command
+
+
+def register(registry):
+    registry.register(
+        Command(
+            name="my-greeting",
+            handler=lambda ctx: print("Drico > Hello from my plugin.\n"),
+            help_text="Greet from a user plugin.",
+            category="user",
+        )
+    )
+```
+
+Run `plugins` in Drico to see load status and file paths.
+
 ## Updating Drico
 
 To install the latest version from the main branch:

@@ -187,6 +187,22 @@ def blame_summary(path, cwd=None, limit=10):
     return "\n".join(lines)
 
 
+def _parse_git_committer_date(date_text):
+    """Parse ``git for-each-ref`` committerdate (works on Python 3.10+)."""
+    text = date_text.strip()
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    if "T" not in text[:19]:
+        base, tz = text.rsplit(" ", 1)
+        if len(tz) == 5 and tz[0] in "+-" and tz[1:].isdigit():
+            tz = tz[:3] + ":" + tz[3:]
+            text = base.replace(" ", "T", 1) + tz
+    committed = datetime.fromisoformat(text)
+    if committed.tzinfo is not None:
+        committed = committed.replace(tzinfo=None)
+    return committed
+
+
 def stale_branches_report(cwd=None, days=None):
     root = git_root(cwd)
     stale_days = _parse_positive_int(
@@ -216,11 +232,7 @@ def stale_branches_report(cwd=None, days=None):
             continue
         name, date_text = parts[0].strip(), parts[1].strip()
         try:
-            if date_text.endswith("Z"):
-                date_text = date_text[:-1] + "+00:00"
-            committed = datetime.fromisoformat(date_text)
-            if committed.tzinfo is not None:
-                committed = committed.replace(tzinfo=None)
+            committed = _parse_git_committer_date(date_text)
         except ValueError:
             continue
         if committed <= cutoff:

@@ -21,6 +21,7 @@ class Command:
 class PluginStatus:
     name: str
     status: str
+    path: str = ""
 
 
 class Registry:
@@ -70,8 +71,8 @@ class Registry:
             return None
         return entry["handler"]
 
-    def record_plugin(self, name, status):
-        self._plugins.append(PluginStatus(name=name, status=status))
+    def record_plugin(self, name, status, path=""):
+        self._plugins.append(PluginStatus(name=name, status=status, path=path))
 
     def plugin_statuses(self):
         return list(self._plugins)
