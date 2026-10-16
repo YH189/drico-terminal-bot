@@ -1,7 +1,7 @@
 import io
 import os
 import subprocess
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 from unittest import mock
 
@@ -35,17 +35,26 @@ def _init_repo(path):
     _run_git(["config", "user.name", "Test User"], path)
 
 
-def _commit(path, message, filename="file.txt", content="line\n", env=None):
+def _commit(path, message, filename="file.txt", content="line\n", env=None, date=None):
     file_path = Path(path) / filename
     file_path.parent.mkdir(parents=True, exist_ok=True)
     file_path.write_text(content, encoding="utf-8")
     _run_git(["add", filename], path)
+    commit_env = os.environ.copy()
+    if env:
+        commit_env.update(env)
+    if date:
+        commit_env["GIT_AUTHOR_DATE"] = date
+        commit_env["GIT_COMMITTER_DATE"] = date
+    cmd = ["git", "commit", "-m", message]
+    if date:
+        cmd.extend(["--date", date])
     subprocess.run(
-        ["git", "commit", "-m", message],
+        cmd,
         cwd=str(path),
         check=True,
         capture_output=True,
-        env=env,
+        env=commit_env,
     )
 
 
@@ -122,14 +131,21 @@ def test_blame_summary_counts_authors(tmp_path):
 def test_stale_branches_lists_old_branch(tmp_path):
     repo = tmp_path / "repo"
     _init_repo(repo)
-    old_date = (datetime.utcnow() - timedelta(days=40)).strftime("%Y-%m-%dT12:00:00")
-    env = os.environ.copy()
-    env["GIT_AUTHOR_DATE"] = old_date
-    env["GIT_COMMITTER_DATE"] = old_date
-    _commit(repo, "old", "old.txt", "old\n", env=env)
+    stale_tip_date = "2020-01-15T10:00:00"
+    fresh_tip_date = "2025-05-01T10:00:00"
+    report_now = datetime(2025, 6, 1, 12, 0, 0)
+
+    _commit(repo, "old", "old.txt", "old\n", date=stale_tip_date)
     _run_git(["branch", "stale-branch"], repo)
-    _commit(repo, "fresh", "fresh.txt", "new\n")
-    text = stale_branches_report(cwd=repo, days=30)
+    _commit(repo, "fresh", "fresh.txt", "new\n", date=fresh_tip_date)
+
+    class _FixedNow(datetime):
+        @classmethod
+        def utcnow(cls):
+            return report_now
+
+    with mock.patch("drico_bot.plugins.git_tools.datetime", _FixedNow):
+        text = stale_branches_report(cwd=repo, days=30)
     assert "stale-branch" in text
 
 
