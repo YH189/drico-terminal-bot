@@ -1,6 +1,7 @@
 """ANSI themes with NO_COLOR and plain-mode support (Phase 10)."""
 
 import os
+import sys
 
 from drico_bot.core.config import get, load_config
 
@@ -26,6 +27,8 @@ def _theme_name(config=None):
 
 def colors_enabled(config=None):
     if os.environ.get("NO_COLOR"):
+        return False
+    if not sys.stdout.isatty():
         return False
     return _theme_name(config) != "plain"
 

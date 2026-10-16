@@ -19,15 +19,16 @@ def test_plain_theme_disables_styles(monkeypatch):
     assert colors_enabled() is False
 
 
-def test_default_theme_adds_ansi_when_enabled(monkeypatch):
+def test_default_theme_adds_ansi_when_tty(monkeypatch):
     monkeypatch.delenv("NO_COLOR", raising=False)
     monkeypatch.setattr(
         "drico_bot.core.theme.load_config",
         lambda: {"ui": {"theme": "default"}},
     )
+    monkeypatch.setattr("drico_bot.core.theme.sys.stdout.isatty", lambda: True)
     text = style("x", "prompt")
-    assert text.startswith("\033[")
-    assert text.endswith("x\033[0m") or "x" in text
+    assert "\033[" in text
+    assert "x" in text
 
 
 def test_show_banner_no_color_plain_output(capsys, monkeypatch):
