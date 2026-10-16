@@ -2,9 +2,11 @@ import os
 import sys
 import time
 
+from drico_bot.core.theme import style
+
 
 def show_loading(message="Searching"):
-    print("Drico > {0}".format(message), end="", flush=True)
+    print(style("Drico > {0}".format(message), "accent"), end="", flush=True)
 
     if os.environ.get("DRICO_NO_DELAY") or not sys.stdout.isatty():
         print()
@@ -18,8 +20,14 @@ def show_loading(message="Searching"):
 
 
 def show_banner():
-    print("-" * 50)
-    print("        DRICO - AI TOOLS ROUTER")
-    print("-" * 50)
+    bar = style("-" * 50, "banner")
+    title = style("        DRICO - AI TOOLS ROUTER", "banner")
+    print(bar)
+    print(title)
+    print(bar)
     print("Type 'show' to see the available commands.")
     print("Type 'exit' to close the program.\n")
+
+
+def user_prompt():
+    return style("User  > ", "prompt")

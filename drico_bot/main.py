@@ -5,7 +5,8 @@ import sys
 from drico_bot.core.bootstrap import build_registry, run_cli
 from drico_bot.core.dispatcher import Dispatcher, InteractiveSession
 from drico_bot.core.text import normalize_text
-from drico_bot.core.ui import show_banner
+from drico_bot.core.input_line import read_line
+from drico_bot.core.ui import show_banner, user_prompt
 
 
 def run():
@@ -23,7 +24,7 @@ def run():
 
     while session.running:
         check_reminders()
-        raw_user = input("User  > ").strip()
+        raw_user = read_line(user_prompt()).strip()
 
         if not raw_user:
             continue
