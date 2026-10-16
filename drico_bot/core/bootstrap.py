@@ -3,12 +3,14 @@
 import sys
 
 from drico_bot.core.config import ensure_drico_home, load_config
+from drico_bot.storage.database import ensure_db
 from drico_bot.core.plugin_loader import load_builtin_plugins
 from drico_bot.core.registry import Registry
 
 
 def build_registry():
     ensure_drico_home()
+    ensure_db()
     config = load_config()
     registry = Registry()
     load_builtin_plugins(registry, config)

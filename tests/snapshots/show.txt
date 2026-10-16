@@ -14,6 +14,13 @@ Drico > Commands
   <expression> - Safe math (AST): + - * / % **, sqrt, abs, round, pi, e.
 [concepts]
   concepts / topics - List concept topics.
+[productivity]
+  note add - Add a note.
+  note list - List notes.
+  task add - Add a task.
+  task delete - Delete a task.
+  task done - Mark task done.
+  task list - List tasks.
 [references]
   commands - List commands for a reference topic.
   references / languages - List programming reference topics.
