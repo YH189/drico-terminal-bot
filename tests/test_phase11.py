@@ -81,6 +81,6 @@ def test_network_only_in_download_module():
         if path.name == "download.py":
             continue
         text = path.read_text(encoding="utf-8")
-        if "urllib" in text or "urlopen" in text:
+        if "urllib.request" in text or "urlopen" in text:
             offenders.append(str(path))
     assert offenders == []

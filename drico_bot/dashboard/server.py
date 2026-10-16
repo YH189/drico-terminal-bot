@@ -22,7 +22,7 @@ def _tasks_html():
     conn = connect()
     init_db(conn)
     rows = conn.execute(
-        "SELECT id, title, done FROM tasks ORDER BY id DESC LIMIT 50"
+        "SELECT id, text, done FROM tasks ORDER BY id DESC LIMIT 50"
     ).fetchall()
     conn.close()
     lines = ["<h1>Drico dashboard</h1>", "<h2>Tasks</h2>", "<ul>"]
@@ -30,7 +30,7 @@ def _tasks_html():
         status = "done" if row["done"] else "open"
         lines.append(
             "<li>{0} — {1} ({2})</li>".format(
-                row["id"], html.escape(row["title"]), status
+                row["id"], html.escape(row["text"]), status
             )
         )
     if not rows:
@@ -111,7 +111,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
                 ensure_db()
                 conn = connect()
                 init_db(conn)
-                conn.execute("INSERT INTO tasks (title, done) VALUES (?, 0)", (title,))
+                conn.execute("INSERT INTO tasks (text, done) VALUES (?, 0)", (title,))
                 conn.commit()
                 conn.close()
             self.send_response(303)
