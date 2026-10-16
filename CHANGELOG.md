@@ -1,5 +1,10 @@
 # Changelog
 
+## Phase 11: Pack download
+
+- `packs download <name>` installs zip packs from `drico_bot/data/sources.json` only.
+- License allowlist, size cap, and SHA-256 verification; zip-slip safe extract.
+
 ## Phase 10: Terminal interface
 
 - Optional readline history stored under `DRICO_HOME/history.txt`.

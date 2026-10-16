@@ -55,6 +55,15 @@ def _cmd_packs(args):
     if args.packs_action == "remove":
         print(remove_pack(args.pack_name, confirm_callback=default_yes_no_prompt))
         return 0
+    if args.packs_action == "download":
+        from drico_bot.knowledge.download import PackDownloadError, download_pack
+
+        try:
+            print(download_pack(args.pack_name, sources_path=args.sources_file))
+        except PackDownloadError as exc:
+            print(str(exc))
+            return 1
+        return 0
     print("Unknown packs subcommand.")
     return 1
 
@@ -110,6 +119,15 @@ def build_parser(registry):
     remove_parser = packs_sub.add_parser("remove", help="Delete a pack")
     remove_parser.add_argument("pack_name")
     packs_sub.add_parser("verify", help="Verify file hashes")
+    download_parser = packs_sub.add_parser(
+        "download", help="Download a pack from sources.json"
+    )
+    download_parser.add_argument("pack_name")
+    download_parser.add_argument(
+        "--sources-file",
+        default=None,
+        help="Override sources.json path (tests only)",
+    )
 
     reindex_parser = sub.add_parser("reindex", help="Update the BM25 index")
     reindex_parser.add_argument(
