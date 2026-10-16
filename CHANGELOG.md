@@ -1,5 +1,11 @@
 # Changelog
 
+## Phase 9: User plugins
+
+- Load optional plugins from `~/.drico/plugins/*.py` with isolated import/register errors.
+- `disabled.plugins` in `config.toml` skips built-in and user plugins by file stem.
+- `plugins` command lists each plugin status and source path.
+
 ## Phase 8: Macros and safe run
 
 - Macro recording: `record start <name>`, `record stop`; `macro list`, `macro run`, `macro delete` (confirm).
