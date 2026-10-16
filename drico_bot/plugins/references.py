@@ -1,3 +1,5 @@
+import re
+
 from drico_bot.core.registry import Command
 from drico_bot.core.text import normalize_text
 from drico_bot.core.ui import show_loading
@@ -21,8 +23,9 @@ def find_reference(text):
 def find_reference_command(text, reference):
     text = normalize_text(text)
 
-    for command in reference:
-        if command in text:
+    for command in sorted(reference.keys(), key=len, reverse=True):
+        pattern = r"(?<!\w){0}(?!\w)".format(re.escape(command))
+        if re.search(pattern, text):
             return command
 
     return None
@@ -103,5 +106,6 @@ def register(registry):
             category="references",
             match_fn=_match_reference,
             priority=60,
+            show_in_help=False,
         )
     )

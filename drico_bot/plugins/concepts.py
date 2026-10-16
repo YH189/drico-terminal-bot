@@ -76,5 +76,6 @@ def register(registry):
             category="concepts",
             match_fn=lambda ctx: is_concept_question(ctx.normalized),
             priority=50,
+            show_in_help=False,
         )
     )

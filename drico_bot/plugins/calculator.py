@@ -49,11 +49,21 @@ def _handle_math(context):
 def register(registry):
     registry.register(
         Command(
+            name="<a><op><b>",
+            handler=lambda ctx: None,
+            help_text="Two-number arithmetic (+, -, *, /, %), e.g. 12+13.",
+            category="calculator",
+            match_fn=lambda ctx: False,
+        )
+    )
+    registry.register(
+        Command(
             name="calculator",
             handler=_handle_math,
             help_text="Basic two-operand arithmetic.",
             category="calculator",
             match_fn=lambda ctx: is_math(ctx.normalized),
             priority=10,
+            show_in_help=False,
         )
     )

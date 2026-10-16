@@ -89,7 +89,40 @@ def _handle_category(context):
     show_tools(category)
 
 
+def _handle_tool_count(context):
+    total = sum(len(entries) for entries in TOOLS.values())
+    print("Drico > Total tools: {0}\n".format(total))
+
+
 def register(registry):
+    registry.register(
+        Command(
+            name="tool count",
+            handler=_handle_tool_count,
+            help_text="Print the total number of tools.",
+            category="tools",
+        )
+    )
+    registry.register(
+        Command(
+            name="tool <name>",
+            handler=lambda ctx: None,
+            help_text="Look up a tool by name.",
+            category="tools",
+            match_fn=lambda ctx: False,
+            show_in_help=True,
+        )
+    )
+    registry.register(
+        Command(
+            name="search tools <keyword>",
+            handler=lambda ctx: None,
+            help_text="Search tools by keyword.",
+            category="tools",
+            match_fn=lambda ctx: False,
+            show_in_help=True,
+        )
+    )
     registry.register(
         Command(
             name="list",
@@ -108,6 +141,7 @@ def register(registry):
             match_fn=lambda ctx: ctx.normalized.startswith("tool ")
             and ctx.normalized != "tool count",
             priority=8,
+            show_in_help=False,
         )
     )
     registry.register(
@@ -116,6 +150,7 @@ def register(registry):
             handler=_handle_search_tools,
             help_text="Search tools by keyword.",
             category="tools",
+            show_in_help=False,
         )
     )
     registry.register(
@@ -126,5 +161,6 @@ def register(registry):
             category="tools",
             match_fn=lambda ctx: find_category(ctx.normalized) is not None,
             priority=70,
+            show_in_help=False,
         )
     )

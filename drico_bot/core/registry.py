@@ -13,6 +13,8 @@ class Command:
     category: str = "general"
     match_fn: Optional[Callable] = None
     priority: int = 100
+    destructive: bool = False
+    show_in_help: bool = True
 
 
 @dataclass
@@ -43,8 +45,21 @@ class Registry:
             category=kwargs.get("category", "general"),
             match_fn=kwargs.get("match_fn"),
             priority=kwargs.get("priority", 100),
+            destructive=kwargs.get("destructive", False),
+            show_in_help=kwargs.get("show_in_help", True),
         )
         self._commands.append(command)
+
+    def help_by_category(self):
+        grouped = {}
+        for command in self._commands:
+            if not command.show_in_help:
+                continue
+            names = [command.name]
+            names.extend(command.aliases)
+            label = " / ".join(names)
+            grouped.setdefault(command.category, []).append((label, command.help_text))
+        return grouped
 
     def register_cli(self, name, handler, help_text=""):
         self._cli[name] = {"handler": handler, "help": help_text}
