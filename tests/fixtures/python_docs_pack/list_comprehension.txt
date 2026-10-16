@@ -1,0 +1,9 @@
+List comprehension quick reference (fixture pack).
+
+A list comprehension has the form [expression for item in iterable].
+Optional predicates use a trailing if condition.
+
+Example: squares = [n * n for n in range(10)]
+Example with filter: evens = [n for n in range(10) if n % 2 == 0]
+
+List comprehensions are preferred when the result is a simple transformed list.
