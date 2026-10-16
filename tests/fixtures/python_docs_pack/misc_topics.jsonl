@@ -1,0 +1,3 @@
+{"id": "dict-get", "title": "dict.get", "text": "The dict.get method returns a default when a key is missing instead of raising KeyError.", "source_url": "fixture://python_docs_pack/dict-get", "license": "CC0-1.0"}
+{"id": "with-statement", "title": "with statement", "text": "The with statement opens a context manager and guarantees cleanup when the block ends.", "source_url": "fixture://python_docs_pack/with", "license": "CC0-1.0"}
+{"id": "enumerate-loop", "title": "enumerate", "text": "enumerate pairs each item with an index while iterating a sequence.", "source_url": "fixture://python_docs_pack/enumerate", "license": "CC0-1.0"}

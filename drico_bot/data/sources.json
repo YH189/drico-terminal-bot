@@ -1,0 +1,4 @@
+{
+  "description": "Curated knowledge pack download sources for a future phase. Each entry will be an object with fields such as name, url, license, and version. Downloads run only via an explicit CLI command and only from URLs listed here. This file is intentionally an empty list until download support is approved.",
+  "sources": []
+}
