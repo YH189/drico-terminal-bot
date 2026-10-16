@@ -1,5 +1,10 @@
 # Changelog
 
+## Phase 3: Safe calculator and utilities
+
+- AST calculator (`drico_bot/calc/safe_eval.py`) with whitelist and limits.
+- Utilities plugin: json, base64, hash sha256, uuid, timestamp, hex, bin, dec, regex.
+
 ## Phase 2: Bug fixes
 
 - `large language models` alias maps to `llm`.
