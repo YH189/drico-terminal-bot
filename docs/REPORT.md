@@ -12,8 +12,9 @@
 | 2 | #4 | MERGED | 24 → 30 after P3 |
 | 3 | #8 | MERGED | 30 passed |
 | 4 | — | IN PROGRESS | 30+ |
-| 5 | — | IN PROGRESS | +9 phase5 |
+| 5 | #11 | MERGED | +9 phase5 |
+| 6 | — | IN PROGRESS | +10 phase6 |
 
 ## Next step
 
-Merge Phase 5 (`cursor/phase-5-knowledge-75a5`) after CI green; continue Phase 6 code intelligence per SPEC.md.
+Merge Phase 6 (`cursor/phase-6-code-intel-75a5`) after CI green; continue Phase 7 git tools per SPEC.md.
