@@ -14,6 +14,34 @@ Drico > Commands
   <expression> - Safe math (AST): + - * / % **, sqrt, abs, round, pi, e.
 [concepts]
   concepts / topics - List concept topics.
+[productivity]
+  backup - Zip backup of local data.
+  brief - Productivity summary.
+  export notes csv - Export notes as CSV.
+  export notes md - Export notes as Markdown.
+  export tasks csv - Export tasks as CSV.
+  export tasks md - Export tasks as Markdown.
+  focus - Focus timer (1-240 minutes).
+  import notes csv - Import notes from CSV.
+  import notes md - Import notes from Markdown.
+  import tasks csv - Import tasks from CSV.
+  import tasks md - Import tasks from Markdown.
+  new - Scaffold from a template.
+  note add - Add a note.
+  note delete - Delete a note.
+  note list - List notes.
+  note search - Search notes.
+  remind - Set a reminder at HH:MM.
+  restore - Restore from a backup zip.
+  schedule add - Add a crontab entry.
+  schedule list - List Drico crontab entries.
+  schedule remove - Remove a scheduled job.
+  task add - Add a task (optional --after <id>).
+  task blocked - List blocked tasks.
+  task delete - Delete a task.
+  task done - Mark a task done.
+  task list - List tasks.
+  task next - Show next available task.
 [references]
   commands - List commands for a reference topic.
   references / languages - List programming reference topics.

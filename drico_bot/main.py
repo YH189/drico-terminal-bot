@@ -19,7 +19,10 @@ def run():
 
     show_banner()
 
+    from drico_bot.plugins.productivity import check_reminders
+
     while session.running:
+        check_reminders()
         raw_user = input("User  > ").strip()
 
         if not raw_user:
