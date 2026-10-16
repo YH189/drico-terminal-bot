@@ -11,7 +11,7 @@ Drico > Commands
   plugins - List loaded plugins and status.
   show / help - Show this command list.
 [calculator]
-  <a><op><b> - Two-number arithmetic (+, -, *, /, %), e.g. 12+13.
+  <expression> - Safe math (AST): + - * / % **, sqrt, abs, round, pi, e.
 [concepts]
   concepts / topics - List concept topics.
 [references]
@@ -22,5 +22,15 @@ Drico > Commands
   search tools <keyword> - Search tools by keyword.
   tool <name> - Look up a tool by name.
   tool count - Print the total number of tools.
+[utilities]
+  base64 - Base64 encode/decode.
+  bin - bin <int>
+  dec - dec <0x..|0b..>
+  hash - hash sha256 <text>
+  hex - hex <int>
+  json - Pretty-print JSON.
+  regex - regex <pattern> | <text>
+  timestamp - timestamp now | timestamp <epoch>
+  uuid - Generate a UUID.
 
 Drico > Thanks for using Drico.
