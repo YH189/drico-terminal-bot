@@ -1,5 +1,10 @@
 # Changelog
 
+## Phase 12: Local dashboard
+
+- `dashboard` serves tasks on `http://127.0.0.1:8765/` with CSRF on POST, security headers, and 64 KB POST limit.
+- `dashboard stop` and `dashboard status` control the background server.
+
 ## Phase 11: Pack download
 
 - `packs download <name>` installs zip packs from `drico_bot/data/sources.json` only.

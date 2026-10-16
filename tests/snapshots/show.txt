@@ -30,6 +30,8 @@ Drico > Commands
   hotspots - Files touched most in history.
   stale-branches - Branches older than N days (default 30).
   undo-last - Soft-reset the last commit.
+[interface]
+  dashboard - Start local dashboard (dashboard stop | status).
 [macros]
   macro delete - Delete a saved macro.
   macro list - List saved macros.
