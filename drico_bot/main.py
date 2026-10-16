@@ -562,6 +562,13 @@ def handle_reference_question(user):
 
 
 def run():
+    import sys
+
+    if len(sys.argv) > 1:
+        from drico_bot.plugins.knowledge import run_cli
+
+        sys.exit(run_cli(sys.argv[1:]))
+
     show_banner()
 
     while True:
