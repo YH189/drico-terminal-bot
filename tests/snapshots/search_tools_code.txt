@@ -4,6 +4,14 @@
 Type 'show' to see the available commands.
 Type 'exit' to close the program.
 
-Drico > No matching tools found.
+Drico > Searching...
+
+Drico > Research tools
+
+Perplexity - https://www.perplexity.ai/
+NotebookLM - https://notebooklm.google.com/
+Grok - https://grok.com/
+Elicit - https://elicit.com/
+Consensus - https://consensus.app/
 
 Drico > Thanks for using Drico.

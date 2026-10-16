@@ -30,6 +30,12 @@ Drico > Commands
   hotspots - Files touched most in history.
   stale-branches - Branches older than N days (default 30).
   undo-last - Soft-reset the last commit.
+[macros]
+  macro delete - Delete a saved macro.
+  macro list - List saved macros.
+  macro run - Run a saved macro.
+  record start - Start recording commands into a macro.
+  record stop - Stop recording and save the macro.
 [productivity]
   backup - Zip backup of local data.
   brief - Productivity summary.
@@ -61,6 +67,9 @@ Drico > Commands
 [references]
   commands - List commands for a reference topic.
   references / languages - List programming reference topics.
+[run]
+  logs - Show recent masked run log lines.
+  run - Run a whitelisted command (argv only).
 [tools]
   list / tools / links - Show the full tool directory.
   search tools <keyword> - Search tools by keyword.
