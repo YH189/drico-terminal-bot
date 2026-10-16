@@ -1,0 +1,17 @@
+--------------------------------------------------
+        DRICO - AI TOOLS ROUTER
+--------------------------------------------------
+Type 'show' to see the available commands.
+Type 'exit' to close the program.
+
+
+Drico > Commands
+automation / agent / workflow   - Automation tools
+research / find / search        - Research tools
+create / image / video          - Creative tools
+build / website / app / code    - Development tools
+git / python / java / c / c++   - Programming references
+list / tools / links            - Show all tools
+exit                            - To close Drico
+
+Drico > Thanks for using Drico.

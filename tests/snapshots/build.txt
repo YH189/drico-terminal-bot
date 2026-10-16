@@ -1,0 +1,18 @@
+--------------------------------------------------
+        DRICO - AI TOOLS ROUTER
+--------------------------------------------------
+Type 'show' to see the available commands.
+Type 'exit' to close the program.
+
+Drico > Searching...
+
+Drico > Development tools
+
+Claude - https://claude.ai/
+Cursor - https://www.cursor.com/
+GitHub Copilot - https://github.com/features/copilot
+Base44 - https://app.base44.com/
+Lovable - https://lovable.dev/
+Replit - https://replit.com/
+
+Drico > Thanks for using Drico.
