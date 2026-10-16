@@ -63,10 +63,10 @@ def _cmd_reindex(args):
 
 
 def register(registry):
-    registry.register("ask", _cmd_ask, "Search loaded knowledge packs (BM25).")
-    registry.register("import", _cmd_import, "Import a folder or file into a new pack.")
-    registry.register("packs", _cmd_packs, "List, verify, or remove installed packs.")
-    registry.register("reindex", _cmd_reindex, "Rebuild the search index from packs.")
+    registry.register_cli("ask", _cmd_ask, "Search loaded knowledge packs (BM25).")
+    registry.register_cli("import", _cmd_import, "Import a folder or file into a new pack.")
+    registry.register_cli("packs", _cmd_packs, "List, verify, or remove installed packs.")
+    registry.register_cli("reindex", _cmd_reindex, "Rebuild the search index from packs.")
 
 
 def build_parser(registry):
@@ -100,9 +100,9 @@ def build_parser(registry):
 
 def run_cli(argv, registry=None):
     if registry is None:
-        from drico_bot.plugins import create_registry
+        from drico_bot.core.bootstrap import build_registry
 
-        registry = create_registry()
+        registry = build_registry()
     parser = build_parser(registry)
     if not argv:
         parser.print_help()
@@ -112,7 +112,7 @@ def run_cli(argv, registry=None):
     if args.command is None:
         parser.print_help()
         return 0
-    handler = registry.get(args.command)
+    handler = registry.get_cli(args.command)
     if handler is None:
         print("Unknown command: {0}".format(args.command), file=sys.stderr)
         return 1
