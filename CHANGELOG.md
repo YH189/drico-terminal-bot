@@ -1,5 +1,11 @@
 # Changelog
 
+## Phase 4: Productivity SQLite and commands
+
+- SQLite `drico.db` for tasks (with dependencies, blocked/next, cycle detection), notes, reminders, and focus state.
+- Commands: task, note, focus, remind, brief, backup/restore (zip-slip safe), export/import (MD/CSV with formula escape), schedule (crontab argv + `# drico:` marker), `new` templates (`python-cli`, `python-package`, `fastapi-basic`).
+- `ensure_db` wired in bootstrap; reminder checks each interactive loop iteration.
+
 ## Phase 3: Safe calculator and utilities
 
 - AST calculator (`drico_bot/calc/safe_eval.py`) with whitelist and limits.
