@@ -403,8 +403,12 @@ def check_reminders():
     rows = conn.execute(
         "SELECT id, text FROM reminders WHERE time_hhmm = ? AND fired = 0", (now,)
     ).fetchall()
+    from drico_bot.core.notify import notify
+
     for row in rows:
-        print("Drico > Reminder: {0}".format(row["text"]))
+        message = row["text"]
+        print("Drico > Reminder: {0}".format(message))
+        notify("Drico reminder", message)
         conn.execute("UPDATE reminders SET fired = 1 WHERE id = ?", (row["id"],))
     if rows:
         print()

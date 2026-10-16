@@ -10,6 +10,9 @@ DEFAULT_CONFIG = """\
 
 [disabled]
 plugins = []
+
+[ui]
+theme = "default"
 """
 
 

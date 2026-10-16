@@ -1,5 +1,11 @@
 # Changelog
 
+## Phase 10: Terminal interface
+
+- Optional readline history stored under `DRICO_HOME/history.txt`.
+- ANSI themes via `[ui] theme` (`default` or `plain`) and `NO_COLOR`.
+- Reminders call `notify-send` when available.
+
 ## Phase 9: User plugins
 
 - Load optional plugins from `~/.drico/plugins/*.py` with isolated import/register errors.

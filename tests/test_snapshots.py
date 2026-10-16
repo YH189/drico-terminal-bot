@@ -27,7 +27,11 @@ def _run_command(raw_input, drico_home):
     buf = io.StringIO()
     with redirect_stdout(buf):
         with mock.patch("sys.argv", ["drico-bot"]):
-            with mock.patch.dict("os.environ", {"DRICO_HOME": drico_home}, clear=False):
+            with mock.patch.dict(
+                "os.environ",
+                {"DRICO_HOME": drico_home, "NO_COLOR": "1"},
+                clear=False,
+            ):
                 with mock.patch("builtins.input", side_effect=[raw_input, "exit"]):
                     with mock.patch("time.sleep", return_value=None):
                         with mock.patch.object(sys.stdout, "isatty", return_value=True):
