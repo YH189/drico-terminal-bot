@@ -1,8 +1,9 @@
-"""Knowledge foundation commands: ask, packs, reindex, import."""
+"""Knowledge foundation commands: ask, packs, reindex, import, index, watch."""
 
 import argparse
 import sys
 
+from drico_bot.knowledge.folder_index import FolderIndexError, index_folder_text
 from drico_bot.knowledge.importer import PackImportError, import_path
 from drico_bot.knowledge.manager import (
     default_yes_no_prompt,
@@ -12,6 +13,7 @@ from drico_bot.knowledge.manager import (
     verify_all_packs_text,
 )
 from drico_bot.knowledge.query import ask
+from drico_bot.knowledge.watch_folder import watch_folder
 
 
 def _cmd_ask(args):
@@ -62,11 +64,30 @@ def _cmd_reindex(args):
     return 0
 
 
+def _cmd_index(args):
+    print(index_folder_text(args.folder))
+    return 0
+
+
+def _cmd_watch(args):
+    try:
+        return watch_folder(args.folder, poll_seconds=args.interval)
+    except FolderIndexError as exc:
+        print(str(exc))
+        return 1
+
+
 def register(registry):
     registry.register_cli("ask", _cmd_ask, "Search loaded knowledge packs (BM25).")
     registry.register_cli("import", _cmd_import, "Import a folder or file into a new pack.")
     registry.register_cli("packs", _cmd_packs, "List, verify, or remove installed packs.")
     registry.register_cli("reindex", _cmd_reindex, "Rebuild the search index from packs.")
+    registry.register_cli(
+        "index", _cmd_index, "Index a project folder into a searchable project pack."
+    )
+    registry.register_cli(
+        "watch", _cmd_watch, "Watch a folder and re-index when files change."
+    )
 
 
 def build_parser(registry):
@@ -93,6 +114,18 @@ def build_parser(registry):
     reindex_parser = sub.add_parser("reindex", help="Update the BM25 index")
     reindex_parser.add_argument(
         "--force", action="store_true", help="Reindex all packs even if unchanged"
+    )
+
+    index_parser = sub.add_parser("index", help="Index a local project folder")
+    index_parser.add_argument("folder")
+
+    watch_parser = sub.add_parser("watch", help="Watch a folder for changes")
+    watch_parser.add_argument("folder")
+    watch_parser.add_argument(
+        "--interval",
+        type=float,
+        default=5,
+        help="Poll interval in seconds (default 5)",
     )
 
     return parser
