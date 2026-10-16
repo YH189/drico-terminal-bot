@@ -1,5 +1,11 @@
 # Changelog
 
+## Phase 8: Macros and safe run
+
+- Macro recording: `record start <name>`, `record stop`; `macro list`, `macro run`, `macro delete` (confirm).
+- `run` executes whitelisted commands via argv-only subprocess with env allowlist; `logs` shows masked run history.
+- Dispatcher runs pattern commands before prefix lookup so recording capture works.
+
 ## Phase 7: Git tools
 
 - Commands (git repo required): `git summary`, `hotspots`, `blame-summary`, `stale-branches`, `undo-last` (confirm), `hooks install`, `hooks remove`.

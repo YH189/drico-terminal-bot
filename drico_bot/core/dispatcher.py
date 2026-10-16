@@ -24,15 +24,15 @@ class Dispatcher:
     def dispatch(self, raw, normalized, session):
         context = DispatchContext(raw=raw, normalized=normalized, session=session)
 
-        command = self.registry.find(normalized)
-        if command is not None:
-            command.handler(context)
-            return
-
         for command in self.registry.pattern_commands():
             if command.match_fn(context):
                 command.handler(context)
                 return
+
+        command = self.registry.find(normalized)
+        if command is not None:
+            command.handler(context)
+            return
 
         self.default_handler(context)
 
