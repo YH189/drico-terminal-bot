@@ -12,6 +12,14 @@ Drico > Commands
   show / help - Show this command list.
 [calculator]
   <expression> - Safe math (AST): + - * / % **, sqrt, abs, round, pi, e.
+[code]
+  complexity - Cyclomatic complexity for Python.
+  deps - List dependency manifests.
+  explain-file - Summarize a source file.
+  largefiles - List large files.
+  loc - Count lines by extension.
+  secrets - Scan for secrets (masked).
+  todos - Find TODO/FIXME markers.
 [concepts]
   concepts / topics - List concept topics.
 [productivity]

@@ -1,5 +1,11 @@
 # Changelog
 
+## Phase 6: Code intelligence
+
+- Commands (indexed project only): `explain-file`, `complexity`, `secrets` (masked), `deps`, `todos`, `loc`, `largefiles`.
+- Paths must stay under the current indexed project root; symlink escape blocked.
+- Python cyclomatic complexity, manifest parsing (`requirements.txt`, `pyproject.toml`, `package.json`), TODO/FIXME scan, LOC by extension, large-file listing (default 100 KB).
+
 ## Phase 5: Knowledge indexing, synonyms, phrases, project-first search
 
 - `index <folder>` syncs `.txt`/`.md`/`.jsonl` into a per-project pack (skips `.git`, `node_modules`, `__pycache__`, `venv`, hidden paths, binaries, files over 1 MB; blocks symlink escape).

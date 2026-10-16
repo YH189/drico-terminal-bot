@@ -46,10 +46,8 @@ def register_project_root(root_path, pack_name):
     _save_project_index(data)
 
 
-def find_project_pack_for_cwd(cwd=None):
-    """
-    Return pack name for the longest registered project root containing cwd.
-    """
+def _best_project_entry_for_cwd(cwd=None):
+    """Return (root Path, pack_name) for the longest registered root containing cwd."""
     if cwd is None:
         cwd = Path.cwd()
     cwd = Path(cwd).resolve()
@@ -70,8 +68,22 @@ def find_project_pack_for_cwd(cwd=None):
         if best_root is None or len(str(root)) > len(str(best_root)):
             best_root = root
             best_pack = pack_name
-    if best_pack is None:
-        return None
+    if best_root is None:
+        return None, None
     if not pack_dir(best_pack).is_dir():
-        return None
-    return best_pack
+        return None, None
+    return best_root, best_pack
+
+
+def find_project_root_for_cwd(cwd=None):
+    """Return project root Path for cwd, or None if not inside an indexed project."""
+    root, _pack = _best_project_entry_for_cwd(cwd)
+    return root
+
+
+def find_project_pack_for_cwd(cwd=None):
+    """
+    Return pack name for the longest registered project root containing cwd.
+    """
+    _root, pack = _best_project_entry_for_cwd(cwd)
+    return pack
