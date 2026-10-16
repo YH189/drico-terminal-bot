@@ -1,9 +1,21 @@
 
 # Drico
 
-Drico-Bot is a AI tools router.
+Drico is an offline, stdlib-only developer toolkit (terminal + optional local dashboard). No API keys, no LLM, no telemetry.
 
-It helps developers discover useful tools, understand programming concepts, explore command references, and perform simple calculations directly from the terminal.
+## Quickstart
+
+```bash
+git clone https://github.com/YH189/drico-terminal-bot.git
+cd drico-terminal-bot
+export PYTHONPATH=.
+python -m drico_bot.main          # interactive shell
+python -m drico_bot.main ask "…"  # knowledge CLI (same as drico-bot)
+```
+
+Run `setup`, then `doctor`, inside the shell. Data stays under `~/.drico/` (`DRICO_HOME`). See `docs/SPEC.md` and `SECURITY.md`.
+
+Drico-Bot also routes classic tool/concept/reference commands from the terminal.
 
 The project focuses on keeping things simple. Drico uses predefined knowledge, keyword matching, and basic input processing rather than relying on an external AI model.
 
