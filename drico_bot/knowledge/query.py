@@ -1,6 +1,9 @@
 """Search the local BM25 index."""
 
 from drico_bot.knowledge.index import _connect, bm25_score, get_corpus_stats, init_db
+from drico_bot.knowledge.project import find_project_pack_for_cwd
+from drico_bot.knowledge.query_parse import chunk_contains_phrases, parse_question
+from drico_bot.knowledge.synonyms import SynonymsError, expand_query_tokens, load_synonyms
 from drico_bot.knowledge.tokenize import tokenize
 
 NOT_FOUND_MESSAGE = "Not found in your loaded packs."
@@ -8,13 +11,16 @@ NOT_FOUND_MESSAGE = "Not found in your loaded packs."
 SCORE_THRESHOLD = 0.05
 
 
-def search(question, top_k=5, db_path=None):
-    """
-    Return top_k hits as dicts with pack, title, line range, score, source_url, text.
-    Empty list means no match above threshold.
-    """
-    terms = tokenize(question)
-    if not terms:
+def _search_index(question, top_k=5, db_path=None, pack_filter=None):
+    phrases, remainder = parse_question(question)
+    try:
+        synonyms = load_synonyms()
+    except SynonymsError:
+        synonyms = {}
+
+    terms = tokenize(remainder)
+    terms = expand_query_tokens(terms, synonyms)
+    if not terms and not phrases:
         return []
 
     conn = _connect(db_path)
@@ -25,10 +31,15 @@ def search(question, top_k=5, db_path=None):
         return []
 
     candidate_ids = set()
-    for term in terms:
-        rows = conn.execute(
-            "SELECT chunk_id FROM postings WHERE term = ?", (term,)
-        ).fetchall()
+    if terms:
+        for term in terms:
+            rows = conn.execute(
+                "SELECT chunk_id FROM postings WHERE term = ?", (term,)
+            ).fetchall()
+            for row in rows:
+                candidate_ids.add(row[0])
+    else:
+        rows = conn.execute("SELECT id FROM chunks").fetchall()
         for row in rows:
             candidate_ids.add(row[0])
 
@@ -54,6 +65,10 @@ def search(question, top_k=5, db_path=None):
         if not chunk:
             continue
         pack_name, doc_id, title, line_start, line_end, source_url, text, dl = chunk
+        if pack_filter is not None and pack_name != pack_filter:
+            continue
+        if not chunk_contains_phrases(text, phrases):
+            continue
         score = 0.0
         for term in terms:
             posting = conn.execute(
@@ -65,6 +80,8 @@ def search(question, top_k=5, db_path=None):
             tf = posting[0]
             df = df_map.get(term, 0)
             score += bm25_score(tf, dl, df, num_docs, avg_dl)
+        if phrases and score <= 0:
+            score = SCORE_THRESHOLD
         if score > 0:
             scored.append(
                 {
@@ -85,6 +102,21 @@ def search(question, top_k=5, db_path=None):
     if not top or top[0]["score"] < SCORE_THRESHOLD:
         return []
     return top
+
+
+def search(question, top_k=5, db_path=None, cwd=None):
+    """
+    Return top_k hits as dicts with pack, title, line range, score, source_url, text.
+    Empty list means no match above threshold.
+    """
+    project_pack = find_project_pack_for_cwd(cwd)
+    if project_pack:
+        hits = _search_index(
+            question, top_k=top_k, db_path=db_path, pack_filter=project_pack
+        )
+        if hits:
+            return hits
+    return _search_index(question, top_k=top_k, db_path=db_path, pack_filter=None)
 
 
 def format_hits(hits):
@@ -109,8 +141,8 @@ def format_hits(hits):
     return "\n".join(lines)
 
 
-def ask(question, top_k=5, db_path=None):
-    hits = search(question, top_k=top_k, db_path=db_path)
+def ask(question, top_k=5, db_path=None, cwd=None):
+    hits = search(question, top_k=top_k, db_path=db_path, cwd=cwd)
     if not hits:
         return NOT_FOUND_MESSAGE
     return format_hits(hits)

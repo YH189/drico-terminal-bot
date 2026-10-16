@@ -1,5 +1,12 @@
 # Changelog
 
+## Phase 5: Knowledge indexing, synonyms, phrases, project-first search
+
+- `index <folder>` syncs `.txt`/`.md`/`.jsonl` into a per-project pack (skips `.git`, `node_modules`, `__pycache__`, `venv`, hidden paths, binaries, files over 1 MB; blocks symlink escape).
+- `~/.drico/synonyms.json` validated on load; query terms expand through synonym lists.
+- `ask` honors quoted phrases and searches the current project pack before global packs.
+- `watch <folder>` polls mtimes every 5 seconds and re-indexes on change (Ctrl+C to stop).
+
 ## Phase 4: Productivity SQLite and commands
 
 - SQLite `drico.db` for tasks (with dependencies, blocked/next, cycle detection), notes, reminders, and focus state.
