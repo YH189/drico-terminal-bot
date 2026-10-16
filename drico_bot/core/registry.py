@@ -13,12 +13,14 @@ class Command:
     category: str = "general"
     match_fn: Optional[Callable] = None
     priority: int = 100
+    destructive: bool = False
 
 
 @dataclass
 class PluginStatus:
     name: str
     status: str
+    path: str = ""
 
 
 class Registry:
@@ -43,6 +45,7 @@ class Registry:
             category=kwargs.get("category", "general"),
             match_fn=kwargs.get("match_fn"),
             priority=kwargs.get("priority", 100),
+            destructive=kwargs.get("destructive", False),
         )
         self._commands.append(command)
 
@@ -55,8 +58,8 @@ class Registry:
             return None
         return entry["handler"]
 
-    def record_plugin(self, name, status):
-        self._plugins.append(PluginStatus(name=name, status=status))
+    def record_plugin(self, name, status, path=""):
+        self._plugins.append(PluginStatus(name=name, status=status, path=path))
 
     def plugin_statuses(self):
         return list(self._plugins)

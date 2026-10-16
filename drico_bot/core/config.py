@@ -1,8 +1,10 @@
 """Load ~/.drico/config.toml (stdlib only)."""
 
+import os
 import sys
 from pathlib import Path
 
+from drico_bot.core.security import secure_mkdir, secure_write_file, warn_data_permissions
 from drico_bot.knowledge.pack import get_drico_home
 
 DEFAULT_CONFIG = """\
@@ -15,10 +17,16 @@ plugins = []
 
 def ensure_drico_home():
     home = get_drico_home()
-    home.mkdir(parents=True, exist_ok=True)
+    secure_mkdir(str(home))
     config_path = home / "config.toml"
     if not config_path.is_file():
-        config_path.write_text(DEFAULT_CONFIG, encoding="utf-8")
+        secure_write_file(str(config_path), DEFAULT_CONFIG)
+    else:
+        try:
+            os.chmod(str(config_path), 0o600)
+        except OSError:
+            pass
+    warn_data_permissions(str(home))
     return home
 
 
@@ -64,15 +72,40 @@ def _parse_config_text(text):
     return _parse_toml_simple(text)
 
 
+def _validate_config(data):
+    """Return sanitized config; invalid keys fall back with warnings."""
+    if not isinstance(data, dict):
+        print("Drico > Warning: config.toml root must be a table. Using defaults.")
+        return {}
+    out = {}
+    disabled = data.get("disabled")
+    if disabled is None:
+        out["disabled"] = {"plugins": []}
+    elif not isinstance(disabled, dict):
+        print("Drico > Warning: [disabled] must be a table. Ignoring.")
+        out["disabled"] = {"plugins": []}
+    else:
+        plugins = disabled.get("plugins", [])
+        if not isinstance(plugins, list):
+            print("Drico > Warning: disabled.plugins must be a list. Using [].")
+            plugins = []
+        else:
+            plugins = [p for p in plugins if isinstance(p, str)]
+        out["disabled"] = {"plugins": plugins}
+    return out
+
+
 def load_config():
     ensure_drico_home()
     path = get_drico_home() / "config.toml"
     if not path.is_file():
-        return {}
+        return _validate_config({})
     try:
-        return _parse_config_text(path.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return {}
+        raw = _parse_config_text(path.read_text(encoding="utf-8"))
+        return _validate_config(raw)
+    except (OSError, ValueError) as exc:
+        print("Drico > Warning: could not read config.toml ({0}). Using defaults.".format(exc))
+        return _validate_config({})
 
 
 def get(config, key, default=None):

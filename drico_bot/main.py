@@ -4,7 +4,6 @@ import sys
 
 from drico_bot.core.bootstrap import build_registry, run_cli
 from drico_bot.core.dispatcher import Dispatcher, InteractiveSession
-from drico_bot.core.text import normalize_text
 from drico_bot.core.ui import show_banner
 
 
@@ -20,12 +19,17 @@ def run():
     show_banner()
 
     while session.running:
-        raw_user = input("User  > ").strip()
+        raw_user = input("User  > ")
 
-        if not raw_user:
+        if not raw_user.strip():
             continue
 
-        normalized = normalize_text(raw_user)
+        try:
+            raw_user, normalized = dispatcher.prepare_input(raw_user)
+        except ValueError as exc:
+            print("Drico > {0}\n".format(exc))
+            continue
+
         dispatcher.dispatch(raw_user, normalized, session)
 
 

@@ -44,7 +44,8 @@ def _match_greeting(context):
 def _handle_plugins(context):
     print("\nDrico > Plugins:\n")
     for entry in context.session.registry.plugin_statuses():
-        print("  {0}: {1}".format(entry.name, entry.status))
+        path_part = " ({0})".format(entry.path) if entry.path else ""
+        print("  {0}: {1}{2}".format(entry.name, entry.status, path_part))
     print()
 
 
