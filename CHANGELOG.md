@@ -1,5 +1,11 @@
 # Changelog
 
+## Phase 7: Git tools
+
+- Commands (git repo required): `git summary`, `hotspots`, `blame-summary`, `stale-branches`, `undo-last` (confirm), `hooks install`, `hooks remove`.
+- Hotspots rank files by commit touches; blame summary groups lines by author; stale branches use committer date thresholds.
+- Hooks install a marked `pre-commit` stub; remove only deletes Drico-installed hooks.
+
 ## Phase 6: Code intelligence
 
 - Commands (indexed project only): `explain-file`, `complexity`, `secrets` (masked), `deps`, `todos`, `loc`, `largefiles`.

@@ -22,6 +22,14 @@ Drico > Commands
   todos - Find TODO/FIXME markers.
 [concepts]
   concepts / topics - List concept topics.
+[git]
+  blame-summary - Line counts by author for a file.
+  git summary - Repository summary.
+  hooks install - Install Drico pre-commit hook.
+  hooks remove - Remove Drico pre-commit hook.
+  hotspots - Files touched most in history.
+  stale-branches - Branches older than N days (default 30).
+  undo-last - Soft-reset the last commit.
 [productivity]
   backup - Zip backup of local data.
   brief - Productivity summary.
