@@ -9,7 +9,6 @@ import uuid
 from datetime import datetime, timezone
 
 from drico_bot.core.registry import Command
-from drico_bot.core.security import MAX_INPUT_LENGTH
 
 MAX_JSON_BYTES = 1024 * 1024
 MAX_REGEX_TEXT = 100 * 1024
